@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.72",
     "esbuild": "^0.28.0",
