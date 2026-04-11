@@ -3259,25 +3259,15 @@
     setLoadingState();
 
     try {
-      // Fetch knives one at a time with delay to avoid CSFloat rate limits
-      const allData = [];
+      // Load pre-fetched data from static JSON (no CSFloat API calls at runtime)
+      const res = await fetch('/data/listings.json');
+      if (!res.ok) throw new Error(`Failed to load listings data: ${res.status}`);
+      const { knives: allData } = await res.json();
 
-      for (let i = 0; i < KNIFE_IDS.length; i++) {
-        try {
-          const r = await fetch(`/api/knives/${KNIFE_IDS[i]}`);
-          if (r.ok) {
-            const data = await r.json();
-            allData.push(data);
-            knifeListingsCache[data.knife_id] = data.listings || [];
-            updateCard(data);
-          }
-        } catch {}
-
-        // 2s delay between requests to respect rate limits
-        if (i < KNIFE_IDS.length - 1) {
-          await new Promise(r => setTimeout(r, 2000));
-        }
-      }
+      allData.forEach(data => {
+        knifeListingsCache[data.knife_id] = data.listings || [];
+        updateCard(data);
+      });
 
       buildTable(allData);
       updateHeroStats(allData);
