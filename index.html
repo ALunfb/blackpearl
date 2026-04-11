@@ -3182,6 +3182,14 @@
     nomad: 'https://csfloat.com/db?defIndex=521&paintIndex=417',
   };
 
+  // Data source. Locally we read from the dev server so edits show up
+  // immediately; in production we fetch directly from GitHub raw so that the
+  // hourly data-update commits don't require a Vercel rebuild.
+  const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const DATA_BASE = IS_LOCAL
+    ? '/data'
+    : 'https://raw.githubusercontent.com/ALunfb/blackpearl/main/data';
+
   let DB_COUNTS = {};
   let DB_DELTAS = {};
   let _fdbSort = 'count-desc';
@@ -3208,28 +3216,40 @@
     }).join('');
   }
 
-  // Load DB counts from server
+  // Load DB counts directly from the committed JSON and compute deltas/totals
+  // client-side. Previously this hit /api/db-counts, but that endpoint's only
+  // job was to read the same file and subtract — moving it to the client means
+  // data-only commits don't need a Vercel rebuild.
   async function initDbCounts() {
     try {
-      const res = await fetch('/api/db-counts');
+      const res = await fetch(`${DATA_BASE}/db-counts.json`, { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed');
-      const data = await res.json();
-      DB_COUNTS = data.counts || {};
-      DB_DELTAS = data.deltas || {};
+      const raw = await res.json();
 
-      const totalDb = data.total || 0;
-      const totalDelta = data.total_delta || 0;
-      const totalText = totalDb.toLocaleString() + ' total'
+      const counts = raw.counts || {};
+      const previous = raw.previous || {};
+      const deltas = {};
+      for (const [id, count] of Object.entries(counts)) {
+        deltas[id] = count - (previous[id] ?? 0);
+      }
+      const total = Object.values(counts).reduce((s, c) => s + c, 0);
+      const totalPrev = Object.values(previous).reduce((s, c) => s + c, 0);
+      const totalDelta = total - totalPrev;
+
+      DB_COUNTS = counts;
+      DB_DELTAS = deltas;
+
+      const totalText = total.toLocaleString() + ' total'
         + (totalDelta > 0 ? ` (+${totalDelta} last 30d)` : '');
       document.getElementById('fdbTotal').textContent = totalText;
 
-      if (data.updated_at) {
-        document.getElementById('fdbTotal').title = 'Last updated: ' + data.updated_at;
+      if (raw.updated_at) {
+        document.getElementById('fdbTotal').title = 'Last updated: ' + raw.updated_at;
       }
 
       // Update hero DB total
       const heroDb = document.getElementById('heroDbTotal');
-      if (heroDb) heroDb.textContent = totalDb.toLocaleString();
+      if (heroDb) heroDb.textContent = total.toLocaleString();
 
       renderFdbGrid(_fdbSort);
     } catch {
@@ -3260,8 +3280,10 @@
     setLoadingState();
 
     try {
-      // Load pre-fetched data from static JSON (no CSFloat API calls at runtime)
-      const res = await fetch('/data/listings.json');
+      // Load pre-fetched data from static JSON (no CSFloat API calls at runtime).
+      // In production this hits GitHub raw directly so we don't need a Vercel
+      // rebuild every time the hourly Action commits fresh data.
+      const res = await fetch(`${DATA_BASE}/listings.json`, { cache: 'no-store' });
       if (!res.ok) throw new Error(`Failed to load listings data: ${res.status}`);
       const { knives: allData } = await res.json();
 
@@ -3601,9 +3623,11 @@
       drawChart();
     });
 
-    // Fetch history
+    // Fetch history directly from the raw JSON (bypasses Vercel so data-only
+    // commits don't need a rebuild). The /api/history endpoint only ever did
+    // server-side time-range filtering, which drawChart already does itself.
     try {
-      const res = await fetch('/api/history');
+      const res = await fetch(`${DATA_BASE}/price-history.json`, { cache: 'no-store' });
       if (res.ok) _chartHistory = await res.json();
     } catch {}
 
