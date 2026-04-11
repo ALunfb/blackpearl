@@ -8,6 +8,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { fetchBlackPearls, KNIVES } from './csfloat.mjs';
+import { recordMarketCap } from './price-history.mjs';
+import { getDbCounts } from './db-counts.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_FILE = path.join(__dirname, 'data', 'listings.json');
@@ -51,6 +53,13 @@ async function main() {
   fs.writeFileSync(OUT_FILE, JSON.stringify(output, null, 2));
   console.log(`\nSaved to ${OUT_FILE}`);
   console.log(`Total knives: ${allData.length}, Total listings: ${allData.reduce((s, d) => s + (d.count || 0), 0)}`);
+
+  // Record market cap snapshot (throttled to once per 12 hours internally)
+  try {
+    recordMarketCap(allData, getDbCounts().counts);
+  } catch (e) {
+    console.error('[History] Market cap record failed:', e.message);
+  }
 }
 
 main().catch(err => {

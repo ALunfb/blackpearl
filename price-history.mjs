@@ -7,6 +7,8 @@ const HISTORY_FILE = path.join(__dirname, 'data', 'price-history.json');
 
 // Minimum interval between snapshots for the same knife (1 hour)
 const MIN_INTERVAL_MS = 60 * 60 * 1000;
+// Minimum interval between market cap snapshots (1 hour)
+const MARKET_CAP_INTERVAL_MS = 60 * 60 * 1000;
 
 /**
  * Load the full history from disk.
@@ -80,7 +82,7 @@ export function recordMarketCap(allData, dbCounts) {
   const entries = history[key];
   if (entries.length > 0) {
     const lastTs = entries[entries.length - 1].ts;
-    if (Date.now() - lastTs < MIN_INTERVAL_MS) return;
+    if (Date.now() - lastTs < MARKET_CAP_INTERVAL_MS) return;
   }
 
   let totalListed = 0;
