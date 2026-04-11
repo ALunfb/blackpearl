@@ -5,8 +5,9 @@ import { recordSnapshot } from './price-history.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Load API key from .env
+// Load API key from process.env or .env file
 function loadApiKey() {
+  if (process.env.CSFLOAT_API_KEY) return process.env.CSFLOAT_API_KEY;
   try {
     const env = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
     const match = env.match(/CSFLOAT_API_KEY\s*=\s*(.+)/);

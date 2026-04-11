@@ -1,0 +1,30 @@
+name: Update CSFloat Data
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Every hour
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch CSFloat data
+        env:
+          CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
+        run: node fetch-data.mjs
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/listings.json data/price-history.json
+          git diff --staged --quiet && echo "No changes" && exit 0
+          git commit -m "Update listings data (automated)"
+          git push
