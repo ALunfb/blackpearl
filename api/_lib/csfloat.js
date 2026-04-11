@@ -29,9 +29,9 @@ function wearFromFloat(f) {
   return 'BS';
 }
 
-async function apiFetch(url, apiKey) {
+async function apiFetch(url, apiKey, retries = 1) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 7000);
+  const timeout = setTimeout(() => controller.abort(), 8000);
 
   try {
     const res = await fetch(url, {
@@ -40,6 +40,11 @@ async function apiFetch(url, apiKey) {
     });
 
     if (res.status === 429) {
+      if (retries > 0) {
+        clearTimeout(timeout);
+        await new Promise(r => setTimeout(r, 3000));
+        return apiFetch(url, apiKey, retries - 1);
+      }
       throw new Error('CSFloat rate limited (429)');
     }
 

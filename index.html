@@ -3259,31 +3259,23 @@
     setLoadingState();
 
     try {
-      // Fetch knives in small batches to avoid rate limits and Vercel concurrency limits
-      const BATCH_SIZE = 2;
+      // Fetch knives one at a time with delay to avoid CSFloat rate limits
       const allData = [];
 
-      for (let i = 0; i < KNIFE_IDS.length; i += BATCH_SIZE) {
-        const batch = KNIFE_IDS.slice(i, i + BATCH_SIZE);
-        const results = await Promise.allSettled(
-          batch.map(id =>
-            fetch(`/api/knives/${id}`)
-              .then(r => r.ok ? r.json() : Promise.reject(new Error(`API error ${r.status}`)))
-          )
-        );
-
-        results.forEach(r => {
-          if (r.status === 'fulfilled') {
-            const data = r.value;
+      for (let i = 0; i < KNIFE_IDS.length; i++) {
+        try {
+          const r = await fetch(`/api/knives/${KNIFE_IDS[i]}`);
+          if (r.ok) {
+            const data = await r.json();
             allData.push(data);
             knifeListingsCache[data.knife_id] = data.listings || [];
             updateCard(data);
           }
-        });
+        } catch {}
 
-        // Small delay between batches to avoid rate limits
-        if (i + BATCH_SIZE < KNIFE_IDS.length) {
-          await new Promise(r => setTimeout(r, 1500));
+        // 2s delay between requests to respect rate limits
+        if (i < KNIFE_IDS.length - 1) {
+          await new Promise(r => setTimeout(r, 2000));
         }
       }
 
