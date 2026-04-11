@@ -2396,6 +2396,69 @@
     .feed-col-float { display: none; }
     .feed-col-wear { display: none; }
   }
+
+  /* ── Feed Pagination ────────────────────────────────────── */
+  .feed-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    background: rgba(8,8,28,0.5);
+    flex-wrap: wrap;
+  }
+  .feed-page-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .feed-page-info strong {
+    color: var(--silver);
+    font-weight: 600;
+  }
+  .feed-page-buttons {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .feed-page-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: rgba(20,20,48,0.6);
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.18s, background 0.18s, border-color 0.18s, transform 0.12s;
+  }
+  .feed-page-btn:hover:not(:disabled):not(.active) {
+    color: var(--silver);
+    border-color: var(--border-bright);
+    background: rgba(20,20,48,0.9);
+  }
+  .feed-page-btn.active {
+    color: var(--white);
+    background: linear-gradient(135deg, rgba(168,85,247,0.32), rgba(168,85,247,0.14));
+    border-color: rgba(168,85,247,0.55);
+    box-shadow: 0 0 0 1px rgba(168,85,247,0.18), 0 6px 18px -8px rgba(168,85,247,0.6);
+  }
+  .feed-page-btn:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+    color: var(--muted);
+  }
+  @media (max-width: 680px) {
+    .feed-pagination { padding: 12px 14px; }
+    .feed-page-btn { width: 30px; height: 30px; font-size: 11px; }
+  }
 </style>
 </head>
 <body>
@@ -2930,7 +2993,7 @@
           <span class="feed-tab-count" id="feedTabNewCount">0</span>
         </button>
         <button class="feed-tab" data-tab="sold" type="button">
-          Sold
+          Sold / Unlisted
           <span class="feed-tab-count" id="feedTabSoldCount">0</span>
         </button>
       </div>
@@ -2955,6 +3018,16 @@
             <tr><td colspan="8"><div class="feed-empty">Loading feed…</div></td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="feed-pagination">
+        <span class="feed-page-info" id="feedPageInfo">—</span>
+        <div class="feed-page-buttons" id="feedPageButtons">
+          <button class="feed-page-btn active" data-page="1" type="button">1</button>
+          <button class="feed-page-btn" data-page="2" type="button">2</button>
+          <button class="feed-page-btn" data-page="3" type="button">3</button>
+          <button class="feed-page-btn" data-page="4" type="button">4</button>
+          <button class="feed-page-btn" data-page="5" type="button">5</button>
+        </div>
       </div>
     </div>
   </div>
@@ -3671,7 +3744,10 @@
 
   // ── Live Listings Feed ───────────────────────────────────────
 
+  const FEED_PAGE_SIZE = 20;
+  const FEED_PAGE_COUNT = 5;
   let _feedTab = 'new';
+  let _feedPage = { new: 1, sold: 1 };
   let _feedData = { new_listings: [], sold: [], updated_at: null };
 
   function fmtRelTime(iso) {
@@ -3694,18 +3770,19 @@
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
-  function renderFeedRows(rows, mode) {
+  function renderFeedRows(rows, mode, pageOffset = 0) {
     if (!rows || rows.length === 0) {
       const msg = mode === 'sold'
-        ? 'No items have sold yet'
+        ? 'Nothing sold or unlisted yet'
         : 'No new listings detected yet';
       const sub = mode === 'sold'
-        ? 'Items appear here when they leave the active listings.'
+        ? 'When a listing disappears from CSFloat — sold or pulled by the seller — it shows up here.'
         : 'Newly added listings appear here as they reach CSFloat.';
       return `<tr><td colspan="8"><div class="feed-empty">${msg}<span class="feed-empty-sub">${sub}</span></div></td></tr>`;
     }
 
     return rows.map((row, idx) => {
+      const absoluteIdx = pageOffset + idx;
       const l = row.listing || {};
       const seller = l.seller || {};
       const isPrivate = !seller.username || seller.username === 'Unknown';
@@ -3722,7 +3799,7 @@
         ? `<img class="feed-knife-thumb" src="${l.image_url}" alt="${row.knife_name}" loading="lazy">`
         : `<div class="feed-knife-thumb"></div>`;
       const dateIso = mode === 'sold' ? row.sold_at : row.created_at;
-      const freshClass = mode === 'new' && idx === 0 ? ' feed-row-fresh' : '';
+      const freshClass = mode === 'new' && absoluteIdx === 0 ? ' feed-row-fresh' : '';
 
       return `<tr class="feed-row${freshClass}">
         <td>
@@ -3759,18 +3836,46 @@
     const header = document.getElementById('feedDateHeader');
     if (!body) return;
 
-    if (_feedTab === 'new') {
-      header.textContent = 'Listed';
-      body.innerHTML = renderFeedRows(_feedData.new_listings, 'new');
-    } else {
-      header.textContent = 'Sold';
-      body.innerHTML = renderFeedRows(_feedData.sold, 'sold');
-    }
+    const isNew = _feedTab === 'new';
+    const fullList = isNew ? (_feedData.new_listings || []) : (_feedData.sold || []);
+    header.textContent = isNew ? 'Listed' : 'Sold / Unlisted';
 
+    // Clamp current page to valid range for this tab
+    const totalPages = Math.max(1, Math.ceil(fullList.length / FEED_PAGE_SIZE));
+    let page = _feedPage[_feedTab] || 1;
+    if (page > totalPages) page = totalPages;
+    _feedPage[_feedTab] = page;
+
+    const start = (page - 1) * FEED_PAGE_SIZE;
+    const pageRows = fullList.slice(start, start + FEED_PAGE_SIZE);
+
+    body.innerHTML = renderFeedRows(pageRows, isNew ? 'new' : 'sold', start);
+
+    // Tab counts
     document.getElementById('feedTabNewCount').textContent =
       (_feedData.new_listings || []).length;
     document.getElementById('feedTabSoldCount').textContent =
       (_feedData.sold || []).length;
+
+    // Pagination buttons + info
+    const buttons = document.querySelectorAll('#feedPageButtons .feed-page-btn');
+    buttons.forEach(btn => {
+      const p = parseInt(btn.dataset.page, 10);
+      const pageStart = (p - 1) * FEED_PAGE_SIZE;
+      const hasItems = pageStart < fullList.length;
+      btn.classList.toggle('active', p === page);
+      btn.disabled = !hasItems;
+    });
+
+    const info = document.getElementById('feedPageInfo');
+    if (info) {
+      if (fullList.length === 0) {
+        info.innerHTML = `<strong>0</strong> items`;
+      } else {
+        const end = Math.min(start + FEED_PAGE_SIZE, fullList.length);
+        info.innerHTML = `<strong>${start + 1}–${end}</strong> of <strong>${fullList.length}</strong>`;
+      }
+    }
 
     const updEl = document.getElementById('feedUpdated');
     if (updEl) {
@@ -3807,6 +3912,16 @@
       document.querySelectorAll('.feed-tab').forEach(b => b.classList.toggle('active', b === btn));
       renderFeed();
     });
+  });
+
+  // Pagination
+  document.getElementById('feedPageButtons').addEventListener('click', (e) => {
+    const btn = e.target.closest('.feed-page-btn');
+    if (!btn || btn.disabled) return;
+    const page = parseInt(btn.dataset.page, 10);
+    if (!page) return;
+    _feedPage[_feedTab] = page;
+    renderFeed();
   });
 
   // ── Owners Panel ─────────────────────────────────────────────

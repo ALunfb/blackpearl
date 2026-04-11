@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TRACKER_FILE = path.join(__dirname, 'data', 'listings-tracker.json');
 
-const MAX_NEW = 20;
+const MAX_NEW = 100;
 const MAX_SOLD = 100;
 const MAX_SEEN_EVER = 5000;
 
