@@ -140,6 +140,25 @@
     filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.9));
   }
 
+  .nav-partner {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    filter: drop-shadow(0 0 10px rgba(255, 160, 40, 0.25));
+    transition: filter 0.35s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .nav-partner-img {
+    height: 34px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-partner:hover {
+    filter: drop-shadow(0 0 16px rgba(255, 160, 40, 0.7));
+    transform: translateY(-1px);
+  }
+
   .nav-brand {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
@@ -2469,6 +2488,9 @@
     <a href="#" class="nav-logo">
       <img src="brand-assets/bp logo new svg.svg" alt="Black Pearl" class="nav-logo-img" />
       <span class="nav-brand">BLACKPEARL<span>.GG</span></span>
+    </a>
+    <a href="https://cs2inspects.com/" target="_blank" rel="noopener" class="nav-partner" title="CS2Inspects">
+      <img src="brand-assets/cs2inspect.webp" alt="CS2Inspects" class="nav-partner-img" />
     </a>
     <ul class="nav-links">
       <li><a href="#tracker">Tracker</a></li>
