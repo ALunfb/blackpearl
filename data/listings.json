@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-11T06:52:08.608Z",
+  "fetched_at": "2026-04-11T07:44:43.676Z",
   "knives": [
     {
       "knife_id": "karambit",
@@ -857,7 +857,7 @@
       "csfloat_db_url": "https://csfloat.com/db?defIndex=500&paintIndex=417",
       "count": 17,
       "floor_prices": {
-        "FN": 1898.57,
+        "FN": 1872.71,
         "MW": null,
         "FT": null,
         "WW": null,
@@ -866,6 +866,23 @@
       "float_min": 0.006633109413087368,
       "float_max": 0.05868560075759888,
       "listings": [
+        {
+          "id": "962977297143562839",
+          "price": 1872.71,
+          "wear": "FN",
+          "float_value": 0.029771706089377403,
+          "paint_seed": 949,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/962977297143562839",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018F40320A1032806300338CBC7CFE70340B5071C838FDA",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzn4_v8ydP0POjV6ZhIfOYHmKR0-JJveB7TSW2nAcitwKJk4jxNWWVZ1AmDJIlQuZcu0btx9e0Y-205gOL3dhGzS333CpBvHxi6ucEBfcg5OSJ2MqXuBCE/360fx360f",
+          "seller": {
+            "steam_id": "76561198892882620",
+            "username": "¡nkkey!",
+            "avatar": "https://avatars.steamstatic.com/8d87b51989dec4a67efd4cd31e00ec79457308ca_full.jpg",
+            "stall_url": "https://csfloat.com/stall/76561198892882620"
+          }
+        },
         {
           "id": "951287666673057826",
           "price": 1898.57,
@@ -881,23 +898,6 @@
             "username": null,
             "avatar": null,
             "stall_url": null
-          }
-        },
-        {
-          "id": "962619100994079757",
-          "price": 1927.77,
-          "wear": "FN",
-          "float_value": 0.029771706089377403,
-          "paint_seed": 949,
-          "stattrak": false,
-          "csfloat_url": "https://csfloat.com/item/962619100994079757",
-          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018F40320A1032806300338CBC7CFE70340B5071C838FDA",
-          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzn4_v8ydP0POjV6ZhIfOYHmKR0-JJveB7TSW2nAcitwKJk4jxNWWVZ1AmDJIlQuZcu0btx9e0Y-205gOL3dhGzS333CpBvHxi6ucEBfcg5OSJ2MqXuBCE/360fx360f",
-          "seller": {
-            "steam_id": "76561198892882620",
-            "username": "¡nkkey!",
-            "avatar": "https://avatars.steamstatic.com/8d87b51989dec4a67efd4cd31e00ec79457308ca_full.jpg",
-            "stall_url": "https://csfloat.com/stall/76561198892882620"
           }
         },
         {
