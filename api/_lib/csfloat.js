@@ -30,49 +30,35 @@ function wearFromFloat(f) {
 }
 
 async function apiFetch(url, apiKey) {
-  const res = await fetch(url, {
-    headers: { 'Authorization': apiKey },
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 7000);
 
-  if (res.status === 429) {
-    const resetTs = parseInt(res.headers.get('x-ratelimit-reset') || '0', 10);
-    let waitMs;
-    if (resetTs > 0) {
-      waitMs = Math.max(1000, resetTs * 1000 - Date.now() + 1000);
-      waitMs = Math.min(waitMs, 120_000);
-    } else {
-      const retryAfter = parseInt(res.headers.get('Retry-After') || '10', 10);
-      waitMs = retryAfter * 1000;
+  try {
+    const res = await fetch(url, {
+      headers: { 'Authorization': apiKey },
+      signal: controller.signal,
+    });
+
+    if (res.status === 429) {
+      throw new Error('CSFloat rate limited (429)');
     }
-    await new Promise(r => setTimeout(r, waitMs));
-    return apiFetch(url, apiKey);
-  }
 
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`CSFloat API ${res.status}: ${text}`);
-  }
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`CSFloat API ${res.status}: ${text}`);
+    }
 
-  return res.json();
+    return res.json();
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 async function fetchAllListings(defIndex, paintIndex, apiKey) {
-  const listings = [];
-  let page = 0;
-  const limit = 50;
-
-  while (true) {
-    const url = `${API_BASE}/listings?def_index=${defIndex}&paint_index=${paintIndex}&limit=${limit}&page=${page}&sort_by=lowest_price`;
-    const data = await apiFetch(url, apiKey);
-    const items = data?.data ?? [];
-    if (items.length === 0) break;
-    listings.push(...items);
-    if (items.length < limit) break;
-    page++;
-    await new Promise(r => setTimeout(r, 300));
-  }
-
-  return listings;
+  // Only fetch first page on Vercel to stay within timeout
+  const url = `${API_BASE}/listings?def_index=${defIndex}&paint_index=${paintIndex}&limit=50&page=0&sort_by=lowest_price`;
+  const data = await apiFetch(url, apiKey);
+  return data?.data ?? [];
 }
 
 function transformListings(rawListings) {
@@ -139,32 +125,4 @@ export async function fetchBlackPearls(knifeId) {
   const raw = await fetchAllListings(knife.def_index, knife.paint_index, apiKey);
   const dbUrl = `https://csfloat.com/db?defIndex=${knife.def_index}&paintIndex=${knife.paint_index}`;
   return { knife_id: knifeId, knife_name: knife.name, csfloat_db_url: dbUrl, ...transformListings(raw) };
-}
-
-export async function fetchAllBlackPearls() {
-  const CONCURRENCY = 3;
-  const results = [];
-
-  for (let i = 0; i < KNIVES.length; i += CONCURRENCY) {
-    const batch = KNIVES.slice(i, i + CONCURRENCY);
-    const batchResults = await Promise.all(
-      batch.map(k => fetchBlackPearls(k.id).catch(err => ({
-        knife_id: k.id,
-        knife_name: k.name,
-        csfloat_db_url: `https://csfloat.com/db?defIndex=${k.def_index}&paintIndex=${k.paint_index}`,
-        count: 0,
-        floor_prices: {},
-        float_min: null,
-        float_max: null,
-        listings: [],
-        error: err.message,
-      })))
-    );
-    results.push(...batchResults);
-    if (i + CONCURRENCY < KNIVES.length) {
-      await new Promise(r => setTimeout(r, 500));
-    }
-  }
-
-  return results;
 }
