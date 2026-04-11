@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/knives.mjs": {
+      "maxDuration": 60
+    }
+  }
+}
