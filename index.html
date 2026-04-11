@@ -3055,26 +3055,8 @@
   </div>
 </section>
 
-<!-- ═══════════════════ FLOAT DB STATS ═══════════════════ -->
-<section class="section" id="tracker" style="padding-top:48px;padding-bottom:48px;">
-  <div class="fdb-section">
-    <div class="fdb-header">
-      <div>
-        <span class="fdb-title"><span>CSFloat</span> DB Tracker</span>
-        <span class="fdb-total" id="fdbTotal"></span>
-      </div>
-      <div class="fdb-sort" id="fdbSort">
-        <button class="fdb-sort-btn" data-sort="name">A–Z</button>
-        <button class="fdb-sort-btn active" data-sort="count-desc">Most</button>
-        <button class="fdb-sort-btn" data-sort="count-asc">Least</button>
-      </div>
-    </div>
-    <div class="fdb-grid" id="fdbGrid"></div>
-  </div>
-</section>
-
 <!-- ═══════════════════ PRICE HISTORY CHART ═══════════════════ -->
-<section class="section" style="padding-top:48px;padding-bottom:48px;">
+<section class="section" id="tracker" style="padding-top:48px;padding-bottom:48px;">
   <div class="chart-section">
     <div class="chart-header">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
@@ -3095,6 +3077,24 @@
         <span class="chart-empty-sub">Price history builds automatically over time. Check back in a few hours for your first data points.</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FLOAT DB STATS ═══════════════════ -->
+<section class="section" style="padding-top:48px;padding-bottom:48px;">
+  <div class="fdb-section">
+    <div class="fdb-header">
+      <div>
+        <span class="fdb-title"><span>CSFloat</span> DB Tracker</span>
+        <span class="fdb-total" id="fdbTotal"></span>
+      </div>
+      <div class="fdb-sort" id="fdbSort">
+        <button class="fdb-sort-btn" data-sort="name">A–Z</button>
+        <button class="fdb-sort-btn active" data-sort="count-desc">Most</button>
+        <button class="fdb-sort-btn" data-sort="count-asc">Least</button>
+      </div>
+    </div>
+    <div class="fdb-grid" id="fdbGrid"></div>
   </div>
 </section>
 
@@ -4074,9 +4074,12 @@
 
     const W = rect.width;
     const H = 220;
-    const pad = { top: 20, right: 16, bottom: 28, left: 60 };
+    const pad = { top: 20, right: 28, bottom: 28, left: 60 };
     const plotW = W - pad.left - pad.right;
     const plotH = H - pad.top - pad.bottom;
+    // Inset data coordinates so the first/last dots + date labels don't
+    // collide with the plot frame or overflow the canvas edge.
+    const dataInset = 10;
 
     // Price range — auto-fit y-axis tightly around the primary line (median/market_cap),
     // so small movements are visible. Low/high band is clipped to this range.
@@ -4122,7 +4125,8 @@
     const tsMax = data[data.length - 1].ts;
     const tsRange = tsMax - tsMin || 1;
 
-    function x(ts) { return pad.left + ((ts - tsMin) / tsRange) * plotW; }
+    const dataW = Math.max(plotW - dataInset * 2, 1);
+    function x(ts) { return pad.left + dataInset + ((ts - tsMin) / tsRange) * dataW; }
     function y(p) { return pad.top + plotH - ((p - minP) / (maxP - minP)) * plotH; }
 
     // Clear
