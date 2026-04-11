@@ -64,6 +64,13 @@ export function recordTrackerUpdate(allKnivesData) {
   const state = loadState();
   const now = new Date().toISOString();
 
+  // Bootstrap detection: if we have never seen any fingerprint before, this is
+  // the first run. Seed seen_ever/active with everything that's currently
+  // listed but do NOT push any of it to new_listings — those items are not
+  // actually new, they're just the baseline. Only subsequent runs should emit
+  // newly-appeared listings into the feed.
+  const isBootstrap = Object.keys(state.seen_ever).length === 0;
+
   // Build map of currently visible items across all knives
   const currentlyListed = new Map(); // fp -> { knife_id, knife_name, listing }
   for (const knife of allKnivesData) {
@@ -125,16 +132,20 @@ export function recordTrackerUpdate(allKnivesData) {
       };
 
       // Only push to "new listings" feed if this is the first time we've EVER
-      // seen this fingerprint. Relisted items are not "new".
+      // seen this fingerprint. Relisted items are not "new". On a bootstrap
+      // run we seed seen_ever silently so these baseline items never get
+      // mistaken for fresh listings.
       if (!state.seen_ever[fp]) {
         state.seen_ever[fp] = now;
-        newlyAdded.push({
-          fp,
-          knife_id: entry.knife_id,
-          knife_name: entry.knife_name,
-          listing: entry.listing,
-          created_at: now,
-        });
+        if (!isBootstrap) {
+          newlyAdded.push({
+            fp,
+            knife_id: entry.knife_id,
+            knife_name: entry.knife_name,
+            listing: entry.listing,
+            created_at: now,
+          });
+        }
       }
     }
   }
@@ -156,7 +167,7 @@ export function recordTrackerUpdate(allKnivesData) {
 
   saveState(state);
   console.log(
-    `[Tracker] +${newlyAdded.length} new, ` +
+    `[Tracker] ${isBootstrap ? 'BOOTSTRAP ' : ''}+${newlyAdded.length} new, ` +
     `${Object.keys(state.active).length} active, ` +
     `${state.sold.length} sold tracked`
   );
