@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-11T08:33:20.382Z",
+  "fetched_at": "2026-04-11T09:33:26.496Z",
   "knives": [
     {
       "knife_id": "karambit",
@@ -69,7 +69,7 @@
         },
         {
           "id": "917826018323073712",
-          "price": 9100,
+          "price": 9000,
           "wear": "FN",
           "float_value": 0.0192831102758646,
           "paint_seed": 568,
@@ -1348,9 +1348,9 @@
       "knife_id": "gut",
       "knife_name": "Gut Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=506&paintIndex=417",
-      "count": 8,
+      "count": 9,
       "floor_prices": {
-        "FN": 545,
+        "FN": 500.52,
         "MW": 19000,
         "FT": null,
         "WW": null,
@@ -1359,6 +1359,23 @@
       "float_min": 0.006575367879122496,
       "float_max": 0.07135412096977234,
       "listings": [
+        {
+          "id": "961980050243191535",
+          "price": 500.52,
+          "wear": "FN",
+          "float_value": 0.032200299203395844,
+          "paint_seed": 28,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/961980050243191535",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018FA0320A1032806300338F6C88FE803401CF70CBA4E",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1c-uaRaalSIvySDWyAxO9kvN5kTjuxmRguqTiBpYPwJiPTcFInDpVyELMOshO9wYHvZujk5VPagotHnC6viixLui5jsr1XWKcgqKTJz1aW4QQYg2A/360fx360f",
+          "seller": {
+            "steam_id": "76561198106949127",
+            "username": "Jasper",
+            "avatar": "https://avatars.steamstatic.com/4bedb44000bec7cf0880283731e82c00501d35a2_full.jpg",
+            "stall_url": "https://csfloat.com/stall/76561198106949127"
+          }
+        },
         {
           "id": "962700433980263175",
           "price": 545,
@@ -4136,7 +4153,7 @@
       "knife_id": "paracord",
       "knife_name": "Paracord Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=517&paintIndex=417",
-      "count": 29,
+      "count": 30,
       "floor_prices": {
         "FN": 650,
         "MW": 718.76,
