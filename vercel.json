@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/knives.mjs": {
+    "api/knives/index.mjs": {
       "maxDuration": 60
     }
   }
