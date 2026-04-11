@@ -3249,13 +3249,27 @@
   });
 
   // ── Main fetch + populate ────────────────────────────────────
+  const KNIFE_IDS = [
+    'karambit','butterfly','m9','bayonet','flip','gut','huntsman','bowie',
+    'falchion','stiletto','talon','skeleton','navaja','ursus','shadow',
+    'paracord','survival','nomad'
+  ];
+
   async function initDatabase() {
     setLoadingState();
 
     try {
-      const res = await fetch('/api/knives');
-      if (!res.ok) throw new Error(`API error ${res.status}`);
-      const allData = await res.json();
+      // Fetch each knife individually in parallel to avoid Vercel timeout
+      const results = await Promise.allSettled(
+        KNIFE_IDS.map(id =>
+          fetch(`/api/knives/${id}`)
+            .then(r => r.ok ? r.json() : Promise.reject(new Error(`API error ${r.status}`)))
+        )
+      );
+
+      const allData = results
+        .filter(r => r.status === 'fulfilled')
+        .map(r => r.value);
 
       allData.forEach(data => {
         knifeListingsCache[data.knife_id] = data.listings || [];
