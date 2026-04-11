@@ -3238,7 +3238,8 @@
     }
   }
 
-  initDbCounts();
+  // Expose promise so initDatabase can wait for DB_COUNTS before computing market cap
+  const dbCountsReady = initDbCounts();
 
   document.getElementById('fdbSort').addEventListener('click', (e) => {
     const btn = e.target.closest('.fdb-sort-btn');
@@ -3268,6 +3269,9 @@
         knifeListingsCache[data.knife_id] = data.listings || [];
         updateCard(data);
       });
+
+      // Wait for DB counts to load before computing market cap (uses DB_COUNTS)
+      await dbCountsReady;
 
       buildTable(allData);
       updateHeroStats(allData);
