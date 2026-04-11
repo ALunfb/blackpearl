@@ -1,6 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Warp } from '@paper-design/shaders-react';
+import { inject } from '@vercel/analytics';
+
+inject();
 
 function ShaderBackground() {
   return (
