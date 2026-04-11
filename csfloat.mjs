@@ -175,6 +175,9 @@ function transformListings(rawListings) {
     float_min: floatMin,
     float_max: floatMax,
     listings: listings.slice(0, 20), // return top 20 for the owners panel
+    // Full list — used by the new-listings tracker. Strip before persisting
+    // to listings.json so the static file doesn't balloon in size.
+    all_listings: listings,
   };
 }
 

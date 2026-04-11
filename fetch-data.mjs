@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import { fetchBlackPearls, KNIVES } from './csfloat.mjs';
 import { recordMarketCap } from './price-history.mjs';
 import { getDbCounts } from './db-counts.mjs';
+import { recordTrackerUpdate } from './listings-tracker.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_FILE = path.join(__dirname, 'data', 'listings.json');
@@ -45,9 +46,24 @@ async function main() {
     }
   }
 
+  // Update the new-listings tracker BEFORE stripping all_listings, so it can
+  // see the full set of items (not just the top-20 cheapest per knife).
+  try {
+    recordTrackerUpdate(allData);
+  } catch (e) {
+    console.error('[Tracker] Update failed:', e.message);
+  }
+
+  // Strip the transient `all_listings` field — it's only needed by the tracker
+  // and would otherwise bloat listings.json substantially.
+  const knivesForOutput = allData.map(d => {
+    const { all_listings, ...rest } = d;
+    return rest;
+  });
+
   const output = {
     fetched_at: new Date().toISOString(),
-    knives: allData,
+    knives: knivesForOutput,
   };
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(output, null, 2));

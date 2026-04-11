@@ -2153,6 +2153,249 @@
     content: ' ↗';
     color: var(--violet-bright);
   }
+
+  /* ── New Listings Feed Section ──────────────────────────── */
+  .feed-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .feed-header-bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .feed-header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .feed-pulse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(168,85,247,0.3);
+    background: rgba(168,85,247,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--violet-bright);
+  }
+  .feed-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80, 0 0 16px rgba(74,222,128,0.4);
+    animation: feed-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes feed-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.85); }
+  }
+  .feed-updated {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .feed-tabs {
+    display: inline-flex;
+    gap: 0;
+    background: rgba(20,20,48,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px;
+  }
+  .feed-tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.18s, background 0.18s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .feed-tab:hover { color: var(--silver); }
+  .feed-tab.active {
+    color: var(--white);
+    background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(168,85,247,0.08));
+    box-shadow: 0 1px 0 rgba(168,85,247,0.35) inset;
+  }
+  .feed-tab-count {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: rgba(168,85,247,0.18);
+    color: var(--violet-bright);
+    letter-spacing: 0;
+  }
+  .feed-tab.active .feed-tab-count {
+    background: rgba(168,85,247,0.32);
+    color: var(--white);
+  }
+
+  .feed-table-wrap {
+    background: linear-gradient(180deg, #141430 0%, #0e0e26 100%);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+      0 1px 0 rgba(168,85,247,0.06) inset,
+      0 24px 60px -30px rgba(168,85,247,0.18);
+  }
+  .feed-table-scroll {
+    max-height: 720px;
+    overflow-y: auto;
+  }
+  .feed-table-scroll::-webkit-scrollbar { width: 8px; }
+  .feed-table-scroll::-webkit-scrollbar-track { background: transparent; }
+  .feed-table-scroll::-webkit-scrollbar-thumb {
+    background: rgba(168,85,247,0.22);
+    border-radius: 4px;
+  }
+  .feed-table-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(168,85,247,0.4);
+  }
+
+  .feed-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+  }
+  .feed-table thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: #141430;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .feed-table thead th:last-child { text-align: right; }
+  .feed-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(107,107,138,0.08);
+    vertical-align: middle;
+  }
+  .feed-table tbody tr {
+    transition: background 0.18s ease;
+  }
+  .feed-table tbody tr:hover {
+    background: rgba(168,85,247,0.05);
+  }
+  .feed-table tbody tr:last-child td { border-bottom: none; }
+
+  /* Highlight first row briefly when feed updates */
+  .feed-table tbody tr.feed-row-fresh {
+    background: rgba(74,222,128,0.06);
+    animation: feed-row-pop 0.9s ease-out;
+  }
+  @keyframes feed-row-pop {
+    0% { background: rgba(74,222,128,0.18); }
+    100% { background: rgba(74,222,128,0.06); }
+  }
+
+  .feed-knife-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .feed-knife-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .feed-knife-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .feed-knife-sub {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .feed-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--silver);
+    white-space: nowrap;
+  }
+  .feed-date-rel {
+    display: block;
+    font-size: 10px;
+    color: var(--violet-bright);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .feed-empty {
+    text-align: center;
+    padding: 60px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .feed-empty-sub {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    color: rgba(107,107,138,0.7);
+    letter-spacing: 0.06em;
+    text-transform: none;
+  }
+
+  /* Responsive: collapse sparse columns on narrow screens */
+  @media (max-width: 900px) {
+    .feed-section { padding: 0 16px; }
+    .feed-table thead th,
+    .feed-table tbody td { padding: 10px 10px; }
+    .feed-col-inspect { display: none; }
+    .feed-knife-thumb { width: 36px; height: 36px; }
+  }
+  @media (max-width: 680px) {
+    .feed-col-float { display: none; }
+    .feed-col-wear { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -2663,6 +2906,58 @@
     </div>
   </div>
 
+</section>
+
+<!-- ═══════════════════ NEW LISTINGS FEED ═══════════════════ -->
+<section class="section" id="feed" style="padding-top:48px;padding-bottom:64px;">
+  <div class="feed-section">
+    <div class="feed-header-bar reveal">
+      <div>
+        <h2 class="section-title" style="margin:0 0 12px;text-align:left;font-size:1.6em;">
+          Live<br/><span class="text-gradient-violet">Listings Feed</span>
+        </h2>
+        <div class="feed-header-left">
+          <span class="feed-pulse-badge">
+            <span class="feed-pulse-dot"></span>
+            Tracking · CSFloat
+          </span>
+          <span class="feed-updated" id="feedUpdated">—</span>
+        </div>
+      </div>
+      <div class="feed-tabs" role="tablist">
+        <button class="feed-tab active" data-tab="new" type="button">
+          New Listings
+          <span class="feed-tab-count" id="feedTabNewCount">0</span>
+        </button>
+        <button class="feed-tab" data-tab="sold" type="button">
+          Sold
+          <span class="feed-tab-count" id="feedTabSoldCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="feed-table-wrap reveal">
+      <div class="feed-table-scroll">
+        <table class="feed-table">
+          <thead>
+            <tr>
+              <th>Knife</th>
+              <th class="feed-col-float">Float</th>
+              <th class="feed-col-wear">Wear</th>
+              <th>Seller</th>
+              <th id="feedDateHeader">Listed</th>
+              <th>Price</th>
+              <th>Listing</th>
+              <th class="feed-col-inspect">Inspect</th>
+            </tr>
+          </thead>
+          <tbody id="feedTableBody">
+            <tr><td colspan="8"><div class="feed-empty">Loading feed…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════ FLOAT DB STATS ═══════════════════ -->
@@ -3374,6 +3669,146 @@
     }
   }
 
+  // ── Live Listings Feed ───────────────────────────────────────
+
+  let _feedTab = 'new';
+  let _feedData = { new_listings: [], sold: [], updated_at: null };
+
+  function fmtRelTime(iso) {
+    if (!iso) return '';
+    const ms = Date.now() - new Date(iso).getTime();
+    if (ms < 60_000) return 'just now';
+    const m = Math.floor(ms / 60_000);
+    if (m < 60) return `${m}m ago`;
+    const h = Math.floor(m / 60);
+    if (h < 24) return `${h}h ago`;
+    const d = Math.floor(h / 24);
+    if (d < 30) return `${d}d ago`;
+    const mo = Math.floor(d / 30);
+    return `${mo}mo ago`;
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function renderFeedRows(rows, mode) {
+    if (!rows || rows.length === 0) {
+      const msg = mode === 'sold'
+        ? 'No items have sold yet'
+        : 'No new listings detected yet';
+      const sub = mode === 'sold'
+        ? 'Items appear here when they leave the active listings.'
+        : 'Newly added listings appear here as they reach CSFloat.';
+      return `<tr><td colspan="8"><div class="feed-empty">${msg}<span class="feed-empty-sub">${sub}</span></div></td></tr>`;
+    }
+
+    return rows.map((row, idx) => {
+      const l = row.listing || {};
+      const seller = l.seller || {};
+      const isPrivate = !seller.username || seller.username === 'Unknown';
+      const sellerUrl = seller.stall_url || l.csfloat_url || '#';
+      const sellerName = isPrivate ? 'Private Stall' : seller.username;
+      const avatar = seller.avatar
+        ? `<img class="ol-avatar" src="${seller.avatar}" alt="" onerror="this.src='brand-assets/private%20stall.png'">`
+        : `<img class="ol-avatar" src="brand-assets/private%20stall.png" alt="Private">`;
+      const price = l.price != null
+        ? `<span class="ol-price"><em>$</em>${Math.round(l.price).toLocaleString()}</span>`
+        : '—';
+      const stTag = l.stattrak ? `<span class="ol-st">ST</span>` : '';
+      const thumb = l.image_url
+        ? `<img class="feed-knife-thumb" src="${l.image_url}" alt="${row.knife_name}" loading="lazy">`
+        : `<div class="feed-knife-thumb"></div>`;
+      const dateIso = mode === 'sold' ? row.sold_at : row.created_at;
+      const freshClass = mode === 'new' && idx === 0 ? ' feed-row-fresh' : '';
+
+      return `<tr class="feed-row${freshClass}">
+        <td>
+          <div class="feed-knife-cell">
+            ${thumb}
+            <div>
+              <span class="feed-knife-name">${shortName(row.knife_name)}</span>
+              <span class="feed-knife-sub">Doppler · Black Pearl</span>
+            </div>
+          </div>
+        </td>
+        <td class="feed-col-float"><span class="ol-float">${fmtFloat(l.float_value)}</span></td>
+        <td class="feed-col-wear"><span class="ol-wear">${l.wear || '—'}</span></td>
+        <td>
+          <div class="ol-seller">
+            ${avatar}
+            <a class="ol-name${isPrivate ? ' ol-private' : ''}" href="${sellerUrl}" target="_blank" rel="noopener">${sellerName}</a>
+            ${stTag}
+          </div>
+        </td>
+        <td>
+          <span class="feed-date">${fmtDate(dateIso)}</span>
+          <span class="feed-date-rel">${fmtRelTime(dateIso)}</span>
+        </td>
+        <td>${price}</td>
+        <td>${l.csfloat_url ? `<a class="ol-link" href="${l.csfloat_url}" target="_blank" rel="noopener">View ↗</a>` : ''}</td>
+        <td class="feed-col-inspect">${l.inspect_link ? `<a class="ol-link ol-inspect" href="${l.inspect_link}">Inspect</a>` : ''}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderFeed() {
+    const body = document.getElementById('feedTableBody');
+    const header = document.getElementById('feedDateHeader');
+    if (!body) return;
+
+    if (_feedTab === 'new') {
+      header.textContent = 'Listed';
+      body.innerHTML = renderFeedRows(_feedData.new_listings, 'new');
+    } else {
+      header.textContent = 'Sold';
+      body.innerHTML = renderFeedRows(_feedData.sold, 'sold');
+    }
+
+    document.getElementById('feedTabNewCount').textContent =
+      (_feedData.new_listings || []).length;
+    document.getElementById('feedTabSoldCount').textContent =
+      (_feedData.sold || []).length;
+
+    const updEl = document.getElementById('feedUpdated');
+    if (updEl) {
+      updEl.textContent = _feedData.updated_at
+        ? `Updated ${fmtRelTime(_feedData.updated_at)}`
+        : '';
+    }
+  }
+
+  async function initFeed() {
+    try {
+      const res = await fetch(`${DATA_BASE}/listings-tracker.json`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Tracker fetch failed: ${res.status}`);
+      const raw = await res.json();
+      _feedData = {
+        new_listings: raw.new_listings || [],
+        sold: raw.sold || [],
+        updated_at: raw.updated_at || null,
+      };
+      renderFeed();
+    } catch (err) {
+      console.error('Feed init failed:', err.message);
+      const body = document.getElementById('feedTableBody');
+      if (body) {
+        body.innerHTML = `<tr><td colspan="8"><div class="feed-empty">Feed unavailable<span class="feed-empty-sub">${err.message}</span></div></td></tr>`;
+      }
+    }
+  }
+
+  // Tab switcher
+  document.querySelectorAll('.feed-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      _feedTab = btn.dataset.tab;
+      document.querySelectorAll('.feed-tab').forEach(b => b.classList.toggle('active', b === btn));
+      renderFeed();
+    });
+  });
+
   // ── Owners Panel ─────────────────────────────────────────────
 
   let _panelListings = [];
@@ -3689,6 +4124,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initDatabase();
     initChart();
+    initFeed();
   });
 
   // ── Toast notification ──
