@@ -23,11 +23,17 @@ jobs:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
         run: node fetch-data.mjs
 
+      - name: Install Puppeteer browser
+        run: npx puppeteer browsers install chrome
+
+      - name: Generate OG image
+        run: node generate-og-image.mjs
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/listings.json data/price-history.json data/listings-tracker.json
+          git add data/listings.json data/price-history.json data/listings-tracker.json brand-assets/og-image.png
           git diff --staged --quiet && echo "No changes" && exit 0
           git commit -m "Update listings data (automated)"
           git push
