@@ -23,10 +23,11 @@ jobs:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
         run: node fetch-data.mjs
 
-      - name: Install Puppeteer browser
-        run: npx puppeteer browsers install chrome
+      - name: Install dependencies
+        run: npm install
 
       - name: Generate OG image
+        continue-on-error: true
         run: node generate-og-image.mjs
 
       - name: Commit and push if changed
