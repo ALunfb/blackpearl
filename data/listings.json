@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-12T21:26:16.915Z",
+  "fetched_at": "2026-04-12T22:25:23.636Z",
   "knives": [
     {
       "knife_id": "karambit",
@@ -476,23 +476,6 @@
           }
         },
         {
-          "id": "892058898528339330",
-          "price": 18000,
-          "wear": "FN",
-          "float_value": 0.007043651770800352,
-          "paint_seed": 534,
-          "stattrak": true,
-          "csfloat_url": "https://csfloat.com/item/892058898528339330",
-          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198930819998A46447565383D16584730610025818129",
-          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2qvw-J3s-p5SiihmSIqsi-HlorwOy7DAVRPVssnHaMUuhe9xIHlMuvqtgPf2IoTyC383Sod7CY-sr4DVfZ2qKPU3g-TNuE-545DeqjFvb87vg/360fx360f",
-          "seller": {
-            "steam_id": "76561198930819998",
-            "username": "!Haruno [H] 100 knife for trade",
-            "avatar": "https://avatars.steamstatic.com/ce5ca412a9937418b1cc1e34879e45d6bb87b74f_full.jpg",
-            "stall_url": "https://csfloat.com/stall/76561198930819998"
-          }
-        },
-        {
           "id": "936071689488435640",
           "price": 18000,
           "wear": "FN",
@@ -507,6 +490,23 @@
             "username": "Kvest",
             "avatar": "https://avatars.steamstatic.com/5a628dffdeb4669ef64ac344ec2d0f78409e7cc8_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198880090841"
+          }
+        },
+        {
+          "id": "892058898528339330",
+          "price": 19000,
+          "wear": "FN",
+          "float_value": 0.007043651770800352,
+          "paint_seed": 534,
+          "stattrak": true,
+          "csfloat_url": "https://csfloat.com/item/892058898528339330",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198930819998A46447565383D16584730610025818129",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2qvw-J3s-p5SiihmSIqsi-HlorwOy7DAVRPVssnHaMUuhe9xIHlMuvqtgPf2IoTyC383Sod7CY-sr4DVfZ2qKPU3g-TNuE-545DeqjFvb87vg/360fx360f",
+          "seller": {
+            "steam_id": "76561198930819998",
+            "username": "!Haruno [H] 100 knife for trade",
+            "avatar": "https://avatars.steamstatic.com/ce5ca412a9937418b1cc1e34879e45d6bb87b74f_full.jpg",
+            "stall_url": "https://csfloat.com/stall/76561198930819998"
           }
         }
       ]
