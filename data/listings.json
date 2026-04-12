@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-12T08:46:40.844Z",
+  "fetched_at": "2026-04-12T09:38:58.703Z",
   "knives": [
     {
       "knife_id": "karambit",
@@ -4818,7 +4818,7 @@
       "csfloat_db_url": "https://csfloat.com/db?defIndex=521&paintIndex=417",
       "count": 34,
       "floor_prices": {
-        "FN": 1209.75,
+        "FN": 1210,
         "MW": 2019.5,
         "FT": null,
         "WW": null,
@@ -4829,7 +4829,7 @@
       "listings": [
         {
           "id": "962758733853755899",
-          "price": 1209.75,
+          "price": 1210,
           "wear": "FN",
           "float_value": 0.03418395668268204,
           "paint_seed": 954,
