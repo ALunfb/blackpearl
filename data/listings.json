@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-12T17:28:37.805Z",
+  "fetched_at": "2026-04-12T18:35:17.809Z",
   "knives": [
     {
       "knife_id": "karambit",
@@ -175,9 +175,9 @@
       "knife_id": "butterfly",
       "knife_name": "Butterfly Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=515&paintIndex=617",
-      "count": 24,
+      "count": 23,
       "floor_prices": {
-        "FN": 10450,
+        "FN": 10799,
         "MW": 10999,
         "FT": null,
         "WW": null,
@@ -186,23 +186,6 @@
       "float_min": 0.006908414885401726,
       "float_max": 0.07144223898649216,
       "listings": [
-        {
-          "id": "962728554100032855",
-          "price": 10450,
-          "wear": "FN",
-          "float_value": 0.028950657695531845,
-          "paint_seed": 941,
-          "stattrak": false,
-          "csfloat_url": "https://csfloat.com/item/962728554100032855",
-          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018830420E9042806300338EED3B4E70340AD0746FE3288",
-          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2qvw-J3s-p5SiihmSIqsi-HlorwOy7DAVRPVssnHaMUuhe9xIHlMuvqtgPf2IoTyC383Sod7CY-sr4DVfZ2qKPU3g-TNuE-545DeqjFvb87vg/360fx360f",
-          "seller": {
-            "steam_id": "76561198073900734",
-            "username": "RobertBaratheon",
-            "avatar": "https://avatars.steamstatic.com/d46811978312195410879915c709601929cc9920_full.jpg",
-            "stall_url": "https://csfloat.com/stall/76561198073900734"
-          }
-        },
         {
           "id": "960894398516824895",
           "price": 10799,
@@ -524,6 +507,23 @@
             "username": "!Haruno [H] 100 knife for trade",
             "avatar": "https://avatars.steamstatic.com/ce5ca412a9937418b1cc1e34879e45d6bb87b74f_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198930819998"
+          }
+        },
+        {
+          "id": "936071689488435640",
+          "price": 18000,
+          "wear": "FN",
+          "float_value": 0.031437087804079056,
+          "paint_seed": 291,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/936071689488435640",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198880090841A18688972376D16584165812913840853",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2qvw-J3s-p5SiihmSIqsi-HlorwOy7DAVRPVssnHaMUuhe9xIHlMuvqtgPf2IoTyC383Sod7CY-sr4DVfZ2qKPU3g-TNuE-545DeqjFvb87vg/360fx360f",
+          "seller": {
+            "steam_id": "76561198880090841",
+            "username": "Kvest",
+            "avatar": "https://avatars.steamstatic.com/5a628dffdeb4669ef64ac344ec2d0f78409e7cc8_full.jpg",
+            "stall_url": "https://csfloat.com/stall/76561198880090841"
           }
         }
       ]
@@ -1333,7 +1333,7 @@
       "csfloat_db_url": "https://csfloat.com/db?defIndex=506&paintIndex=417",
       "count": 9,
       "floor_prices": {
-        "FN": 545,
+        "FN": 540,
         "MW": 19000,
         "FT": null,
         "WW": null,
@@ -1344,7 +1344,7 @@
       "listings": [
         {
           "id": "962700433980263175",
-          "price": 545,
+          "price": 540,
           "wear": "FN",
           "float_value": 0.02310161478817463,
           "paint_seed": 406,
@@ -2861,7 +2861,7 @@
       "knife_id": "skeleton",
       "knife_name": "Skeleton Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=525&paintIndex=417",
-      "count": 36,
+      "count": 35,
       "floor_prices": {
         "FN": 2462.3,
         "MW": 3061.23,
@@ -2887,23 +2887,6 @@
             "username": "Haru",
             "avatar": "https://avatars.steamstatic.com/5af018c9f927b033f344c3bc72980af712b8b278_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198844586671"
-          }
-        },
-        {
-          "id": "963227534164623848",
-          "price": 2500,
-          "wear": "FN",
-          "float_value": 0.02430974878370762,
-          "paint_seed": 607,
-          "stattrak": false,
-          "csfloat_url": "https://csfloat.com/item/963227534164623848",
-          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%2000188D0420A1032806300338BDCA9CE60340DF0427FD2A04",
-          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1I5PeibbBiLs-SA1iSze91u_FsTju_qhAmoT-Jn4bjJC_4Ml93UtZuR7JYtEO-mtzjN-_gs1DXjN9MyHr92n4d7S89sL4AWaR2_vbSigzFZKp9v8c7W1qI3g/360fx360f",
-          "seller": {
-            "steam_id": null,
-            "username": null,
-            "avatar": null,
-            "stall_url": null
           }
         },
         {
@@ -3210,6 +3193,23 @@
             "username": "!Chez 🔥 TRADING 550 KNIVES",
             "avatar": "https://avatars.steamstatic.com/1cbee78c0cbaba40459d7cd5ac691968a5a75161_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198305185709"
+          }
+        },
+        {
+          "id": "942624143399062056",
+          "price": 3300,
+          "wear": "FN",
+          "float_value": 0.020438052713871002,
+          "paint_seed": 357,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/942624143399062056",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198345253629A47998986552D1073653658593803113",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1I5PeibbBiLs-SA1iSze91u_FsTju_qhAmoT-Jn4bjJC_4Ml93UtZuR7JYtEO-mtzjN-_gs1DXjN9MyHr92n4d7S89sL4AWaR2_vbSigzFZKp9v8c7W1qI3g/360fx360f",
+          "seller": {
+            "steam_id": "76561198345253629",
+            "username": "reaver",
+            "avatar": "https://avatars.steamstatic.com/67e6c8f548531496285075b2be2f5bdfa98acee7_full.jpg",
+            "stall_url": "https://csfloat.com/stall/76561198345253629"
           }
         }
       ]
@@ -4816,9 +4816,9 @@
       "knife_id": "nomad",
       "knife_name": "Nomad Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=521&paintIndex=417",
-      "count": 31,
+      "count": 30,
       "floor_prices": {
-        "FN": 1210,
+        "FN": 1220,
         "MW": 2019.5,
         "FT": null,
         "WW": null,
@@ -4827,23 +4827,6 @@
       "float_min": 0.001033737906254828,
       "float_max": 0.07944706827402115,
       "listings": [
-        {
-          "id": "962758733853755899",
-          "price": 1210,
-          "wear": "FN",
-          "float_value": 0.03418395668268204,
-          "paint_seed": 954,
-          "stattrak": false,
-          "csfloat_url": "https://csfloat.com/item/962758733853755899",
-          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018890420A1032806300338FA88B0E80340BA07D4CCB088",
-          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1U-uaqZ6t_H_GeMWWcwO19oORoXSWMmBw1sTGAk5X8JRTLN1F4TowlROMLuxe8k9DjP-rj4QONjNhAnCuojiNLvytpt-pRUPci-PffilzIL_Rjtq5H6bYu/360fx360f",
-          "seller": {
-            "steam_id": "76561198160452219",
-            "username": "TrapaneseNuts",
-            "avatar": "https://avatars.steamstatic.com/7e92b239e2bae488ba7c38af96447918eab37397_full.jpg",
-            "stall_url": "https://csfloat.com/stall/76561198160452219"
-          }
-        },
         {
           "id": "963433099960650657",
           "price": 1220,
@@ -5165,6 +5148,23 @@
             "username": "!Chez 🔥 TRADING 550 KNIVES",
             "avatar": "https://avatars.steamstatic.com/1cbee78c0cbaba40459d7cd5ac691968a5a75161_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198305185709"
+          }
+        },
+        {
+          "id": "910281911300130709",
+          "price": 1735,
+          "wear": "FN",
+          "float_value": 0.03180888667702675,
+          "paint_seed": 266,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/910281911300130709",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198141971812A47676412299D17069325093140446277",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1U-uaqZ6t_H_GeMWWcwO19oORoXSWMmBw1sTGAk5X8JRTLN1F4TowlROMLuxe8k9DjP-rj4QONjNhAnCuojiNLvytpt-pRUPci-PffilzIL_Rjtq5H6bYu/360fx360f",
+          "seller": {
+            "steam_id": "76561198141971812",
+            "username": "MsOne",
+            "avatar": "https://avatars.steamstatic.com/603ad35be68a12be139f26a462140d6a117f4188_full.jpg",
+            "stall_url": "https://csfloat.com/stall/76561198141971812"
           }
         }
       ]
