@@ -208,6 +208,17 @@
       "high": 22800,
       "median": 9485,
       "avg": 11281
+    },
+    {
+      "ts": 1775974764496,
+      "count": 9,
+      "floor_fn": 8350,
+      "floor_mw": 22800,
+      "floor_ft": null,
+      "low": 8350,
+      "high": 22800,
+      "median": 9485,
+      "avg": 11281
     }
   ],
   "m9": [
@@ -411,6 +422,17 @@
     },
     {
       "ts": 1775969918766,
+      "count": 18,
+      "floor_fn": 8708.02,
+      "floor_mw": 8000,
+      "floor_ft": null,
+      "low": 8000,
+      "high": 17999,
+      "median": 9888,
+      "avg": 10847
+    },
+    {
+      "ts": 1775974770745,
       "count": 18,
       "floor_fn": 8708.02,
       "floor_mw": 8000,
@@ -630,6 +652,17 @@
       "high": 18000,
       "median": 11999,
       "avg": 12694
+    },
+    {
+      "ts": 1775974767611,
+      "count": 24,
+      "floor_fn": 10450,
+      "floor_mw": 10999,
+      "floor_ft": null,
+      "low": 10450,
+      "high": 18000,
+      "median": 11999,
+      "avg": 12694
     }
   ],
   "gut": [
@@ -841,6 +874,17 @@
       "high": 19000,
       "median": 590,
       "avg": 3345
+    },
+    {
+      "ts": 1775974780232,
+      "count": 8,
+      "floor_fn": 545,
+      "floor_mw": 19000,
+      "floor_ft": null,
+      "low": 545,
+      "high": 19000,
+      "median": 610,
+      "avg": 3700
     }
   ],
   "flip": [
@@ -1044,6 +1088,17 @@
     },
     {
       "ts": 1775969924979,
+      "count": 12,
+      "floor_fn": 1555,
+      "floor_mw": 1361.5,
+      "floor_ft": null,
+      "low": 1361.5,
+      "high": 6728.79,
+      "median": 2500,
+      "avg": 2690
+    },
+    {
+      "ts": 1775974777124,
       "count": 12,
       "floor_fn": 1555,
       "floor_mw": 1361.5,
@@ -1263,6 +1318,17 @@
       "high": 17900,
       "median": 2826.19,
       "avg": 4128
+    },
+    {
+      "ts": 1775974773962,
+      "count": 15,
+      "floor_fn": 1898.57,
+      "floor_mw": null,
+      "floor_ft": null,
+      "low": 1898.57,
+      "high": 17900,
+      "median": 2826.19,
+      "avg": 4128
     }
   ],
   "huntsman": [
@@ -1474,6 +1540,17 @@
       "high": 11330.29,
       "median": 1725,
       "avg": 2539
+    },
+    {
+      "ts": 1775974783351,
+      "count": 13,
+      "floor_fn": 1268.3,
+      "floor_mw": 1707.9,
+      "floor_ft": null,
+      "low": 1268.3,
+      "high": 11330.29,
+      "median": 1710,
+      "avg": 2538
     }
   ],
   "falchion": [
@@ -1677,6 +1754,17 @@
     },
     {
       "ts": 1775969937418,
+      "count": 13,
+      "floor_fn": 999.99,
+      "floor_mw": 24720.65,
+      "floor_ft": null,
+      "low": 999.99,
+      "high": 24720.65,
+      "median": 1516.16,
+      "avg": 3491
+    },
+    {
+      "ts": 1775974789578,
       "count": 13,
       "floor_fn": 999.99,
       "floor_mw": 24720.65,
@@ -1896,6 +1984,17 @@
       "high": 2000,
       "median": 1290.11,
       "avg": 1378
+    },
+    {
+      "ts": 1775974786468,
+      "count": 23,
+      "floor_fn": 1080,
+      "floor_mw": 1200,
+      "floor_ft": null,
+      "low": 1080,
+      "high": 2000,
+      "median": 1290.11,
+      "avg": 1376
     }
   ],
   "stiletto": [
@@ -2099,6 +2198,17 @@
     },
     {
       "ts": 1775969940524,
+      "count": 12,
+      "floor_fn": 2050,
+      "floor_mw": 1850.77,
+      "floor_ft": null,
+      "low": 1850.77,
+      "high": 4000,
+      "median": 2643.11,
+      "avg": 2644
+    },
+    {
+      "ts": 1775974792688,
       "count": 12,
       "floor_fn": 2050,
       "floor_mw": 1850.77,
@@ -2318,6 +2428,17 @@
       "high": 29529.02,
       "median": 3600,
       "avg": 5878
+    },
+    {
+      "ts": 1775974795797,
+      "count": 14,
+      "floor_fn": 2934.99,
+      "floor_mw": null,
+      "floor_ft": null,
+      "low": 2934.99,
+      "high": 29529.02,
+      "median": 3600,
+      "avg": 5878
     }
   ],
   "skeleton": [
@@ -2529,6 +2650,17 @@
       "high": 3700,
       "median": 2882.26,
       "avg": 2873
+    },
+    {
+      "ts": 1775974798938,
+      "count": 34,
+      "floor_fn": 2462.3,
+      "floor_mw": 3099,
+      "floor_ft": null,
+      "low": 2462.3,
+      "high": 3700,
+      "median": 2882.26,
+      "avg": 2872
     }
   ],
   "navaja": [
@@ -2732,6 +2864,17 @@
     },
     {
       "ts": 1775969949872,
+      "count": 22,
+      "floor_fn": 400,
+      "floor_mw": 449.99,
+      "floor_ft": null,
+      "low": 400,
+      "high": 786.35,
+      "median": 487.93,
+      "avg": 542
+    },
+    {
+      "ts": 1775974802073,
       "count": 22,
       "floor_fn": 400,
       "floor_mw": 449.99,
@@ -2951,6 +3094,17 @@
       "high": 1193.61,
       "median": 700.86,
       "avg": 768
+    },
+    {
+      "ts": 1775974808325,
+      "count": 11,
+      "floor_fn": 650,
+      "floor_mw": 625,
+      "floor_ft": null,
+      "low": 625,
+      "high": 1193.61,
+      "median": 700.86,
+      "avg": 768
     }
   ],
   "ursus": [
@@ -3154,6 +3308,17 @@
     },
     {
       "ts": 1775969952984,
+      "count": 27,
+      "floor_fn": 860.93,
+      "floor_mw": 959.04,
+      "floor_ft": null,
+      "low": 860.93,
+      "high": 1457.02,
+      "median": 1094.22,
+      "avg": 1114
+    },
+    {
+      "ts": 1775974805194,
       "count": 27,
       "floor_fn": 860.93,
       "floor_mw": 959.04,
@@ -3373,6 +3538,17 @@
       "high": 1141.73,
       "median": 670,
       "avg": 720
+    },
+    {
+      "ts": 1775974814581,
+      "count": 17,
+      "floor_fn": 536.32,
+      "floor_mw": 652.93,
+      "floor_ft": null,
+      "low": 536.32,
+      "high": 1141.73,
+      "median": 670,
+      "avg": 720
     }
   ],
   "paracord": [
@@ -3576,6 +3752,17 @@
     },
     {
       "ts": 1775969959206,
+      "count": 29,
+      "floor_fn": 660,
+      "floor_mw": 718,
+      "floor_ft": null,
+      "low": 660,
+      "high": 1040.53,
+      "median": 750.93,
+      "avg": 783
+    },
+    {
+      "ts": 1775974811462,
       "count": 29,
       "floor_fn": 660,
       "floor_mw": 718,
@@ -3795,6 +3982,17 @@
       "high": 1633.62,
       "median": 1328.47,
       "avg": 1357
+    },
+    {
+      "ts": 1775974817706,
+      "count": 34,
+      "floor_fn": 1209.75,
+      "floor_mw": 2019.5,
+      "floor_ft": null,
+      "low": 1209.75,
+      "high": 1633.62,
+      "median": 1328.47,
+      "avg": 1357
     }
   ],
   "_market_cap": [
@@ -3863,6 +4061,12 @@
       "listed": 336,
       "listed_value": 829960,
       "market_cap": 14793106
+    },
+    {
+      "ts": 1775974817720,
+      "listed": 335,
+      "listed_value": 828781,
+      "market_cap": 14797035
     }
   ]
 }
