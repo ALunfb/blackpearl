@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-12T07:58:42.367Z",
+  "fetched_at": "2026-04-12T08:46:40.844Z",
   "knives": [
     {
       "knife_id": "karambit",
@@ -2844,7 +2844,7 @@
       "knife_id": "skeleton",
       "knife_name": "Skeleton Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=525&paintIndex=417",
-      "count": 33,
+      "count": 34,
       "floor_prices": {
         "FN": 2462.3,
         "MW": 3099,
@@ -2870,6 +2870,23 @@
             "username": "Haru",
             "avatar": "https://avatars.steamstatic.com/5af018c9f927b033f344c3bc72980af712b8b278_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198844586671"
+          }
+        },
+        {
+          "id": "963347564441241598",
+          "price": 2544.38,
+          "wear": "FN",
+          "float_value": 0.02646402269601822,
+          "paint_seed": 274,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/963347564441241598",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%2000188D0420A10328063003389496E3E603409202E35E589A",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1I5PeibbBiLs-SA1iSze91u_FsTju_qhAmoT-Jn4bjJC_4Ml93UtZuR7JYtEO-mtzjN-_gs1DXjN9MyHr92n4d7S89sL4AWaR2_vbSigzFZKp9v8c7W1qI3g/360fx360f",
+          "seller": {
+            "steam_id": null,
+            "username": null,
+            "avatar": null,
+            "stall_url": null
           }
         },
         {
@@ -3176,23 +3193,6 @@
             "username": "Daishouri",
             "avatar": "https://avatars.steamstatic.com/8a391766f95655d8fc16583f5358ce65aabd53ef_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561198299806858"
-          }
-        },
-        {
-          "id": "952915243393223039",
-          "price": 3748.85,
-          "wear": "FN",
-          "float_value": 0.03328120708465576,
-          "paint_seed": 17,
-          "stattrak": false,
-          "csfloat_url": "https://csfloat.com/item/952915243393223039",
-          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198819448109A47301176078D14017674637560517505",
-          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1I5PeibbBiLs-SA1iSze91u_FsTju_qhAmoT-Jn4bjJC_4Ml93UtZuR7JYtEO-mtzjN-_gs1DXjN9MyHr92n4d7S89sL4AWaR2_vbSigzFZKp9v8c7W1qI3g/360fx360f",
-          "seller": {
-            "steam_id": "76561198819448109",
-            "username": "White Guy",
-            "avatar": "https://avatars.steamstatic.com/67386181a1cf7d4596c3e0413fe948cc9c12526f_full.jpg",
-            "stall_url": "https://csfloat.com/stall/76561198819448109"
           }
         }
       ]
@@ -4476,7 +4476,7 @@
       "knife_id": "survival",
       "knife_name": "Survival Knife",
       "csfloat_db_url": "https://csfloat.com/db?defIndex=518&paintIndex=417",
-      "count": 18,
+      "count": 19,
       "floor_prices": {
         "FN": 536.32,
         "MW": 652.93,
@@ -4536,6 +4536,23 @@
             "username": "Galaxy B/S SKINS",
             "avatar": "https://avatars.steamstatic.com/4313a68b82212c60fcc560673399d05782937e70_full.jpg",
             "stall_url": "https://csfloat.com/stall/76561199531611001"
+          }
+        },
+        {
+          "id": "963355783616137903",
+          "price": 562.81,
+          "wear": "FN",
+          "float_value": 0.03494890034198761,
+          "paint_seed": 641,
+          "stattrak": false,
+          "csfloat_url": "https://csfloat.com/item/963355783616137903",
+          "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018860420A103280630033894CDBCE803408105589592E8",
+          "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Y7vyne5tsLc-RAmaTyv5zsfNlcCSyhx8rtjSfn4vGLSLANkI-CJQjFrQJsxHrktfjMu6z5gbYi49FyS-rh3lJuHxst7oLAvci-PDehxaBb-MyRwuVrw/360fx360f",
+          "seller": {
+            "steam_id": null,
+            "username": null,
+            "avatar": null,
+            "stall_url": null
           }
         },
         {
