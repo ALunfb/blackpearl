@@ -1484,6 +1484,90 @@
     margin: 0 auto;
   }
 
+  /* FAQ */
+  .faq-section-toggle { }
+  .faq-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .faq-section-header::-webkit-details-marker { display: none; }
+  .faq-section-header::marker { display: none; content: ''; }
+  .faq-section-header:focus-visible {
+    outline: 2px solid var(--violet-bright);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  .faq-section-chevron {
+    color: var(--violet-bright);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+  .faq-section-toggle[open] .faq-section-chevron {
+    transform: rotate(180deg);
+  }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+  .faq-item:hover { border-color: var(--border-bright); }
+  .faq-item[open] { border-color: var(--border-bright); }
+  .faq-item + .faq-item { margin-top: 6px; }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--silver-bright);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    letter-spacing: 0.01em;
+  }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::marker { display: none; content: ''; }
+  .faq-question::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--violet-bright);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+  .faq-item[open] .faq-question::after {
+    content: '−';
+    transform: rotate(0deg);
+  }
+  .faq-question:hover { color: var(--white); }
+  .faq-question:focus-visible {
+    outline: 2px solid var(--violet-bright);
+    outline-offset: -2px;
+    border-radius: 8px;
+  }
+  .faq-answer {
+    padding: 0 24px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--silver);
+  }
+  @media (max-width: 680px) {
+    .faq-question { padding: 16px 18px; font-size: 15px; }
+    .faq-answer { padding: 0 18px 16px; font-size: 13px; }
+  }
+
   /* View toggle */
   .view-toggle {
     display: flex;
@@ -3289,6 +3373,62 @@
         <span style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);">Kukri</span>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section class="section" id="faq" style="padding-top:64px;padding-bottom:80px;">
+  <div class="reveal" style="max-width:800px;margin:0 auto;">
+    <details class="faq-section-toggle">
+      <summary class="faq-section-header">
+        <h2 class="section-title" style="margin:0;font-size:1.6em;pointer-events:none;">
+          Frequently Asked<br/><span class="text-gradient-violet">Questions</span>
+        </h2>
+        <span class="faq-section-chevron">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </summary>
+    <div class="faq-list" style="display:flex;flex-direction:column;gap:2px;padding-top:40px;">
+
+      <details class="faq-item">
+        <summary class="faq-question">What is a CS2 Black Pearl Doppler?</summary>
+        <div class="faq-answer">A Black Pearl Doppler is one of the rarest knife finishes in Counter-Strike 2 (CS2). It is a special phase of the Doppler skin pattern that features a dark, iridescent color palette mixing deep purples, greens, and blues. Black Pearls are significantly rarer and more expensive than standard Doppler phases (P1–P4), Ruby, or Sapphire variants.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">How much is a Black Pearl knife worth in CS2?</summary>
+        <div class="faq-answer">Black Pearl knife prices vary widely depending on the knife type, wear condition, and float value. Prices can range from around $400 for less popular knives like the Navaja or Gut Knife to over $10,000 for a Factory New Karambit or Butterfly Knife Black Pearl. Check blackpearl.gg for live, up-to-date pricing from CSFloat listings.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">How can I tell if a Doppler knife is a Black Pearl?</summary>
+        <div class="faq-answer">Black Pearls are identified by their paint index: 417 for most knives, or 617 for the Butterfly Knife and Shadow Daggers. In-game, they have a distinctive dark, oil-slick appearance with deep purple and green hues, unlike the brighter pinks and blues of standard Doppler phases. You can verify a knife's phase by inspecting it on CSFloat or using blackpearl.gg.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Which CS2 knives can have the Black Pearl finish?</summary>
+        <div class="faq-answer">There are 18 knife types that can drop with the Black Pearl Doppler finish in CS2: Karambit, Butterfly Knife, M9 Bayonet, Bayonet, Flip Knife, Gut Knife, Huntsman Knife, Bowie Knife, Falchion Knife, Stiletto Knife, Talon Knife, Skeleton Knife, Navaja Knife, Ursus Knife, Shadow Daggers, Paracord Knife, Survival Knife, and Nomad Knife.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">What does float value mean for a Black Pearl knife?</summary>
+        <div class="faq-answer">Float value is a number between 0 and 1 that determines the wear condition of a CS2 skin. For Black Pearl knives: Factory New (FN) is 0.00–0.07, Minimal Wear (MW) is 0.07–0.15, Field-Tested (FT) is 0.15–0.38, Well-Worn (WW) is 0.38–0.45, and Battle-Scarred (BS) is 0.45–1.00. Lower float values mean less visible wear and typically command higher prices.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Where can I buy a CS2 Black Pearl knife?</summary>
+        <div class="faq-answer">Black Pearl knives can be purchased on third-party CS2 marketplaces like CSFloat. blackpearl.gg aggregates live CSFloat listings for all 18 Black Pearl knife types, showing current prices, float values, and direct links to buy. You can also inspect each knife in 3D before purchasing.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">How rare is a Black Pearl Doppler drop in CS2?</summary>
+        <div class="faq-answer">Black Pearl is the rarest Doppler phase in CS2. When a Doppler knife drops, there is roughly a 1-in-250 chance it will be a Black Pearl, making it far rarer than standard phases (P1–P4) and even rarer than Ruby or Sapphire variants. This extreme rarity is what drives their premium pricing.</div>
+      </details>
+
+    </div>
+    </details>
   </div>
 </section>
 
