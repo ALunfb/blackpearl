@@ -1,6 +1,29 @@
 {
-  "updated_at": "2026-04-14T18:00:40.858Z",
+  "updated_at": "2026-04-14T19:23:35.169Z",
   "new_listings": [
+    {
+      "fp": "huntsman|934|0.030507398769259453|n",
+      "knife_id": "huntsman",
+      "knife_name": "Huntsman Knife",
+      "listing": {
+        "id": "964241823780440705",
+        "price": 1216.03,
+        "wear": "FN",
+        "float_value": 0.030507398769259453,
+        "paint_seed": 934,
+        "stattrak": false,
+        "csfloat_url": "https://csfloat.com/item/964241823780440705",
+        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018FD0320A1032806300338A7D5E7E70340A607BCD55224",
+        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1P7vG6YadsLM-SA1iSze91u_FsTju_qhAmoT-Jn4bjJC_4Ml93UtZuE7UDuhC-mtbnNb-xtFfZ3YtGzSv6hisauns-5b5WVqIgqKDfjwjEYKp9v8eb6jzRvA/360fx360f",
+        "seller": {
+          "steam_id": null,
+          "username": null,
+          "avatar": null,
+          "stall_url": null
+        }
+      },
+      "created_at": "2026-04-14T19:23:35.167Z"
+    },
     {
       "fp": "flip|133|0.07112440466880798|n",
       "knife_id": "flip",
@@ -1360,6 +1383,78 @@
     }
   ],
   "sold": [
+    {
+      "fp": "nomad|376|0.032974887639284134|n",
+      "knife_id": "nomad",
+      "knife_name": "Nomad Knife",
+      "listing": {
+        "id": "963881429228457885",
+        "price": 1190,
+        "wear": "FN",
+        "float_value": 0.032974887639284134,
+        "paint_seed": 376,
+        "stattrak": false,
+        "csfloat_url": "https://csfloat.com/item/963881429228457885",
+        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018890420A1032806300338ADA19CE80340F802FD1FC812",
+        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1U-uaqZ6t_H_GeMWWcwO19oORoXSWMmBw1sTGAk5X8JRTLN1F4TowlROMLuxe8k9DjP-rj4QONjNhAnCuojiNLvytpt-pRUPci-PffilzIL_Rjtq5H6bYu/360fx360f",
+        "seller": {
+          "steam_id": "76561198799287354",
+          "username": "3D",
+          "avatar": "https://avatars.steamstatic.com/46b8de376fdc55cfa989631b5cfe3540316b43dd_full.jpg",
+          "stall_url": "https://csfloat.com/stall/76561198799287354"
+        }
+      },
+      "first_seen": "2026-04-13T20:44:14.504Z",
+      "sold_at": "2026-04-14T19:23:35.167Z"
+    },
+    {
+      "fp": "navaja|79|0.05867873877286911|n",
+      "knife_id": "navaja",
+      "knife_name": "Navaja Knife",
+      "listing": {
+        "id": "963706653893591499",
+        "price": 395,
+        "wear": "FN",
+        "float_value": 0.05867873877286911,
+        "paint_seed": 79,
+        "stattrak": false,
+        "csfloat_url": "https://csfloat.com/item/963706653893591499",
+        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018880420A10328063003389EB2C1EB03404FFE3DB4BA",
+        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1c9uK9cZtnIfOYBWmZx-tJsexWTSWylhY3tjyXlrD0IDnFMlN5QMckKrtT5Uj8jILvNu7r4VfZj4gTySX_33gc6i5r475RBPAh_vKBjQrIZ7Q45sEHJ_y5DUPZghIomjw/360fx360f",
+        "seller": {
+          "steam_id": null,
+          "username": null,
+          "avatar": null,
+          "stall_url": null
+        }
+      },
+      "first_seen": "2026-04-13T09:28:53.360Z",
+      "sold_at": "2026-04-14T19:23:35.167Z"
+    },
+    {
+      "fp": "m9|254|0.024778051301836967|n",
+      "knife_id": "m9",
+      "knife_name": "M9 Bayonet",
+      "listing": {
+        "id": "913339644609957761",
+        "price": 9500,
+        "wear": "FN",
+        "float_value": 0.024778051301836967,
+        "paint_seed": 254,
+        "stattrak": false,
+        "csfloat_url": "https://csfloat.com/item/913339644609957761",
+        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199046031194A47792045626D5677465080922495300",
+        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Wts2sab1iLvWHMWad_ux6seJiXyyyhxEYvjyXmIP8KDHCOml8U8UoAfkItRCwl9XnNe207lCN2t1EzXr93ClN5yc_5L5UVaRxr6HSjQGXYrc9_9BdcwX6MBne/360fx360f",
+        "seller": {
+          "steam_id": "76561199046031194",
+          "username": "Astrooooo B>Skins",
+          "avatar": "https://avatars.steamstatic.com/e17979dfc68e2c81751fa484fea7c565beb5fd2b_full.jpg",
+          "stall_url": "https://csfloat.com/stall/76561199046031194"
+        }
+      },
+      "first_seen": "2026-04-11T17:39:07.215Z",
+      "sold_at": "2026-04-14T19:23:35.167Z"
+    },
     {
       "fp": "navaja|968|0.07616093754768372|n",
       "knife_id": "navaja",
@@ -2751,7 +2846,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|929|0.03577257692813873|n": {
       "knife_id": "karambit",
@@ -2774,7 +2869,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|328|0.035682208836078644|st": {
       "knife_id": "karambit",
@@ -2797,7 +2892,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|56|0.06283854693174362|n": {
       "knife_id": "karambit",
@@ -2820,7 +2915,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|309|0.03228423371911049|n": {
       "knife_id": "karambit",
@@ -2843,7 +2938,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|46|0.01835380680859089|n": {
       "knife_id": "karambit",
@@ -2866,7 +2961,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|875|0.028454909101128578|st": {
       "knife_id": "karambit",
@@ -2889,7 +2984,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|142|0.07733309268951416|n": {
       "knife_id": "karambit",
@@ -2912,7 +3007,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|455|0.07144223898649216|n": {
       "knife_id": "butterfly",
@@ -2935,7 +3030,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|540|0.011145029217004776|n": {
       "knife_id": "butterfly",
@@ -2958,7 +3053,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|387|0.01199912279844284|n": {
       "knife_id": "butterfly",
@@ -2981,7 +3076,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|907|0.030266908928751945|n": {
       "knife_id": "butterfly",
@@ -3004,7 +3099,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|129|0.017935631796717644|n": {
       "knife_id": "butterfly",
@@ -3027,7 +3122,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|823|0.019383471459150314|n": {
       "knife_id": "butterfly",
@@ -3050,7 +3145,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|215|0.02634238451719284|n": {
       "knife_id": "butterfly",
@@ -3073,7 +3168,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|873|0.027339156717061996|n": {
       "knife_id": "butterfly",
@@ -3096,7 +3191,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|600|0.033193983137607574|n": {
       "knife_id": "butterfly",
@@ -3119,7 +3214,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|32|0.008476752787828445|n": {
       "knife_id": "butterfly",
@@ -3142,7 +3237,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|754|0.009915283881127834|n": {
       "knife_id": "butterfly",
@@ -3165,7 +3260,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|647|0.02081260085105896|n": {
       "knife_id": "butterfly",
@@ -3188,7 +3283,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|461|0.007419748697429895|n": {
       "knife_id": "butterfly",
@@ -3211,7 +3306,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|579|0.01981508918106556|n": {
       "knife_id": "m9",
@@ -3234,7 +3329,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|597|0.017847377806901932|n": {
       "knife_id": "m9",
@@ -3257,30 +3352,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
-    },
-    "m9|254|0.024778051301836967|n": {
-      "knife_id": "m9",
-      "knife_name": "M9 Bayonet",
-      "listing": {
-        "id": "913339644609957761",
-        "price": 9500,
-        "wear": "FN",
-        "float_value": 0.024778051301836967,
-        "paint_seed": 254,
-        "stattrak": false,
-        "csfloat_url": "https://csfloat.com/item/913339644609957761",
-        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561199046031194A47792045626D5677465080922495300",
-        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Wts2sab1iLvWHMWad_ux6seJiXyyyhxEYvjyXmIP8KDHCOml8U8UoAfkItRCwl9XnNe207lCN2t1EzXr93ClN5yc_5L5UVaRxr6HSjQGXYrc9_9BdcwX6MBne/360fx360f",
-        "seller": {
-          "steam_id": "76561199046031194",
-          "username": "Astrooooo B>Skins",
-          "avatar": "https://avatars.steamstatic.com/e17979dfc68e2c81751fa484fea7c565beb5fd2b_full.jpg",
-          "stall_url": "https://csfloat.com/stall/76561199046031194"
-        }
-      },
-      "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|18|0.03348154574632645|n": {
       "knife_id": "m9",
@@ -3303,7 +3375,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|359|0.028694970533251762|n": {
       "knife_id": "m9",
@@ -3326,7 +3398,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|516|0.011769101023674011|n": {
       "knife_id": "m9",
@@ -3349,7 +3421,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|846|0.03645772486925125|n": {
       "knife_id": "m9",
@@ -3372,7 +3444,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|21|0.009681418538093567|n": {
       "knife_id": "m9",
@@ -3395,7 +3467,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|306|0.020293843001127243|n": {
       "knife_id": "m9",
@@ -3418,7 +3490,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|114|0.03161283954977989|n": {
       "knife_id": "m9",
@@ -3441,7 +3513,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|295|0.009612574242055416|n": {
       "knife_id": "m9",
@@ -3464,7 +3536,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|725|0.027475085109472275|n": {
       "knife_id": "m9",
@@ -3487,7 +3559,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|82|0.0243984367698431|n": {
       "knife_id": "m9",
@@ -3510,7 +3582,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|357|0.02889683097600937|n": {
       "knife_id": "m9",
@@ -3533,7 +3605,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|962|0.014319132082164288|st": {
       "knife_id": "m9",
@@ -3556,7 +3628,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "m9|829|0.024602770805358887|st": {
       "knife_id": "m9",
@@ -3579,7 +3651,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|559|0.03515172749757767|n": {
       "knife_id": "bayonet",
@@ -3602,7 +3674,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|828|0.05868560075759888|n": {
       "knife_id": "bayonet",
@@ -3625,7 +3697,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|887|0.04737376049160957|n": {
       "knife_id": "bayonet",
@@ -3648,7 +3720,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|525|0.011047912761569023|n": {
       "knife_id": "bayonet",
@@ -3671,7 +3743,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|758|0.00970908161252737|n": {
       "knife_id": "bayonet",
@@ -3694,7 +3766,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|519|0.007982431910932064|n": {
       "knife_id": "bayonet",
@@ -3717,7 +3789,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|767|0.006633109413087368|n": {
       "knife_id": "bayonet",
@@ -3740,7 +3812,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|706|0.010231091640889645|n": {
       "knife_id": "bayonet",
@@ -3763,7 +3835,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|263|0.010290666483342648|n": {
       "knife_id": "bayonet",
@@ -3786,7 +3858,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|514|0.011051356792449951|n": {
       "knife_id": "bayonet",
@@ -3809,7 +3881,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|85|0.006669173017144203|n": {
       "knife_id": "bayonet",
@@ -3832,7 +3904,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|596|0.00884340237826109|n": {
       "knife_id": "bayonet",
@@ -3855,7 +3927,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|700|0.07667640596628189|n": {
       "knife_id": "flip",
@@ -3878,7 +3950,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|281|0.025877494364976883|n": {
       "knife_id": "flip",
@@ -3901,7 +3973,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|320|0.022370848804712296|n": {
       "knife_id": "flip",
@@ -3924,7 +3996,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|35|0.014497729949653149|n": {
       "knife_id": "flip",
@@ -3947,7 +4019,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|980|0.0770052820444107|n": {
       "knife_id": "flip",
@@ -3970,7 +4042,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|909|0.0008320329361595213|n": {
       "knife_id": "flip",
@@ -3993,7 +4065,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|123|0.0491948202252388|n": {
       "knife_id": "flip",
@@ -4016,7 +4088,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|8|0.03547443449497223|st": {
       "knife_id": "flip",
@@ -4039,7 +4111,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|27|0.027879532426595688|st": {
       "knife_id": "flip",
@@ -4062,7 +4134,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|443|0.0004795196873601526|n": {
       "knife_id": "flip",
@@ -4085,7 +4157,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|414|0.049898672848939896|n": {
       "knife_id": "gut",
@@ -4108,7 +4180,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|903|0.0190722793340683|n": {
       "knife_id": "gut",
@@ -4131,7 +4203,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|380|0.025180377066135406|n": {
       "knife_id": "gut",
@@ -4154,7 +4226,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|666|0.03500347211956978|n": {
       "knife_id": "gut",
@@ -4177,7 +4249,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|575|0.009183047339320183|n": {
       "knife_id": "gut",
@@ -4200,7 +4272,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|170|0.006575367879122496|n": {
       "knife_id": "gut",
@@ -4223,7 +4295,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|391|0.07135412096977234|n": {
       "knife_id": "gut",
@@ -4246,7 +4318,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|937|0.03159492462873459|n": {
       "knife_id": "huntsman",
@@ -4269,7 +4341,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|323|0.027791734784841537|n": {
       "knife_id": "huntsman",
@@ -4292,7 +4364,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|698|0.028899410739541054|n": {
       "knife_id": "huntsman",
@@ -4315,7 +4387,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|127|0.004423194564878941|n": {
       "knife_id": "huntsman",
@@ -4338,7 +4410,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|934|0.00844397023320198|n": {
       "knife_id": "huntsman",
@@ -4361,7 +4433,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|187|0.07011167705059052|n": {
       "knife_id": "huntsman",
@@ -4384,7 +4456,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|597|0.025424178689718246|st": {
       "knife_id": "huntsman",
@@ -4407,7 +4479,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|367|0.011833188124001026|n": {
       "knife_id": "huntsman",
@@ -4430,7 +4502,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|417|0.027689430862665176|n": {
       "knife_id": "huntsman",
@@ -4453,7 +4525,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|235|0.03203701972961426|n": {
       "knife_id": "huntsman",
@@ -4476,7 +4548,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|89|0.006653343327343464|n": {
       "knife_id": "huntsman",
@@ -4499,7 +4571,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|419|0.025369981303811073|st": {
       "knife_id": "huntsman",
@@ -4522,7 +4594,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|839|0.000018007232938543893|n": {
       "knife_id": "huntsman",
@@ -4545,7 +4617,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|746|0.03517095372080803|n": {
       "knife_id": "bowie",
@@ -4568,7 +4640,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|812|0.02442954294383526|n": {
       "knife_id": "bowie",
@@ -4591,7 +4663,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|610|0.01213790662586689|n": {
       "knife_id": "bowie",
@@ -4614,7 +4686,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|632|0.027256449684500694|n": {
       "knife_id": "bowie",
@@ -4637,7 +4709,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|582|0.0719292163848877|n": {
       "knife_id": "bowie",
@@ -4660,7 +4732,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|26|0.022228870540857315|n": {
       "knife_id": "bowie",
@@ -4683,7 +4755,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|401|0.028428366407752037|n": {
       "knife_id": "bowie",
@@ -4706,7 +4778,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|603|0.07045488059520721|n": {
       "knife_id": "bowie",
@@ -4729,7 +4801,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|2|0.01081627607345581|n": {
       "knife_id": "bowie",
@@ -4752,7 +4824,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|130|0.011213929392397404|n": {
       "knife_id": "bowie",
@@ -4775,7 +4847,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|727|0.007114211097359657|n": {
       "knife_id": "bowie",
@@ -4798,7 +4870,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|288|0.008839680813252926|n": {
       "knife_id": "bowie",
@@ -4821,7 +4893,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|70|0.024403413757681847|n": {
       "knife_id": "bowie",
@@ -4844,7 +4916,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|372|0.026203837245702744|n": {
       "knife_id": "bowie",
@@ -4867,7 +4939,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|679|0.029884513467550278|st": {
       "knife_id": "bowie",
@@ -4890,7 +4962,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|650|0.03369288146495819|n": {
       "knife_id": "bowie",
@@ -4913,7 +4985,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|630|0.011184336617588997|n": {
       "knife_id": "bowie",
@@ -4936,7 +5008,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|16|0.05361532047390938|st": {
       "knife_id": "bowie",
@@ -4959,7 +5031,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|558|0.027238208800554276|n": {
       "knife_id": "falchion",
@@ -4982,7 +5054,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|352|0.03245058283209801|n": {
       "knife_id": "falchion",
@@ -5005,7 +5077,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|439|0.043981436640024185|n": {
       "knife_id": "falchion",
@@ -5028,7 +5100,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|609|0.009574136696755886|n": {
       "knife_id": "falchion",
@@ -5051,7 +5123,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|747|0.004968159832060337|n": {
       "knife_id": "falchion",
@@ -5074,7 +5146,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|747|0.011121504008769989|n": {
       "knife_id": "falchion",
@@ -5097,7 +5169,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|679|0.06107521057128906|st": {
       "knife_id": "falchion",
@@ -5120,7 +5192,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|149|0.03314783051609993|n": {
       "knife_id": "falchion",
@@ -5143,7 +5215,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|51|0.015168970450758934|n": {
       "knife_id": "falchion",
@@ -5166,7 +5238,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|827|0.011105538345873356|n": {
       "knife_id": "falchion",
@@ -5189,7 +5261,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|286|0.011757886037230492|st": {
       "knife_id": "falchion",
@@ -5212,7 +5284,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|571|0.008857649751007557|n": {
       "knife_id": "falchion",
@@ -5235,7 +5307,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "falchion|2|0.07206536829471588|st": {
       "knife_id": "falchion",
@@ -5258,7 +5330,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|996|0.0725497454404831|n": {
       "knife_id": "stiletto",
@@ -5281,7 +5353,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|349|0.034770842641592026|st": {
       "knife_id": "stiletto",
@@ -5304,7 +5376,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|541|0.03973762318491936|n": {
       "knife_id": "stiletto",
@@ -5327,7 +5399,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|725|0.035543330013751984|n": {
       "knife_id": "stiletto",
@@ -5350,7 +5422,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|139|0.0738762691617012|n": {
       "knife_id": "stiletto",
@@ -5373,7 +5445,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|246|0.02517789788544178|st": {
       "knife_id": "stiletto",
@@ -5396,7 +5468,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|365|0.03434395417571068|n": {
       "knife_id": "stiletto",
@@ -5419,7 +5491,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|258|0.007182972971349955|n": {
       "knife_id": "stiletto",
@@ -5442,7 +5514,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|939|0.007150124292820692|n": {
       "knife_id": "stiletto",
@@ -5465,7 +5537,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|480|0.0025916530285030603|n": {
       "knife_id": "stiletto",
@@ -5488,7 +5560,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|871|0.019327431917190552|n": {
       "knife_id": "stiletto",
@@ -5511,7 +5583,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|266|0.031522102653980255|n": {
       "knife_id": "talon",
@@ -5534,7 +5606,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|974|0.029796099290251732|n": {
       "knife_id": "talon",
@@ -5557,7 +5629,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|75|0.03289398178458214|n": {
       "knife_id": "talon",
@@ -5580,7 +5652,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|737|0.03793273866176605|n": {
       "knife_id": "talon",
@@ -5603,7 +5675,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|821|0.04657905548810959|n": {
       "knife_id": "talon",
@@ -5626,7 +5698,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|72|0.020065028220415115|n": {
       "knife_id": "talon",
@@ -5649,7 +5721,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|970|0.01808682270348072|n": {
       "knife_id": "talon",
@@ -5672,7 +5744,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|267|0.020979396998882294|n": {
       "knife_id": "talon",
@@ -5695,7 +5767,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|451|0.00956109631806612|n": {
       "knife_id": "talon",
@@ -5718,7 +5790,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|819|0.008489859290421009|n": {
       "knife_id": "talon",
@@ -5741,7 +5813,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|780|0.025840289890766144|n": {
       "knife_id": "talon",
@@ -5764,7 +5836,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|876|0.01027648150920868|n": {
       "knife_id": "talon",
@@ -5787,7 +5859,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|263|0.001514165080152452|n": {
       "knife_id": "talon",
@@ -5810,7 +5882,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|19|0.006456337403506041|st": {
       "knife_id": "talon",
@@ -5833,7 +5905,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|667|0.06509991735219955|n": {
       "knife_id": "skeleton",
@@ -5856,7 +5928,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|211|0.028905395418405533|n": {
       "knife_id": "skeleton",
@@ -5879,7 +5951,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|725|0.03161703795194626|n": {
       "knife_id": "skeleton",
@@ -5902,7 +5974,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|258|0.03040018491446972|n": {
       "knife_id": "skeleton",
@@ -5925,7 +5997,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|895|0.03144342452287674|n": {
       "knife_id": "skeleton",
@@ -5948,7 +6020,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|837|0.014119373634457588|n": {
       "knife_id": "skeleton",
@@ -5971,7 +6043,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|335|0.03162415698170662|st": {
       "knife_id": "skeleton",
@@ -5994,7 +6066,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|281|0.04139270260930061|n": {
       "knife_id": "skeleton",
@@ -6017,7 +6089,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|432|0.03270045295357704|n": {
       "knife_id": "skeleton",
@@ -6040,7 +6112,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|806|0.030198952183127403|n": {
       "knife_id": "skeleton",
@@ -6063,7 +6135,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|149|0.03140982612967491|n": {
       "knife_id": "skeleton",
@@ -6086,7 +6158,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|640|0.009368334896862507|n": {
       "knife_id": "skeleton",
@@ -6109,7 +6181,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|495|0.07077182829380035|n": {
       "knife_id": "skeleton",
@@ -6132,7 +6204,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|577|0.07145337015390396|st": {
       "knife_id": "skeleton",
@@ -6155,7 +6227,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|188|0.07767146825790405|n": {
       "knife_id": "skeleton",
@@ -6178,7 +6250,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|357|0.020438052713871002|n": {
       "knife_id": "skeleton",
@@ -6201,7 +6273,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|766|0.00764838932082057|n": {
       "knife_id": "skeleton",
@@ -6224,7 +6296,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|17|0.03328120708465576|n": {
       "knife_id": "skeleton",
@@ -6247,7 +6319,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|651|0.007061058655381203|n": {
       "knife_id": "skeleton",
@@ -6270,7 +6342,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|642|0.044468775391578674|n": {
       "knife_id": "navaja",
@@ -6293,7 +6365,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|96|0.011285262182354927|n": {
       "knife_id": "navaja",
@@ -6316,7 +6388,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|222|0.026753468438982964|st": {
       "knife_id": "navaja",
@@ -6339,7 +6411,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|481|0.009673766791820526|n": {
       "knife_id": "navaja",
@@ -6362,7 +6434,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|345|0.07268647104501724|n": {
       "knife_id": "navaja",
@@ -6385,7 +6457,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|758|0.03253374248743057|n": {
       "knife_id": "navaja",
@@ -6408,7 +6480,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|591|0.034912992268800735|n": {
       "knife_id": "navaja",
@@ -6431,7 +6503,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|95|0.05276428535580635|n": {
       "knife_id": "navaja",
@@ -6454,7 +6526,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|821|0.026326946914196014|n": {
       "knife_id": "navaja",
@@ -6477,7 +6549,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|476|0.011795105412602425|n": {
       "knife_id": "navaja",
@@ -6500,7 +6572,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|112|0.0251044649630785|n": {
       "knife_id": "navaja",
@@ -6523,7 +6595,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|990|0.03522894158959389|n": {
       "knife_id": "navaja",
@@ -6546,7 +6618,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|30|0.00943321455270052|n": {
       "knife_id": "navaja",
@@ -6569,7 +6641,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|688|0.03266759216785431|st": {
       "knife_id": "navaja",
@@ -6592,7 +6664,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|163|0.07811618596315384|n": {
       "knife_id": "navaja",
@@ -6615,7 +6687,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|526|0.03559592738747597|n": {
       "knife_id": "navaja",
@@ -6638,7 +6710,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|879|0.035802725702524185|n": {
       "knife_id": "navaja",
@@ -6661,7 +6733,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|797|0.034374840557575226|n": {
       "knife_id": "navaja",
@@ -6684,7 +6756,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|126|0.06245628744363785|n": {
       "knife_id": "ursus",
@@ -6707,7 +6779,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|73|0.023450583219528198|n": {
       "knife_id": "ursus",
@@ -6730,7 +6802,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|390|0.028208250179886818|n": {
       "knife_id": "ursus",
@@ -6753,7 +6825,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|748|0.028534336015582085|n": {
       "knife_id": "ursus",
@@ -6776,7 +6848,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|943|0.02376960776746273|n": {
       "knife_id": "ursus",
@@ -6799,7 +6871,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|10|0.022493906319141388|n": {
       "knife_id": "ursus",
@@ -6822,7 +6894,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|546|0.07173658162355423|n": {
       "knife_id": "ursus",
@@ -6845,7 +6917,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|507|0.032427676022052765|n": {
       "knife_id": "ursus",
@@ -6868,7 +6940,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|535|0.01585572399199009|n": {
       "knife_id": "ursus",
@@ -6891,7 +6963,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|958|0.0333009697496891|n": {
       "knife_id": "ursus",
@@ -6914,7 +6986,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|772|0.00846219714730978|n": {
       "knife_id": "ursus",
@@ -6937,7 +7009,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|723|0.012840311974287033|n": {
       "knife_id": "ursus",
@@ -6960,7 +7032,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|743|0.033781249076128006|st": {
       "knife_id": "ursus",
@@ -6983,7 +7055,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|683|0.0018759756349027157|n": {
       "knife_id": "ursus",
@@ -7006,7 +7078,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|751|0.07916048914194107|n": {
       "knife_id": "ursus",
@@ -7029,7 +7101,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|111|0.03427044302225113|n": {
       "knife_id": "ursus",
@@ -7052,7 +7124,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|375|0.07708438485860825|n": {
       "knife_id": "ursus",
@@ -7075,7 +7147,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|815|0.008265416137874126|n": {
       "knife_id": "ursus",
@@ -7098,7 +7170,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|344|0.01411457359790802|n": {
       "knife_id": "ursus",
@@ -7121,7 +7193,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|111|0.07272133976221085|n": {
       "knife_id": "shadow",
@@ -7144,7 +7216,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|534|0.06898167729377747|n": {
       "knife_id": "shadow",
@@ -7167,7 +7239,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|895|0.043231301009655|n": {
       "knife_id": "shadow",
@@ -7190,7 +7262,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|464|0.019950397312641144|n": {
       "knife_id": "shadow",
@@ -7213,7 +7285,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|988|0.016549326479434967|n": {
       "knife_id": "shadow",
@@ -7236,7 +7308,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|374|0.03429924324154854|st": {
       "knife_id": "shadow",
@@ -7259,7 +7331,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|317|0.026788897812366486|st": {
       "knife_id": "shadow",
@@ -7282,7 +7354,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|65|0.03593970090150833|st": {
       "knife_id": "shadow",
@@ -7305,7 +7377,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|240|0.03418954461812973|n": {
       "knife_id": "shadow",
@@ -7328,7 +7400,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|404|0.040883634239435196|st": {
       "knife_id": "shadow",
@@ -7351,7 +7423,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|697|0.038150906562805176|n": {
       "knife_id": "paracord",
@@ -7374,7 +7446,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|944|0.032551754266023636|n": {
       "knife_id": "paracord",
@@ -7397,7 +7469,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|192|0.03244054317474365|n": {
       "knife_id": "paracord",
@@ -7420,7 +7492,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|320|0.006782666314393282|n": {
       "knife_id": "paracord",
@@ -7443,7 +7515,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|240|0.003248085966333747|n": {
       "knife_id": "paracord",
@@ -7466,7 +7538,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|693|0.07328037172555923|n": {
       "knife_id": "paracord",
@@ -7489,7 +7561,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|630|0.073660708963871|n": {
       "knife_id": "paracord",
@@ -7512,7 +7584,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|395|0.035845983773469925|n": {
       "knife_id": "paracord",
@@ -7535,7 +7607,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|902|0.03538225591182709|n": {
       "knife_id": "paracord",
@@ -7558,7 +7630,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|514|0.0155824339017272|n": {
       "knife_id": "paracord",
@@ -7581,7 +7653,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|6|0.07532092183828354|n": {
       "knife_id": "paracord",
@@ -7604,7 +7676,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|127|0.05087866634130478|st": {
       "knife_id": "paracord",
@@ -7627,7 +7699,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|912|0.013832880184054375|st": {
       "knife_id": "paracord",
@@ -7650,7 +7722,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|792|0.004553310573101044|n": {
       "knife_id": "paracord",
@@ -7673,7 +7745,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|20|0.007213536184281111|n": {
       "knife_id": "paracord",
@@ -7696,7 +7768,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|879|0.011153864674270153|n": {
       "knife_id": "paracord",
@@ -7719,7 +7791,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|331|0.007283602841198444|n": {
       "knife_id": "paracord",
@@ -7742,7 +7814,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|175|0.01338187325745821|n": {
       "knife_id": "survival",
@@ -7765,7 +7837,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|80|0.019070114940404892|n": {
       "knife_id": "survival",
@@ -7788,7 +7860,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|4|0.029861921444535255|n": {
       "knife_id": "survival",
@@ -7811,7 +7883,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|227|0.028913086280226707|n": {
       "knife_id": "survival",
@@ -7834,7 +7906,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|271|0.0761895626783371|n": {
       "knife_id": "survival",
@@ -7857,7 +7929,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|658|0.045430198311805725|st": {
       "knife_id": "survival",
@@ -7880,7 +7952,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|874|0.010821526870131493|n": {
       "knife_id": "survival",
@@ -7903,7 +7975,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|712|0.007264589425176382|n": {
       "knife_id": "survival",
@@ -7926,7 +7998,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|233|0.006572248414158821|n": {
       "knife_id": "survival",
@@ -7949,7 +8021,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|399|0.05799565091729164|n": {
       "knife_id": "survival",
@@ -7972,7 +8044,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|695|0.011633221991360188|st": {
       "knife_id": "survival",
@@ -7995,7 +8067,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|101|0.007808851543813944|n": {
       "knife_id": "survival",
@@ -8018,7 +8090,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|859|0.07256786525249481|st": {
       "knife_id": "survival",
@@ -8041,7 +8113,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|622|0.032711852341890335|n": {
       "knife_id": "survival",
@@ -8064,7 +8136,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|397|0.0070017552934587|n": {
       "knife_id": "survival",
@@ -8087,7 +8159,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|111|0.01709153689444065|n": {
       "knife_id": "nomad",
@@ -8110,7 +8182,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|967|0.011786986142396927|n": {
       "knife_id": "nomad",
@@ -8133,7 +8205,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|166|0.0344773530960083|n": {
       "knife_id": "nomad",
@@ -8156,7 +8228,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|118|0.018321499228477478|n": {
       "knife_id": "nomad",
@@ -8179,7 +8251,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|912|0.034915946424007416|n": {
       "knife_id": "nomad",
@@ -8202,7 +8274,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|912|0.01347963698208332|n": {
       "knife_id": "nomad",
@@ -8225,7 +8297,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|853|0.023026324808597565|n": {
       "knife_id": "nomad",
@@ -8248,7 +8320,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|72|0.037822920829057693|n": {
       "knife_id": "nomad",
@@ -8271,7 +8343,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|244|0.03335284814238548|n": {
       "knife_id": "nomad",
@@ -8294,7 +8366,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|396|0.03796783462166786|n": {
       "knife_id": "nomad",
@@ -8317,7 +8389,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|613|0.00550664821639657|n": {
       "knife_id": "nomad",
@@ -8340,7 +8412,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|480|0.013230509124696255|st": {
       "knife_id": "nomad",
@@ -8363,7 +8435,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|164|0.032728634774684906|n": {
       "knife_id": "butterfly",
@@ -8386,7 +8458,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|534|0.007043651770800352|st": {
       "knife_id": "butterfly",
@@ -8409,7 +8481,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|291|0.031437087804079056|n": {
       "knife_id": "butterfly",
@@ -8432,7 +8504,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|738|0.013807685114443302|n": {
       "knife_id": "butterfly",
@@ -8455,7 +8527,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|275|0.006908414885401726|n": {
       "knife_id": "butterfly",
@@ -8478,7 +8550,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|505|0.03395264223217964|n": {
       "knife_id": "butterfly",
@@ -8501,7 +8573,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|680|0.03746340051293373|n": {
       "knife_id": "bayonet",
@@ -8524,7 +8596,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|120|0.01454345416277647|n": {
       "knife_id": "flip",
@@ -8547,7 +8619,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|271|0.034400295466184616|n": {
       "knife_id": "bowie",
@@ -8570,7 +8642,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|595|0.003739969339221716|n": {
       "knife_id": "bowie",
@@ -8593,7 +8665,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|352|0.009069184772670269|st": {
       "knife_id": "bowie",
@@ -8616,7 +8688,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|656|0.07129169255495071|n": {
       "knife_id": "skeleton",
@@ -8639,7 +8711,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|664|0.018174512311816216|n": {
       "knife_id": "skeleton",
@@ -8662,7 +8734,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|867|0.0442095547914505|n": {
       "knife_id": "skeleton",
@@ -8685,7 +8757,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|999|0.07315777987241745|n": {
       "knife_id": "skeleton",
@@ -8708,7 +8780,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|383|0.033649422228336334|n": {
       "knife_id": "skeleton",
@@ -8731,7 +8803,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|263|0.0039001386612653732|st": {
       "knife_id": "skeleton",
@@ -8754,7 +8826,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|429|0.00678323395550251|n": {
       "knife_id": "skeleton",
@@ -8777,7 +8849,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|85|0.002965350402519107|n": {
       "knife_id": "skeleton",
@@ -8800,7 +8872,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|946|0.002222490729764104|n": {
       "knife_id": "skeleton",
@@ -8823,7 +8895,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|450|0.0023308570962399244|n": {
       "knife_id": "skeleton",
@@ -8846,7 +8918,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|71|0.018590671941637993|n": {
       "knife_id": "skeleton",
@@ -8869,7 +8941,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|522|0.0764133408665657|st": {
       "knife_id": "skeleton",
@@ -8892,7 +8964,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|739|0.008699160069227219|st": {
       "knife_id": "navaja",
@@ -8915,7 +8987,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|938|0.008188504725694656|st": {
       "knife_id": "navaja",
@@ -8938,7 +9010,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|604|0.06100616976618767|n": {
       "knife_id": "ursus",
@@ -8961,7 +9033,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|53|0.042675841599702835|n": {
       "knife_id": "ursus",
@@ -8984,7 +9056,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|381|0.009869011119008064|n": {
       "knife_id": "ursus",
@@ -9007,7 +9079,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|1|0.03190337121486664|st": {
       "knife_id": "ursus",
@@ -9030,7 +9102,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|388|0.031690146774053574|n": {
       "knife_id": "ursus",
@@ -9053,7 +9125,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|738|0.06833455711603165|n": {
       "knife_id": "ursus",
@@ -9076,7 +9148,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|105|0.009868405759334564|st": {
       "knife_id": "ursus",
@@ -9099,7 +9171,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|782|0.032636549323797226|st": {
       "knife_id": "paracord",
@@ -9122,7 +9194,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|302|0.031515952199697495|st": {
       "knife_id": "paracord",
@@ -9145,7 +9217,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|543|0.03579846769571304|n": {
       "knife_id": "paracord",
@@ -9168,7 +9240,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|336|0.008789326064288616|st": {
       "knife_id": "paracord",
@@ -9191,7 +9263,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|160|0.00020174648670945317|n": {
       "knife_id": "paracord",
@@ -9214,7 +9286,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|533|0.025116175413131714|st": {
       "knife_id": "paracord",
@@ -9237,7 +9309,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|609|0.007256926503032446|st": {
       "knife_id": "paracord",
@@ -9260,7 +9332,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|491|0.03612902760505676|n": {
       "knife_id": "paracord",
@@ -9283,7 +9355,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|499|0.07764425128698349|n": {
       "knife_id": "paracord",
@@ -9306,7 +9378,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|975|0.007111163344234228|n": {
       "knife_id": "nomad",
@@ -9329,7 +9401,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|733|0.03414083272218704|n": {
       "knife_id": "nomad",
@@ -9352,7 +9424,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|991|0.025210289284586906|n": {
       "knife_id": "nomad",
@@ -9375,7 +9447,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|937|0.018654687330126762|n": {
       "knife_id": "nomad",
@@ -9398,7 +9470,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|587|0.03301110491156578|n": {
       "knife_id": "nomad",
@@ -9421,7 +9493,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|266|0.03180888667702675|n": {
       "knife_id": "nomad",
@@ -9444,7 +9516,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|640|0.02192900888621807|n": {
       "knife_id": "nomad",
@@ -9467,7 +9539,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|549|0.06294890493154526|n": {
       "knife_id": "nomad",
@@ -9490,7 +9562,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|600|0.03785316273570061|n": {
       "knife_id": "nomad",
@@ -9513,7 +9585,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|250|0.07944706827402115|st": {
       "knife_id": "nomad",
@@ -9536,7 +9608,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|356|0.007002025842666626|st": {
       "knife_id": "nomad",
@@ -9559,7 +9631,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|853|0.024727268144488335|st": {
       "knife_id": "nomad",
@@ -9582,7 +9654,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|945|0.028189200907945633|n": {
       "knife_id": "nomad",
@@ -9605,7 +9677,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|49|0.001033737906254828|n": {
       "knife_id": "nomad",
@@ -9628,7 +9700,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|436|0.0013227526796981692|n": {
       "knife_id": "nomad",
@@ -9651,7 +9723,7 @@
         }
       },
       "first_seen": "2026-04-11T18:31:52.063Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|877|0.021245473995804787|n": {
       "knife_id": "stiletto",
@@ -9674,7 +9746,7 @@
         }
       },
       "first_seen": "2026-04-11T20:23:08.715Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|427|0.007043739315122366|n": {
       "knife_id": "skeleton",
@@ -9697,7 +9769,7 @@
         }
       },
       "first_seen": "2026-04-11T20:23:08.715Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|948|0.00790429301559925|n": {
       "knife_id": "shadow",
@@ -9720,7 +9792,7 @@
         }
       },
       "first_seen": "2026-04-11T22:23:31.664Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|566|0.035477928817272186|n": {
       "knife_id": "flip",
@@ -9743,7 +9815,7 @@
         }
       },
       "first_seen": "2026-04-12T07:58:42.361Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|954|0.019479136914014816|n": {
       "knife_id": "survival",
@@ -9766,7 +9838,7 @@
         }
       },
       "first_seen": "2026-04-12T07:58:42.361Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|641|0.03494890034198761|n": {
       "knife_id": "survival",
@@ -9789,7 +9861,7 @@
         }
       },
       "first_seen": "2026-04-12T08:46:40.838Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|935|0.025542518123984337|n": {
       "knife_id": "stiletto",
@@ -9812,7 +9884,7 @@
         }
       },
       "first_seen": "2026-04-12T10:31:23.741Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|421|0.026616215705871582|n": {
       "knife_id": "talon",
@@ -9835,7 +9907,7 @@
         }
       },
       "first_seen": "2026-04-12T11:28:10.093Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|663|0.03513219207525253|n": {
       "knife_id": "survival",
@@ -9858,7 +9930,7 @@
         }
       },
       "first_seen": "2026-04-12T11:28:10.093Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|696|0.03571155294775963|st": {
       "knife_id": "nomad",
@@ -9881,7 +9953,7 @@
         }
       },
       "first_seen": "2026-04-12T13:55:16.470Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|181|0.07933834195137024|n": {
       "knife_id": "skeleton",
@@ -9904,7 +9976,7 @@
         }
       },
       "first_seen": "2026-04-12T15:29:35.949Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|194|0.017703233286738396|n": {
       "knife_id": "skeleton",
@@ -9927,7 +9999,7 @@
         }
       },
       "first_seen": "2026-04-12T16:28:48.088Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|250|0.01659592054784298|n": {
       "knife_id": "flip",
@@ -9950,7 +10022,7 @@
         }
       },
       "first_seen": "2026-04-12T07:58:42.361Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|236|0.04523539915680885|n": {
       "knife_id": "survival",
@@ -9973,7 +10045,7 @@
         }
       },
       "first_seen": "2026-04-12T23:26:56.641Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|682|0.0728486031293869|n": {
       "knife_id": "navaja",
@@ -9996,7 +10068,7 @@
         }
       },
       "first_seen": "2026-04-13T01:50:50.175Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|34|0.031196564435958862|n": {
       "knife_id": "nomad",
@@ -10019,7 +10091,7 @@
         }
       },
       "first_seen": "2026-04-13T01:50:50.175Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|645|0.035944629460573196|n": {
       "knife_id": "bowie",
@@ -10042,7 +10114,7 @@
         }
       },
       "first_seen": "2026-04-13T04:52:51.452Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|338|0.0007735721883364022|n": {
       "knife_id": "skeleton",
@@ -10065,7 +10137,7 @@
         }
       },
       "first_seen": "2026-04-13T04:52:51.452Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|490|0.03628033027052879|n": {
       "knife_id": "gut",
@@ -10088,30 +10160,7 @@
         }
       },
       "first_seen": "2026-04-13T09:28:53.360Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
-    },
-    "navaja|79|0.05867873877286911|n": {
-      "knife_id": "navaja",
-      "knife_name": "Navaja Knife",
-      "listing": {
-        "id": "963706653893591499",
-        "price": 395,
-        "wear": "FN",
-        "float_value": 0.05867873877286911,
-        "paint_seed": 79,
-        "stattrak": false,
-        "csfloat_url": "https://csfloat.com/item/963706653893591499",
-        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018880420A10328063003389EB2C1EB03404FFE3DB4BA",
-        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1c9uK9cZtnIfOYBWmZx-tJsexWTSWylhY3tjyXlrD0IDnFMlN5QMckKrtT5Uj8jILvNu7r4VfZj4gTySX_33gc6i5r475RBPAh_vKBjQrIZ7Q45sEHJ_y5DUPZghIomjw/360fx360f",
-        "seller": {
-          "steam_id": null,
-          "username": null,
-          "avatar": null,
-          "stall_url": null
-        }
-      },
-      "first_seen": "2026-04-13T09:28:53.360Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|749|0.03245736286044121|n": {
       "knife_id": "stiletto",
@@ -10134,7 +10183,7 @@
         }
       },
       "first_seen": "2026-04-13T15:09:28.501Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "talon|103|0.023982934653759003|n": {
       "knife_id": "talon",
@@ -10157,7 +10206,7 @@
         }
       },
       "first_seen": "2026-04-13T15:09:28.501Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|689|0.01627848669886589|n": {
       "knife_id": "survival",
@@ -10180,7 +10229,7 @@
         }
       },
       "first_seen": "2026-04-13T15:09:28.501Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|690|0.03846476599574089|n": {
       "knife_id": "nomad",
@@ -10203,7 +10252,7 @@
         }
       },
       "first_seen": "2026-04-13T15:09:28.501Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|832|0.02683970332145691|n": {
       "knife_id": "skeleton",
@@ -10226,7 +10275,7 @@
         }
       },
       "first_seen": "2026-04-13T16:55:29.928Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "nomad|246|0.01881331577897072|n": {
       "knife_id": "nomad",
@@ -10249,7 +10298,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "survival|220|0.014656912535429|n": {
       "knife_id": "survival",
@@ -10272,7 +10321,7 @@
         }
       },
       "first_seen": "2026-04-13T17:53:48.014Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|753|0.032638512551784515|n": {
       "knife_id": "paracord",
@@ -10295,30 +10344,7 @@
         }
       },
       "first_seen": "2026-04-13T20:44:14.504Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
-    },
-    "nomad|376|0.032974887639284134|n": {
-      "knife_id": "nomad",
-      "knife_name": "Nomad Knife",
-      "listing": {
-        "id": "963881429228457885",
-        "price": 1190,
-        "wear": "FN",
-        "float_value": 0.032974887639284134,
-        "paint_seed": 376,
-        "stattrak": false,
-        "csfloat_url": "https://csfloat.com/item/963881429228457885",
-        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018890420A1032806300338ADA19CE80340F802FD1FC812",
-        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1U-uaqZ6t_H_GeMWWcwO19oORoXSWMmBw1sTGAk5X8JRTLN1F4TowlROMLuxe8k9DjP-rj4QONjNhAnCuojiNLvytpt-pRUPci-PffilzIL_Rjtq5H6bYu/360fx360f",
-        "seller": {
-          "steam_id": "76561198799287354",
-          "username": "3D",
-          "avatar": "https://avatars.steamstatic.com/46b8de376fdc55cfa989631b5cfe3540316b43dd_full.jpg",
-          "stall_url": "https://csfloat.com/stall/76561198799287354"
-        }
-      },
-      "first_seen": "2026-04-13T20:44:14.504Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "paracord|224|0.014591078273952007|n": {
       "knife_id": "paracord",
@@ -10341,7 +10367,7 @@
         }
       },
       "first_seen": "2026-04-13T11:10:42.497Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|833|0.011573693715035915|n": {
       "knife_id": "shadow",
@@ -10364,7 +10390,7 @@
         }
       },
       "first_seen": "2026-04-13T22:36:35.250Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|429|0.03804099187254906|n": {
       "knife_id": "butterfly",
@@ -10387,7 +10413,7 @@
         }
       },
       "first_seen": "2026-04-13T23:36:07.255Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bowie|716|0.053179338574409485|n": {
       "knife_id": "bowie",
@@ -10410,7 +10436,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "bayonet|436|0.013710628263652325|st": {
       "knife_id": "bayonet",
@@ -10433,7 +10459,7 @@
         }
       },
       "first_seen": "2026-04-14T06:27:16.538Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "stiletto|583|0.03428881987929344|st": {
       "knife_id": "stiletto",
@@ -10456,7 +10482,7 @@
         }
       },
       "first_seen": "2026-04-14T06:27:16.538Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|400|0.047962531447410583|st": {
       "knife_id": "skeleton",
@@ -10479,7 +10505,7 @@
         }
       },
       "first_seen": "2026-04-14T06:27:16.538Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|93|0.03434159979224205|n": {
       "knife_id": "gut",
@@ -10502,7 +10528,7 @@
         }
       },
       "first_seen": "2026-04-11T20:23:08.715Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|905|0.008395197801291943|n": {
       "knife_id": "skeleton",
@@ -10525,7 +10551,7 @@
         }
       },
       "first_seen": "2026-04-14T08:22:40.515Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "navaja|296|0.003247173735871911|n": {
       "knife_id": "navaja",
@@ -10548,7 +10574,7 @@
         }
       },
       "first_seen": "2026-04-14T08:22:40.515Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "gut|338|0.03337059170007706|n": {
       "knife_id": "gut",
@@ -10571,7 +10597,7 @@
         }
       },
       "first_seen": "2026-04-14T10:08:40.177Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "karambit|722|0.010802575387060642|n": {
       "knife_id": "karambit",
@@ -10594,7 +10620,7 @@
         }
       },
       "first_seen": "2026-04-14T11:53:12.924Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "butterfly|125|0.03244984894990921|n": {
       "knife_id": "butterfly",
@@ -10617,7 +10643,7 @@
         }
       },
       "first_seen": "2026-04-11T17:39:07.215Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "shadow|950|0.035047248005867004|n": {
       "knife_id": "shadow",
@@ -10640,7 +10666,7 @@
         }
       },
       "first_seen": "2026-04-14T11:53:12.924Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "ursus|750|0.025021804496645927|n": {
       "knife_id": "ursus",
@@ -10663,7 +10689,7 @@
         }
       },
       "first_seen": "2026-04-14T13:04:56.922Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "huntsman|489|0.03516650199890137|n": {
       "knife_id": "huntsman",
@@ -10686,7 +10712,7 @@
         }
       },
       "first_seen": "2026-04-13T20:44:14.504Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|425|0.016635725274682045|n": {
       "knife_id": "skeleton",
@@ -10709,7 +10735,7 @@
         }
       },
       "first_seen": "2026-04-14T15:07:48.399Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "skeleton|220|0.0333208404481411|n": {
       "knife_id": "skeleton",
@@ -10732,7 +10758,7 @@
         }
       },
       "first_seen": "2026-04-14T15:07:48.399Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
     },
     "flip|133|0.07112440466880798|n": {
       "knife_id": "flip",
@@ -10755,7 +10781,30 @@
         }
       },
       "first_seen": "2026-04-14T16:57:03.639Z",
-      "last_seen": "2026-04-14T18:00:40.855Z"
+      "last_seen": "2026-04-14T19:23:35.167Z"
+    },
+    "huntsman|934|0.030507398769259453|n": {
+      "knife_id": "huntsman",
+      "knife_name": "Huntsman Knife",
+      "listing": {
+        "id": "964241823780440705",
+        "price": 1216.03,
+        "wear": "FN",
+        "float_value": 0.030507398769259453,
+        "paint_seed": 934,
+        "stattrak": false,
+        "csfloat_url": "https://csfloat.com/item/964241823780440705",
+        "inspect_link": "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%200018FD0320A1032806300338A7D5E7E70340A607BCD55224",
+        "image_url": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1P7vG6YadsLM-SA1iSze91u_FsTju_qhAmoT-Jn4bjJC_4Ml93UtZuE7UDuhC-mtbnNb-xtFfZ3YtGzSv6hisauns-5b5WVqIgqKDfjwjEYKp9v8eb6jzRvA/360fx360f",
+        "seller": {
+          "steam_id": null,
+          "username": null,
+          "avatar": null,
+          "stall_url": null
+        }
+      },
+      "first_seen": "2026-04-14T19:23:35.167Z",
+      "last_seen": "2026-04-14T19:23:35.167Z"
     }
   },
   "seen_ever": {
@@ -11164,6 +11213,7 @@
     "ursus|750|0.025021804496645927|n": "2026-04-14T13:04:56.922Z",
     "skeleton|425|0.016635725274682045|n": "2026-04-14T15:07:48.399Z",
     "skeleton|220|0.0333208404481411|n": "2026-04-14T15:07:48.399Z",
-    "flip|133|0.07112440466880798|n": "2026-04-14T16:57:03.639Z"
+    "flip|133|0.07112440466880798|n": "2026-04-14T16:57:03.639Z",
+    "huntsman|934|0.030507398769259453|n": "2026-04-14T19:23:35.167Z"
   }
 }
