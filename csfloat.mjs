@@ -123,9 +123,12 @@ async function fetchAllListings(defIndex, paintIndex, apiKey) {
 
 // ── Transform raw listings into our data shape ───────────────────
 function transformListings(rawListings) {
+  // Filter out auctions — only keep buy-now listings
+  const buyNowListings = rawListings.filter(l => l.type !== 'auction');
+
   const byWear = { FN: [], MW: [], FT: [], WW: [], BS: [] };
 
-  const listings = rawListings.map(l => {
+  const listings = buyNowListings.map(l => {
     const item = l.item ?? {};
     const float = item.float_value ?? 0;
     const wear = wearFromFloat(float);

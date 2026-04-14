@@ -1,0 +1,8 @@
+# robots.txt — blackpearl.gg
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /temporary screenshots/
+
+Sitemap: https://blackpearl.gg/sitemap.xml
