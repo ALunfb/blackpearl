@@ -102,6 +102,38 @@ export function formatPriceDrop(listing, knifeId, knifeName, userName, oldPrice,
 }
 
 /**
+ * Build a batch message for multiple new listings matched in the same update.
+ * One message covers all matches — reduces spam when many listings appear at once.
+ */
+export function formatBatch(entries, userName) {
+  const name = userName ? `Hey ${userName}` : 'Hey';
+  const count = entries.length;
+
+  const greetings = [
+    `${name} \u2014 ${count} new Black Pearl listings match your alerts:`,
+    `${name}, ${count} new BPs just dropped matching your subscriptions:`,
+    `${name}! ${count} new Black Pearl Dopplers on CSFloat:`,
+    `${count} new Black Pearl matches for you, ${name.replace('Hey ', '').replace('Hey', 'there')}:`,
+  ];
+
+  let msg = pick(greetings) + '\n\n';
+
+  for (const entry of entries.slice(0, 15)) {
+    const l = entry.listing;
+    const st = l.stattrak ? 'ST ' : '';
+    const price = formatPrice(l.price);
+    const float = formatFloat(l.float_value);
+    msg += `\u2022 ${st}${entry.knife_name} (${l.wear}) \u2014 ${price} \u00b7 ${float} float\n  ${l.csfloat_url}\n`;
+  }
+
+  if (entries.length > 15) {
+    msg += `\n...and ${entries.length - 15} more. Visit your dashboard for full list.`;
+  }
+
+  return msg.trim();
+}
+
+/**
  * Build a digest summary message.
  */
 export function formatDigest(items, userName) {
