@@ -3,6 +3,8 @@ import { requireAuth } from '../server.mjs';
 import db from '../../data/database.mjs';
 import { KNIVES } from '../../config.mjs';
 import { createLogger } from '../../utils/logger.mjs';
+import { enqueueMessage } from '../../bot/message-sender.mjs';
+import { formatNewListing } from '../../notifications/formatter.mjs';
 
 const router = Router();
 const log = createLogger('api');
@@ -82,6 +84,39 @@ router.delete('/subscriptions/:id', requireAuth, (req, res) => {
   }
   log.info('Subscription deleted', { userId: req.user.id, subId });
   res.json({ success: true });
+});
+
+// ── Test ─────────────────────────────────────────
+
+router.post('/test-notification', requireAuth, (req, res) => {
+  if (!req.user.is_friend) {
+    return res.status(400).json({ error: 'Bot is not on your friends list' });
+  }
+
+  const fakeListing = {
+    id: 'test-' + Date.now(),
+    price: 8500,
+    wear: 'FN',
+    float_value: 0.0069,
+    paint_seed: 661,
+    stattrak: false,
+    csfloat_url: 'https://csfloat.com/item/test',
+  };
+
+  const message = formatNewListing(fakeListing, 'karambit', 'Karambit', req.user.persona_name);
+
+  const notifId = db.insertNotification({
+    user_id: req.user.id,
+    subscription_id: null,
+    listing_fp: 'test:' + Date.now(),
+    knife_id: 'karambit',
+    message_text: message,
+    delivery_status: 'pending',
+  });
+
+  enqueueMessage(req.user.steam_id, message, notifId, 1);
+  log.info('Test notification queued', { userId: req.user.id });
+  res.json({ success: true, message: 'Test notification queued — check Steam in a few seconds.' });
 });
 
 // ── Notifications ────────────────────────────────
