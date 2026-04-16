@@ -34,9 +34,9 @@ export const DB_PATH           = resolve(__dirname, '..', env('DB_PATH', './data
 export const MAX_FRIENDS             = parseInt(env('MAX_FRIENDS', '250'), 10);
 export const QUIET_HOUR_START        = parseInt(env('QUIET_HOUR_START', '2'), 10);
 export const QUIET_HOUR_END          = parseInt(env('QUIET_HOUR_END', '6'), 10);
-export const MAX_MESSAGES_PER_HOUR   = parseInt(env('MAX_MESSAGES_PER_HOUR', '10'), 10);
-export const MAX_MESSAGES_PER_DAY    = parseInt(env('MAX_MESSAGES_PER_DAY', '40'), 10);
-export const PER_USER_COOLDOWN_MS    = parseInt(env('PER_USER_COOLDOWN_MINUTES', '5'), 10) * 60 * 1000;
+export const MAX_MESSAGES_PER_HOUR   = parseInt(env('MAX_MESSAGES_PER_HOUR', '60'), 10);
+export const MAX_MESSAGES_PER_DAY    = parseInt(env('MAX_MESSAGES_PER_DAY', '300'), 10);
+export const PER_USER_COOLDOWN_MS    = parseInt(env('PER_USER_COOLDOWN_MINUTES', '1'), 10) * 60 * 1000;
 export const SNIPE_THRESHOLD_PCT     = parseFloat(env('SNIPE_THRESHOLD_PCT', '15'));
 
 // ── Timing (anti-ban) ────────────────────────────

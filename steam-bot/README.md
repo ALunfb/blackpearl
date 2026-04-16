@@ -267,9 +267,9 @@ All projects share one Droplet, one bill. If you outgrow 512MB RAM, DigitalOcean
 
 | Setting | Default | Env Variable |
 |---------|---------|--------------|
-| Max messages per hour | 10 | `MAX_MESSAGES_PER_HOUR` |
-| Max messages per day | 40 | `MAX_MESSAGES_PER_DAY` |
-| Per-user cooldown | 5 min | `PER_USER_COOLDOWN_MINUTES` |
+| Max messages per hour | 60 | `MAX_MESSAGES_PER_HOUR` |
+| Max messages per day | 300 | `MAX_MESSAGES_PER_DAY` |
+| Per-user cooldown | 1 min | `PER_USER_COOLDOWN_MINUTES` |
 | Max friends | 250 | `MAX_FRIENDS` |
 | Quiet hours (UTC) | 2:00-6:00 | `QUIET_HOUR_START`, `QUIET_HOUR_END` |
 | Friend accept delay | 30-120s | Hardcoded in config |
