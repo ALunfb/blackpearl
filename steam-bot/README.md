@@ -191,7 +191,20 @@ pm2 monit            # monitor CPU/RAM
 
 ### 9. Set Up Data Sync
 
-The bot reads `listings-tracker.json` from the main repo. Set up a cron to pull fresh data:
+The Droplet runs `fetch-data.mjs` on a schedule and commits fresh data to GitHub. The bot reads `listings-tracker.json` from the local filesystem.
+
+First, configure git to use a Personal Access Token for pushing. Create a fine-grained PAT at [github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new) with Contents: Read and write on this repo.
+
+Then on the Droplet:
+
+```bash
+cd /root/blackpearl
+git remote set-url origin https://YOUR_TOKEN@github.com/YOUR_USERNAME/blackpearl.git
+git config user.name "blackpearl-bot"
+git config user.email "bot@blackpearl.gg"
+```
+
+Set up the cron:
 
 ```bash
 crontab -e
@@ -199,8 +212,11 @@ crontab -e
 
 Add:
 ```
-*/5 * * * * cd /path/to/blackpearl && git pull --quiet origin main
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+0,30 * * * * cd /path/to/blackpearl && node fetch-data.mjs && git add data/ && git diff --staged --quiet || (git commit -m 'Update listings data (automated)' && git push) >> /tmp/bp-cron.log 2>&1
 ```
+
+The fetch has built-in random jitter (0-8 min startup delay, 5-8s between knives) to avoid clockwork patterns that could trigger CSFloat rate limits.
 
 ### 10. Test the Bot
 

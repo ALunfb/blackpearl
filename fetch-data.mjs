@@ -15,7 +15,22 @@ import { recordTrackerUpdate } from './listings-tracker.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_FILE = path.join(__dirname, 'data', 'listings.json');
 
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 async function main() {
+  // Startup jitter: random 0-8 minute delay. Skipped if --now flag is passed
+  // (for manual runs or CI where you want it to start immediately).
+  const skipJitter = process.argv.includes('--now');
+  if (!skipJitter) {
+    const jitterMs = randomInt(0, 8 * 60) * 1000;
+    if (jitterMs > 0) {
+      console.log(`Jitter delay: ${Math.round(jitterMs / 1000)}s before fetch...`);
+      await new Promise(r => setTimeout(r, jitterMs));
+    }
+  }
+
   console.log(`Fetching data for ${KNIVES.length} knives...\n`);
   const allData = [];
 
@@ -40,9 +55,9 @@ async function main() {
       });
     }
 
-    // Wait between requests to avoid rate limits
+    // Wait between requests — randomized 5-8s to avoid clockwork patterns
     if (i < KNIVES.length - 1) {
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, randomInt(5000, 8000)));
     }
   }
 
