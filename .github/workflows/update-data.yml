@@ -1,8 +1,8 @@
 name: Update CSFloat Data
 
 on:
-  schedule:
-    - cron: '0,30 * * * *' # Every 30 minutes
+  # Scheduled runs disabled — fetch now runs on the Droplet every 30 minutes.
+  # This workflow can still be manually triggered from the GitHub UI as a backup.
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 permissions:
