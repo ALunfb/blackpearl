@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Black Pearl — Steam Alerts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            void: '#05050D',
+            'void-light': '#0A0A18',
+            'void-card': '#0D0D1A',
+            violet: { 400: '#C084FC', 500: '#A855F7', 600: '#7C3FBE', 700: '#5B21B6', 900: '#2E1065' },
+            silver: '#C8C8D8',
+            ghost: '#8888A0',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            tactical: ['Exo 2', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #05050D; color: #C8C8D8; font-family: 'Outfit', sans-serif; min-height: 100vh; }
+    ::selection { background: rgba(168, 85, 247, 0.35); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0A0A18; }
+    ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.3); border-radius: 3px; }
+
+    /* Noise grain overlay */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Ambient glow */
+    .ambient-glow {
+      position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(124, 63, 190, 0.08) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* Card surfaces */
+    .card {
+      background: linear-gradient(135deg, rgba(13, 13, 26, 0.9), rgba(10, 10, 24, 0.95));
+      border: 1px solid rgba(168, 85, 247, 0.12);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover { border-color: rgba(168, 85, 247, 0.25); box-shadow: 0 4px 24px rgba(124, 63, 190, 0.06); }
+
+    .card-elevated {
+      background: linear-gradient(135deg, rgba(16, 16, 32, 0.95), rgba(13, 13, 26, 0.98));
+      border: 1px solid rgba(168, 85, 247, 0.18);
+      border-radius: 12px;
+    }
+
+    /* Inputs */
+    .input-field {
+      background: rgba(5, 5, 13, 0.6);
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      border-radius: 8px; padding: 10px 14px;
+      color: #C8C8D8; font-family: 'Outfit', sans-serif; font-size: 14px;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      outline: none; width: 100%;
+    }
+    .input-field:focus {
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.08);
+    }
+    .input-field::placeholder { color: #555568; }
+    .input-field:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    select.input-field { appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238888A0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+      padding-right: 36px;
+    }
+    select.input-field option { background: #0D0D1A; color: #C8C8D8; }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #7C3FBE, #A855F7);
+      color: #F0F0FA; font-family: 'Exo 2', sans-serif; font-weight: 600;
+      padding: 10px 22px; border-radius: 8px; border: none; cursor: pointer;
+      font-size: 14px; letter-spacing: 0.02em;
+      transition: transform 0.15s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+      box-shadow: 0 2px 12px rgba(124, 63, 190, 0.2);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124, 63, 190, 0.35); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #C084FC; outline-offset: 2px; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-ghost {
+      background: transparent; color: #C8C8D8; font-family: 'Exo 2', sans-serif; font-weight: 500;
+      padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.2);
+      cursor: pointer; font-size: 13px; transition: all 0.2s ease;
+    }
+    .btn-ghost:hover { border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.05); }
+    .btn-ghost:focus-visible { outline: 2px solid #C084FC; outline-offset: 2px; }
+
+    .btn-danger {
+      background: transparent; color: #EF4444; font-family: 'Exo 2', sans-serif; font-weight: 500;
+      padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);
+      cursor: pointer; font-size: 13px; transition: all 0.2s ease;
+    }
+    .btn-danger:hover { border-color: rgba(239, 68, 68, 0.5); background: rgba(239, 68, 68, 0.06); }
+    .btn-danger:focus-visible { outline: 2px solid #EF4444; outline-offset: 2px; }
+
+    /* Toggle switch */
+    .toggle { position: relative; width: 40px; height: 22px; cursor: pointer; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-track {
+      position: absolute; inset: 0; background: rgba(88, 88, 120, 0.3);
+      border-radius: 11px; transition: background 0.25s ease;
+    }
+    .toggle-thumb {
+      position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
+      background: #C8C8D8; border-radius: 50%;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .toggle input:checked ~ .toggle-track { background: rgba(124, 63, 190, 0.5); }
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(18px); background: #A855F7; }
+    .toggle:focus-within .toggle-track { box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3); }
+
+    /* Checkbox as pill */
+    .any-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; border-radius: 6px; cursor: pointer;
+      font-size: 12px; color: #8888A0; border: 1px solid rgba(168, 85, 247, 0.1);
+      transition: all 0.2s ease; user-select: none;
+    }
+    .any-toggle:has(input:checked) {
+      background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #C084FC;
+    }
+    .any-toggle input { display: none; }
+
+    /* Frequency pills */
+    .freq-pill {
+      display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 8px;
+      cursor: pointer; font-size: 13px; font-family: 'Exo 2', sans-serif; font-weight: 500;
+      border: 1px solid rgba(168, 85, 247, 0.12); color: #8888A0;
+      transition: all 0.2s ease; user-select: none;
+    }
+    .freq-pill:has(input:checked) {
+      background: rgba(124, 63, 190, 0.15); border-color: rgba(168, 85, 247, 0.4); color: #C084FC;
+    }
+    .freq-pill input { display: none; }
+
+    /* Subscription card */
+    .sub-card {
+      padding: 16px 20px; border-radius: 10px;
+      background: rgba(5, 5, 13, 0.4); border: 1px solid rgba(168, 85, 247, 0.1);
+      transition: all 0.2s ease;
+    }
+    .sub-card:hover { border-color: rgba(168, 85, 247, 0.2); }
+    .sub-card.paused { opacity: 0.5; }
+
+    /* Badge */
+    .badge {
+      display: inline-flex; align-items: center; padding: 2px 8px;
+      border-radius: 4px; font-size: 11px; font-family: 'JetBrains Mono', monospace;
+      font-weight: 500; letter-spacing: 0.03em;
+    }
+    .badge-green { background: rgba(34, 197, 94, 0.12); color: #4ADE80; }
+    .badge-yellow { background: rgba(250, 204, 21, 0.12); color: #FACC15; }
+    .badge-red { background: rgba(239, 68, 68, 0.12); color: #F87171; }
+    .badge-violet { background: rgba(168, 85, 247, 0.12); color: #C084FC; }
+
+    /* Notification row */
+    .notif-row {
+      padding: 10px 14px; border-bottom: 1px solid rgba(168, 85, 247, 0.06);
+      font-size: 13px; transition: background 0.15s ease;
+    }
+    .notif-row:hover { background: rgba(168, 85, 247, 0.03); }
+    .notif-row:last-child { border-bottom: none; }
+
+    /* Animations */
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .fade-in { animation: fadeSlideIn 0.4s ease forwards; }
+    .stagger-1 { animation-delay: 0.05s; }
+    .stagger-2 { animation-delay: 0.1s; }
+    .stagger-3 { animation-delay: 0.15s; }
+    .stagger-4 { animation-delay: 0.2s; }
+    .loading { animation: pulse 1.5s ease-in-out infinite; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      padding: 12px 20px; border-radius: 10px; font-size: 14px;
+      background: rgba(13, 13, 26, 0.95); border: 1px solid rgba(168, 85, 247, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transform: translateY(80px); opacity: 0; transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .toast.error { border-color: rgba(239, 68, 68, 0.3); }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <div class="relative z-10 max-w-3xl mx-auto px-4 py-8 sm:px-6">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-10 fade-in" id="header">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-void-card border border-violet-500/20 flex items-center justify-center overflow-hidden" id="avatar-container">
+          <svg width="20" height="20" fill="#8888A0" viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+        </div>
+        <div>
+          <h1 class="font-tactical text-lg font-semibold text-white tracking-tight" id="user-name">Black Pearl Alerts</h1>
+          <p class="text-xs text-ghost font-mono" id="user-steam-id"></p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3" id="auth-buttons">
+        <a href="/auth/login" class="btn-primary text-sm" id="login-btn">Sign in with Steam</a>
+      </div>
+    </header>
+
+    <!-- Logged-in content (hidden until auth) -->
+    <div id="app-content" class="hidden">
+
+      <!-- Bot Status -->
+      <section class="card p-5 mb-6 fade-in stagger-1" id="bot-status-card">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-violet-900/40 flex items-center justify-center">
+              <svg width="16" height="16" fill="#A855F7" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 15l-5-5 1.4-1.4L11 14.2l7.6-7.6L20 8l-9 9z"/></svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-white" id="friend-status-text">Checking bot friend status...</p>
+              <p class="text-xs text-ghost mt-0.5" id="friend-status-sub"></p>
+            </div>
+          </div>
+          <span class="badge" id="friend-badge"></span>
+        </div>
+      </section>
+
+      <!-- Add Subscription -->
+      <section class="card p-5 mb-6 fade-in stagger-2">
+        <h2 class="font-tactical text-base font-semibold text-white mb-4 flex items-center gap-2">
+          <svg width="16" height="16" fill="#A855F7" viewBox="0 0 24 24"><path d="M12 2v10l8.5 5-1.5 2.5L10 14V2h2z"/></svg>
+          New Alert Subscription
+        </h2>
+
+        <form id="sub-form" class="space-y-4">
+          <!-- Knife Type -->
+          <div>
+            <label class="block text-xs text-ghost mb-1.5 font-mono uppercase tracking-wider">Knife Type</label>
+            <select name="knife_id" class="input-field" required>
+              <option value="">Select a knife...</option>
+              <option value="*">All Knives</option>
+            </select>
+          </div>
+
+          <!-- Float Range -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs text-ghost font-mono uppercase tracking-wider">Float Range</label>
+              <label class="any-toggle"><input type="checkbox" id="float-any" checked><span>Any</span></label>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="float-inputs">
+              <input type="number" name="float_min" class="input-field" placeholder="Min (0.00)" step="0.001" min="0" max="1" disabled>
+              <input type="number" name="float_max" class="input-field" placeholder="Max (1.00)" step="0.001" min="0" max="1" disabled>
+            </div>
+          </div>
+
+          <!-- Price Range -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs text-ghost font-mono uppercase tracking-wider">Price Range (USD)</label>
+              <label class="any-toggle"><input type="checkbox" id="price-any" checked><span>Any</span></label>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="price-inputs">
+              <input type="number" name="price_min" class="input-field" placeholder="Min $" step="0.01" min="0" disabled>
+              <input type="number" name="price_max" class="input-field" placeholder="Max $" step="0.01" min="0" disabled>
+            </div>
+          </div>
+
+          <!-- Paint Seed -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs text-ghost font-mono uppercase tracking-wider">Pattern / Paint Seed</label>
+              <label class="any-toggle"><input type="checkbox" id="seed-any" checked><span>Any</span></label>
+            </div>
+            <input type="number" name="paint_seed" class="input-field" placeholder="e.g. 661" min="0" max="999" id="seed-input" disabled>
+          </div>
+
+          <!-- Toggles row -->
+          <div class="flex flex-wrap items-center gap-6 pt-1">
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <label class="toggle"><input type="checkbox" name="stattrak_only"><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+              <span class="text-sm text-silver">StatTrak&trade; only</span>
+            </label>
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <label class="toggle"><input type="checkbox" name="snipe_alerts" checked><span class="toggle-track"></span><span class="toggle-thumb"></span></label>
+              <span class="text-sm text-silver">Snipe alerts</span>
+            </label>
+          </div>
+
+          <!-- Price Drop -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs text-ghost font-mono uppercase tracking-wider">Price Drop Alert (%)</label>
+              <label class="any-toggle"><input type="checkbox" id="drop-any" checked><span>Off</span></label>
+            </div>
+            <input type="number" name="price_drop_pct" class="input-field" placeholder="e.g. 5 = notify on >5% drop" min="1" max="99" id="drop-input" disabled>
+          </div>
+
+          <!-- Frequency -->
+          <div>
+            <label class="block text-xs text-ghost mb-2 font-mono uppercase tracking-wider">Notification Frequency</label>
+            <div class="flex flex-wrap gap-2">
+              <label class="freq-pill"><input type="radio" name="frequency" value="instant" checked>Instant</label>
+              <label class="freq-pill"><input type="radio" name="frequency" value="hourly">Hourly Digest</label>
+              <label class="freq-pill"><input type="radio" name="frequency" value="daily">Daily Digest</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary w-full mt-2">Create Alert</button>
+        </form>
+      </section>
+
+      <!-- Active Subscriptions -->
+      <section class="card p-5 mb-6 fade-in stagger-3">
+        <h2 class="font-tactical text-base font-semibold text-white mb-4 flex items-center gap-2">
+          <svg width="16" height="16" fill="#A855F7" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Active Subscriptions
+          <span class="badge badge-violet ml-auto" id="sub-count">0</span>
+        </h2>
+        <div id="subs-list" class="space-y-3">
+          <p class="text-sm text-ghost text-center py-6" id="no-subs-msg">No subscriptions yet. Create one above.</p>
+        </div>
+      </section>
+
+      <!-- Notification History -->
+      <section class="card p-5 mb-6 fade-in stagger-4">
+        <h2 class="font-tactical text-base font-semibold text-white mb-4 flex items-center gap-2">
+          <svg width="16" height="16" fill="#A855F7" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+          Recent Notifications
+        </h2>
+        <div id="notifs-list" class="max-h-64 overflow-y-auto">
+          <p class="text-sm text-ghost text-center py-6" id="no-notifs-msg">No notifications yet.</p>
+        </div>
+      </section>
+
+      <!-- Danger Zone -->
+      <section class="card border-red-500/10 p-5 fade-in stagger-4">
+        <h2 class="font-tactical text-base font-semibold text-red-400 mb-2">Danger Zone</h2>
+        <p class="text-xs text-ghost mb-4">This will permanently delete your account, all subscriptions, and notification history. The bot will also remove you from its friends list.</p>
+        <button class="btn-danger" id="delete-all-btn">Delete All My Data</button>
+      </section>
+
+      <!-- Logout -->
+      <div class="text-center mt-6 mb-4">
+        <a href="/auth/logout" class="text-xs text-ghost hover:text-silver transition-colors">Sign out</a>
+        <span class="text-ghost mx-2">|</span>
+        <a href="https://blackpearl.gg" target="_blank" class="text-xs text-ghost hover:text-violet-400 transition-colors">blackpearl.gg</a>
+      </div>
+    </div>
+
+    <!-- Login prompt (shown when not auth'd) -->
+    <div id="login-prompt" class="hidden text-center py-20">
+      <div class="w-16 h-16 rounded-2xl bg-violet-900/30 border border-violet-500/20 flex items-center justify-center mx-auto mb-6">
+        <svg width="28" height="28" fill="#A855F7" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+      </div>
+      <h2 class="font-tactical text-xl font-semibold text-white mb-2">Steam Alerts for Black Pearls</h2>
+      <p class="text-sm text-ghost max-w-sm mx-auto mb-6">Get notified on Steam when new Black Pearl Doppler knives matching your criteria are listed on CSFloat.</p>
+      <a href="/auth/login" class="btn-primary inline-flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-9.95 9.15l5.36 2.21a2.83 2.83 0 0 1 1.6-.49h.07l2.39-3.46v-.05a3.78 3.78 0 1 1 3.78 3.78h-.09l-3.4 2.43a2.85 2.85 0 0 1-5.66.42L1.2 13.85A10 10 0 1 0 12 2zm-4.89 14.5l-1.2-.5a2.13 2.13 0 0 0 2.09 1.5 2.14 2.14 0 0 0 0-4.28h-.01l1.25-.89a2.84 2.84 0 1 0-4.67.94l1.57.65a1.56 1.56 0 0 0-.42.78 1.57 1.57 0 0 0 1.39 1.8zm8.67-6.72a2.52 2.52 0 1 0-2.52-2.52 2.53 2.53 0 0 0 2.52 2.52z"/></svg>
+        Sign in with Steam
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const API = '';
+    const KNIVES_CACHE = [];
+    let currentUser = null;
+
+    // ── Init ─────────────────────────────
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadKnives();
+      await checkAuth();
+      setupForm();
+      setupToggles();
+    });
+
+    // ── Auth ─────────────────────────────
+    async function checkAuth() {
+      try {
+        const res = await fetch(`${API}/api/me`, { credentials: 'include' });
+        if (!res.ok) throw new Error('Not auth');
+        currentUser = await res.json();
+        showLoggedIn();
+        loadSubscriptions();
+        loadNotifications();
+      } catch {
+        showLoggedOut();
+      }
+    }
+
+    function showLoggedIn() {
+      document.getElementById('app-content').classList.remove('hidden');
+      document.getElementById('login-prompt').classList.add('hidden');
+      document.getElementById('login-btn').classList.add('hidden');
+
+      // Avatar
+      if (currentUser.avatar_url) {
+        const container = document.getElementById('avatar-container');
+        container.innerHTML = `<img src="${escapeHtml(currentUser.avatar_url)}" class="w-full h-full object-cover" alt="">`;
+      }
+      document.getElementById('user-name').textContent = currentUser.persona_name || 'Steam User';
+      document.getElementById('user-steam-id').textContent = currentUser.steam_id;
+
+      // Auth buttons
+      document.getElementById('auth-buttons').innerHTML = `
+        <a href="/auth/logout" class="btn-ghost text-xs">Sign out</a>
+      `;
+
+      // Friend status
+      const statusText = document.getElementById('friend-status-text');
+      const statusSub = document.getElementById('friend-status-sub');
+      const badge = document.getElementById('friend-badge');
+      if (currentUser.is_friend) {
+        statusText.textContent = 'Bot is on your friends list';
+        statusSub.textContent = 'You will receive Steam messages for matching listings.';
+        badge.textContent = 'CONNECTED';
+        badge.className = 'badge badge-green';
+      } else {
+        statusText.textContent = 'Bot is not on your friends list';
+        statusSub.innerHTML = 'Add the bot on Steam to receive notifications. <br>Search for "BP Alerts" or use the friend code in the README.';
+        badge.textContent = 'NOT ADDED';
+        badge.className = 'badge badge-yellow';
+      }
+    }
+
+    function showLoggedOut() {
+      document.getElementById('app-content').classList.add('hidden');
+      document.getElementById('login-prompt').classList.remove('hidden');
+    }
+
+    // ── Knives ───────────────────────────
+    async function loadKnives() {
+      try {
+        const res = await fetch(`${API}/api/knives`);
+        const knives = await res.json();
+        KNIVES_CACHE.push(...knives);
+        const select = document.querySelector('select[name="knife_id"]');
+        for (const k of knives) {
+          const opt = document.createElement('option');
+          opt.value = k.id;
+          opt.textContent = k.name;
+          select.appendChild(opt);
+        }
+      } catch (err) {
+        console.error('Failed to load knives', err);
+      }
+    }
+
+    function knifeName(id) {
+      if (id === '*') return 'All Knives';
+      return KNIVES_CACHE.find(k => k.id === id)?.name || id;
+    }
+
+    // ── Subscriptions ────────────────────
+    async function loadSubscriptions() {
+      try {
+        const res = await fetch(`${API}/api/subscriptions`, { credentials: 'include' });
+        const subs = await res.json();
+        renderSubscriptions(subs);
+      } catch (err) {
+        console.error('Failed to load subs', err);
+      }
+    }
+
+    function renderSubscriptions(subs) {
+      const list = document.getElementById('subs-list');
+      const noMsg = document.getElementById('no-subs-msg');
+      document.getElementById('sub-count').textContent = subs.length;
+
+      if (subs.length === 0) {
+        list.innerHTML = '';
+        list.appendChild(noMsg);
+        noMsg.classList.remove('hidden');
+        return;
+      }
+      noMsg.classList.add('hidden');
+      list.innerHTML = '';
+
+      for (const sub of subs) {
+        const card = document.createElement('div');
+        card.className = `sub-card ${sub.is_active ? '' : 'paused'}`;
+        const filters = buildFilterSummary(sub);
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="font-tactical font-semibold text-white text-sm">${escapeHtml(knifeName(sub.knife_id))}</span>
+                <span class="badge ${sub.is_active ? 'badge-green' : 'badge-red'}">${sub.is_active ? 'ACTIVE' : 'PAUSED'}</span>
+                ${sub.snipe_alerts ? '<span class="badge badge-violet">SNIPE</span>' : ''}
+              </div>
+              <p class="text-xs text-ghost leading-relaxed">${filters}</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="text-[11px] font-mono text-ghost/60">${sub.frequency.toUpperCase()}</span>
+                ${sub.price_drop_pct ? `<span class="text-[11px] font-mono text-ghost/60">DROP >${sub.price_drop_pct}%</span>` : ''}
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button class="btn-ghost text-xs py-1 px-2" onclick="toggleSub(${sub.id}, ${sub.is_active ? 0 : 1})">${sub.is_active ? 'Pause' : 'Resume'}</button>
+              <button class="btn-danger text-xs py-1 px-2" onclick="deleteSub(${sub.id})">Delete</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      }
+    }
+
+    function buildFilterSummary(sub) {
+      const parts = [];
+      if (sub.float_min !== null || sub.float_max !== null) {
+        const min = sub.float_min !== null ? sub.float_min.toFixed(3) : '0';
+        const max = sub.float_max !== null ? sub.float_max.toFixed(3) : '1';
+        parts.push(`Float: ${min} – ${max}`);
+      }
+      if (sub.price_min !== null || sub.price_max !== null) {
+        const min = sub.price_min !== null ? `$${sub.price_min}` : '$0';
+        const max = sub.price_max !== null ? `$${sub.price_max}` : 'any';
+        parts.push(`Price: ${min} – ${max}`);
+      }
+      if (sub.paint_seed !== null) parts.push(`Seed: ${sub.paint_seed}`);
+      if (sub.stattrak_only) parts.push('ST only');
+      return parts.length > 0 ? parts.join(' &middot; ') : 'No filters (all listings)';
+    }
+
+    async function toggleSub(id, active) {
+      try {
+        // First get current sub data
+        const res = await fetch(`${API}/api/subscriptions`, { credentials: 'include' });
+        const subs = await res.json();
+        const sub = subs.find(s => s.id === id);
+        if (!sub) return;
+
+        await fetch(`${API}/api/subscriptions/${id}`, {
+          method: 'PUT', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...sub, is_active: !!active }),
+        });
+        toast(active ? 'Subscription resumed' : 'Subscription paused');
+        loadSubscriptions();
+      } catch (err) {
+        toast('Failed to update', true);
+      }
+    }
+
+    async function deleteSub(id) {
+      if (!confirm('Delete this subscription?')) return;
+      try {
+        await fetch(`${API}/api/subscriptions/${id}`, { method: 'DELETE', credentials: 'include' });
+        toast('Subscription deleted');
+        loadSubscriptions();
+      } catch (err) {
+        toast('Failed to delete', true);
+      }
+    }
+
+    // ── Notifications ────────────────────
+    async function loadNotifications() {
+      try {
+        const res = await fetch(`${API}/api/notifications?limit=20`, { credentials: 'include' });
+        const notifs = await res.json();
+        renderNotifications(notifs);
+      } catch (err) {
+        console.error('Failed to load notifications', err);
+      }
+    }
+
+    function renderNotifications(notifs) {
+      const list = document.getElementById('notifs-list');
+      const noMsg = document.getElementById('no-notifs-msg');
+      if (notifs.length === 0) {
+        list.innerHTML = '';
+        list.appendChild(noMsg);
+        noMsg.classList.remove('hidden');
+        return;
+      }
+      noMsg.classList.add('hidden');
+      list.innerHTML = '';
+
+      for (const n of notifs) {
+        const row = document.createElement('div');
+        row.className = 'notif-row';
+        const statusBadge = n.delivery_status === 'sent' ? 'badge-green'
+          : n.delivery_status === 'failed' ? 'badge-red'
+          : n.delivery_status === 'buffered' ? 'badge-yellow'
+          : 'badge-violet';
+        const timeAgo = formatTimeAgo(n.sent_at);
+        // Truncate message for display
+        const preview = (n.message_text || '').split('\n')[0].slice(0, 80);
+        row.innerHTML = `
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-silver truncate">${escapeHtml(preview)}</p>
+              <p class="text-[11px] text-ghost/50 mt-0.5 font-mono">${escapeHtml(knifeName(n.knife_id))} &middot; ${timeAgo}</p>
+            </div>
+            <span class="badge ${statusBadge} shrink-0">${n.delivery_status.toUpperCase()}</span>
+          </div>
+        `;
+        list.appendChild(row);
+      }
+    }
+
+    // ── Form ─────────────────────────────
+    function setupForm() {
+      document.getElementById('sub-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Creating...';
+
+        const data = {
+          knife_id: form.knife_id.value,
+          float_min: document.getElementById('float-any').checked ? null : (form.float_min.value || null),
+          float_max: document.getElementById('float-any').checked ? null : (form.float_max.value || null),
+          price_min: document.getElementById('price-any').checked ? null : (form.price_min.value || null),
+          price_max: document.getElementById('price-any').checked ? null : (form.price_max.value || null),
+          paint_seed: document.getElementById('seed-any').checked ? null : (form.paint_seed.value || null),
+          stattrak_only: form.stattrak_only.checked,
+          snipe_alerts: form.snipe_alerts.checked,
+          price_drop_pct: document.getElementById('drop-any').checked ? null : (form.price_drop_pct.value || null),
+          frequency: form.frequency.value,
+        };
+
+        try {
+          const res = await fetch(`${API}/api/subscriptions`, {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Failed');
+          }
+          toast('Alert subscription created!');
+          form.reset();
+          // Re-check "any" toggles
+          ['float-any', 'price-any', 'seed-any', 'drop-any'].forEach(id => {
+            document.getElementById(id).checked = true;
+            document.getElementById(id).dispatchEvent(new Event('change'));
+          });
+          document.querySelector('input[name="snipe_alerts"]').checked = true;
+          loadSubscriptions();
+        } catch (err) {
+          toast(err.message, true);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Create Alert';
+        }
+      });
+    }
+
+    function setupToggles() {
+      // "Any" toggles disable/enable their associated inputs
+      const pairs = [
+        ['float-any', ['float_min', 'float_max']],
+        ['price-any', ['price_min', 'price_max']],
+        ['seed-any', ['paint_seed']],
+        ['drop-any', ['price_drop_pct']],
+      ];
+      for (const [toggleId, inputNames] of pairs) {
+        const toggle = document.getElementById(toggleId);
+        const update = () => {
+          const disabled = toggle.checked;
+          for (const name of inputNames) {
+            const input = document.querySelector(`[name="${name}"]`);
+            if (input) { input.disabled = disabled; if (disabled) input.value = ''; }
+          }
+        };
+        toggle.addEventListener('change', update);
+        update(); // initial state
+      }
+
+      // Delete all data
+      document.getElementById('delete-all-btn').addEventListener('click', async () => {
+        if (!confirm('Are you sure? This permanently deletes all your data, subscriptions, and notification history.')) return;
+        if (!confirm('This cannot be undone. Are you absolutely sure?')) return;
+        try {
+          await fetch(`${API}/api/me`, { method: 'DELETE', credentials: 'include' });
+          toast('All data deleted. Goodbye!');
+          setTimeout(() => window.location.reload(), 1500);
+        } catch {
+          toast('Failed to delete data', true);
+        }
+      });
+    }
+
+    // ── Helpers ───────────────────────────
+    function toast(msg, isError = false) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.className = `toast show ${isError ? 'error' : ''}`;
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => el.classList.remove('show'), 3500);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function formatTimeAgo(isoStr) {
+      if (!isoStr) return '';
+      const diff = (Date.now() - new Date(isoStr).getTime()) / 1000;
+      if (diff < 60) return 'just now';
+      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+      return `${Math.floor(diff / 86400)}d ago`;
+    }
+  </script>
+</body>
+</html>

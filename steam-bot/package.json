@@ -1,0 +1,19 @@
+{
+  "name": "blackpearl-steam-bot",
+  "version": "1.0.0",
+  "description": "Steam notification bot for BlackPearl.gg CS2 knife listings",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "node --watch src/index.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "steam-totp": "^2.1.2",
+    "steam-user": "^5.2.0"
+  }
+}
