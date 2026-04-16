@@ -291,15 +291,6 @@
             </div>
           </div>
 
-          <!-- Paint Seed -->
-          <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <label class="text-xs text-ghost font-mono uppercase tracking-wider">Pattern / Paint Seed</label>
-              <label class="any-toggle"><input type="checkbox" id="seed-any" checked><span>Any</span></label>
-            </div>
-            <input type="number" name="paint_seed" class="input-field" placeholder="e.g. 661" min="0" max="999" id="seed-input" disabled>
-          </div>
-
           <!-- Toggles row -->
           <div class="flex flex-wrap items-center gap-6 pt-1">
             <label class="flex items-center gap-2.5 cursor-pointer">
@@ -466,7 +457,8 @@
               <p style="font-family:'Exo 2',sans-serif;font-weight:600;color:#F0F0FA;font-size:13px;">blackpearl.gg</p>
               <span style="color:#A855F7;font-size:12px;display:inline-flex;align-items:center;gap:4px;">Add on Steam <span style="font-size:10px;">&#8599;</span></span>
             </div>
-          </a>`;
+          </a>
+          <p style="font-size:11px;color:#555568;margin-top:6px;">It may take a few minutes to accept your friend request.</p>`;
         badge.textContent = 'NOT ADDED';
         badge.className = 'badge badge-yellow';
       }
@@ -565,7 +557,6 @@
         const max = sub.price_max !== null ? `$${sub.price_max}` : 'any';
         parts.push(`Price: ${min} – ${max}`);
       }
-      if (sub.paint_seed !== null) parts.push(`Seed: ${sub.paint_seed}`);
       if (sub.stattrak_only) parts.push('ST only');
       return parts.length > 0 ? parts.join(' &middot; ') : 'No filters (all listings)';
     }
@@ -662,7 +653,7 @@
           float_max: document.getElementById('float-any').checked ? null : (form.float_max.value || null),
           price_min: document.getElementById('price-any').checked ? null : (form.price_min.value || null),
           price_max: document.getElementById('price-any').checked ? null : (form.price_max.value || null),
-          paint_seed: document.getElementById('seed-any').checked ? null : (form.paint_seed.value || null),
+          paint_seed: null,
           stattrak_only: form.stattrak_only.checked,
           snipe_alerts: form.snipe_alerts.checked,
           price_drop_pct: document.getElementById('drop-any').checked ? null : (form.price_drop_pct.value || null),
@@ -682,7 +673,7 @@
           toast('Alert subscription created!');
           form.reset();
           // Re-check "any" toggles
-          ['float-any', 'price-any', 'seed-any', 'drop-any'].forEach(id => {
+          ['float-any', 'price-any', 'drop-any'].forEach(id => {
             document.getElementById(id).checked = true;
             document.getElementById(id).dispatchEvent(new Event('change'));
           });
@@ -702,7 +693,6 @@
       const pairs = [
         ['float-any', ['float_min', 'float_max']],
         ['price-any', ['price_min', 'price_max']],
-        ['seed-any', ['paint_seed']],
         ['drop-any', ['price_drop_pct']],
       ];
       for (const [toggleId, inputNames] of pairs) {

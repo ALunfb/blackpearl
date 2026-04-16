@@ -90,7 +90,7 @@ async function handleFriendRequest(steamId) {
   if (hasSubscriptions) {
     welcomeMsg = `Hey! Thanks for adding me. You already have notification alerts set up. I'll message you when matching Black Pearl listings appear on CSFloat.\n\nManage your alerts anytime: ${BOT_WEB_URL}`;
   } else {
-    welcomeMsg = `Hey! I'm the Black Pearl notification bot. I'll send you messages when new Black Pearl Doppler knives are listed on CSFloat that match your criteria.\n\nSet up your alerts here: ${BOT_WEB_URL}\n\nYou can choose which knives, float ranges, prices, and patterns to watch for.`;
+    welcomeMsg = `Hey! I'm the Black Pearl notification bot. I'll send you messages when new Black Pearl Doppler knives are listed on CSFloat that match your criteria.\n\nSet up your alerts here: ${BOT_WEB_URL}\n\nYou can choose which knives, float ranges, and prices to watch for.`;
   }
 
   steamClient.sendMessage(steamId, welcomeMsg);
