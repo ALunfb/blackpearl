@@ -28,7 +28,9 @@ function refreshFloorPrices() {
   if (now - cacheUpdatedAt < CACHE_TTL) return;
 
   try {
-    const data = JSON.parse(fs.readFileSync(LISTINGS_FILE_PATH, 'utf8'));
+    const raw = JSON.parse(fs.readFileSync(LISTINGS_FILE_PATH, 'utf8'));
+    const data = Array.isArray(raw) ? raw : raw.knives;
+    if (!data) { log.warn('No knives array in listings data'); return; }
     const newCache = {};
 
     for (const knife of data) {

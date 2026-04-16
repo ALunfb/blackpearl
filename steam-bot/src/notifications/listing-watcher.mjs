@@ -51,9 +51,10 @@ function poll() {
   }
 
   // Check for price drops using the full listings data
-  const listings = readJson(LISTINGS_FILE_PATH);
-  if (listings) {
-    checkPriceDrops(listings);
+  const listingsData = readJson(LISTINGS_FILE_PATH);
+  if (listingsData) {
+    const knives = Array.isArray(listingsData) ? listingsData : listingsData.knives;
+    if (knives) checkPriceDrops(knives);
   }
 }
 
