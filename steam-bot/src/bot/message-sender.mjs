@@ -46,6 +46,7 @@ export function enqueueMessage(steamId, message, notifId, priority = 1) {
  * Check if we're in quiet hours (UTC).
  */
 function isQuietHours() {
+  if (QUIET_HOUR_START === QUIET_HOUR_END) return false; // disabled
   const hour = new Date().getUTCHours();
   if (QUIET_HOUR_START < QUIET_HOUR_END) {
     return hour >= QUIET_HOUR_START && hour < QUIET_HOUR_END;
