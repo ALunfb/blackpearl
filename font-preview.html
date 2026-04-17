@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Black Pearl — Font Preview</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Current site fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<!-- All recommended Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Urbanist:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700;800&family=Raleway:wght@300;400;500;600;700;800&family=Cabin:wght@400;500;600;700&family=Rethink+Sans:wght@400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&family=Manrope:wght@300;400;500;600;700;800&family=Exo+2:wght@300;400;500;600;700;800&family=Jost:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=Figtree:wght@300;400;500;600;700;800&family=Albert+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --void: #05050D;
+    --abyss: #08081A;
+    --surface: #0E0E22;
+    --elevated: #141430;
+    --floating: #1A1A3A;
+    --violet: #7C3FBE;
+    --violet-bright: #A855F7;
+    --violet-glow: #C084FC;
+    --silver: #C8C8D8;
+    --silver-bright: #E8E8F4;
+    --white: #F0F0FA;
+    --muted: #6B6B8A;
+    --border: rgba(168, 85, 247, 0.15);
+    --border-bright: rgba(168, 85, 247, 0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--void);
+    color: var(--silver);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  .section-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--violet-bright);
+    padding: 6px 14px;
+    border: 1px solid var(--border-bright);
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .font-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .font-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--violet-bright), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .font-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(124, 63, 190, 0.12);
+  }
+  .font-card:hover::before { opacity: 1; }
+
+  .font-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--violet-glow);
+    margin-bottom: 4px;
+  }
+
+  .font-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+  }
+
+  .preview-heading {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .preview-subheading {
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--silver-bright);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .preview-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--silver);
+    font-weight: 400;
+    max-width: 600px;
+  }
+
+  .preview-small {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 16px;
+    font-weight: 600;
+  }
+
+  .weight-strip {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .weight-sample {
+    font-size: 24px;
+    color: var(--silver-bright);
+    line-height: 1.2;
+  }
+  .weight-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 300;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-left: 8px;
+    position: relative;
+    top: -1px;
+  }
+  .badge-current {
+    background: rgba(124, 63, 190, 0.2);
+    color: var(--violet-glow);
+    border: 1px solid var(--border-bright);
+  }
+  .badge-recommended {
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.25);
+  }
+  .badge-free {
+    background: rgba(96, 165, 250, 0.1);
+    color: #93c5fd;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 32px;
+  }
+  .comparison-cell {
+    background: var(--surface);
+    padding: 28px 24px;
+  }
+  .comparison-cell:first-child { border-radius: 12px 0 0 0; }
+  .comparison-cell:nth-child(2) { border-radius: 0 12px 0 0; }
+  .comparison-cell:nth-child(3) { border-radius: 0 0 0 12px; }
+  .comparison-cell:last-child { border-radius: 0 0 12px 0; }
+
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--abyss);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 40px;
+    position: sticky;
+    top: 16px;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .tab-btn:hover { color: var(--silver-bright); background: var(--elevated); }
+  .tab-btn.active {
+    background: var(--violet);
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(124, 63, 190, 0.3);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .mockup-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: var(--abyss);
+    border: 1px solid var(--border);
+    border-radius: 12px 12px 0 0;
+  }
+  .mockup-hero {
+    padding: 48px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    text-align: center;
+  }
+
+  .mockup-font-btn {
+    padding: 8px 16px;
+    background: var(--elevated);
+    color: var(--silver);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .mockup-font-btn:hover {
+    background: var(--floating);
+    color: var(--silver-bright);
+  }
+  .mockup-font-btn.active {
+    background: var(--violet);
+    color: var(--white);
+    border-color: var(--violet-bright);
+  }
+
+  @media (max-width: 768px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+    .preview-heading { font-size: 28px; }
+    .tab-bar { flex-wrap: wrap; position: static; }
+    .tab-btn { font-size: 11px; padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div style="max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px;">
+
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 48px;">
+    <div class="section-label">Font Preview Lab</div>
+    <h1 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-top: 16px;">
+      Black Pearl Typography
+    </h1>
+    <p style="color: var(--muted); font-size: 15px; margin-top: 8px; max-width: 500px; margin-left: auto; margin-right: auto;">
+      Compare fonts side by side. Nothing changes on your live site — this is a sandbox. All fonts are free via Google Fonts.
+    </p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('current')">Current</button>
+    <button class="tab-btn" onclick="switchTab('recommended')">Recommended</button>
+    <button class="tab-btn" onclick="switchTab('mockup')">Live Mockup</button>
+  </div>
+
+  <!-- ======================= CURRENT FONTS ======================= -->
+  <div id="tab-current" class="tab-content active">
+    <p style="color: var(--muted); font-size: 13px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace;">
+      These are the fonts currently on blackpearl.gg
+    </p>
+
+    <div style="display: grid; gap: 20px;">
+      <!-- Inter -->
+      <div class="font-card">
+        <div class="font-name">Inter <span class="badge badge-current">Current · Display</span></div>
+        <div class="font-meta">Google Fonts · Free · Sans-serif</div>
+        <div class="preview-heading" style="font-family: 'Inter', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Inter', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Inter', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Inter', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Inter', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Inter', sans-serif; font-weight: 400;">Aa</div><div class="weight-label">400</div></div>
+          <div><div class="weight-sample" style="font-family: 'Inter', sans-serif; font-weight: 600;">Aa</div><div class="weight-label">600</div></div>
+          <div><div class="weight-sample" style="font-family: 'Inter', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Orbitron -->
+      <div class="font-card">
+        <div class="font-name">Orbitron <span class="badge badge-current">Current · Accent</span></div>
+        <div class="font-meta">Google Fonts · Free · Display</div>
+        <div class="preview-heading" style="font-family: 'Orbitron', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Orbitron', sans-serif; font-size: 18px;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Orbitron', sans-serif; font-size: 14px;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement.</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Orbitron', sans-serif; font-weight: 400;">Aa</div><div class="weight-label">400</div></div>
+          <div><div class="weight-sample" style="font-family: 'Orbitron', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Orbitron', sans-serif; font-weight: 900;">Aa</div><div class="weight-label">900</div></div>
+        </div>
+      </div>
+
+      <!-- Rajdhani -->
+      <div class="font-card">
+        <div class="font-name">Rajdhani <span class="badge badge-current">Current · Tactical</span></div>
+        <div class="font-meta">Google Fonts · Free · Sans-serif</div>
+        <div class="preview-heading" style="font-family: 'Rajdhani', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Rajdhani', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Rajdhani', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Rajdhani', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rajdhani', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rajdhani', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= RECOMMENDED FONTS ======================= -->
+  <div id="tab-recommended" class="tab-content">
+    <p style="color: var(--muted); font-size: 13px; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace;">
+      Modern, minimal, sleek, rounded, futuristic — all free on Google Fonts
+    </p>
+    <p style="color: var(--violet-glow); font-size: 12px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace;">
+      ★ = My top picks for Black Pearl
+    </p>
+
+    <div style="display: grid; gap: 20px;">
+
+      <!-- Plus Jakarta Sans ★ -->
+      <div class="font-card" style="border-color: var(--border-bright);">
+        <div class="font-name">Plus Jakarta Sans <span class="badge badge-recommended">★ Top Pick</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Geometric with rounded letterforms · Premium feel</div>
+        <div class="preview-heading" style="font-family: 'Plus Jakarta Sans', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Plus Jakarta Sans', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Plus Jakarta Sans', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Plus Jakarta Sans', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Outfit ★ -->
+      <div class="font-card" style="border-color: var(--border-bright);">
+        <div class="font-name">Outfit <span class="badge badge-recommended">★ Top Pick</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Variable font · Rounded geometric with smooth weight transitions</div>
+        <div class="preview-heading" style="font-family: 'Outfit', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Outfit', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Outfit', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Outfit', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Outfit', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Outfit', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Outfit', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Outfit', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Sora ★ -->
+      <div class="font-card" style="border-color: var(--border-bright);">
+        <div class="font-name">Sora <span class="badge badge-recommended">★ Top Pick</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Geometric with soft terminals · Futuristic yet readable</div>
+        <div class="preview-heading" style="font-family: 'Sora', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Sora', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Sora', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Sora', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Sora', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Sora', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Sora', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Sora', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Manrope ★ -->
+      <div class="font-card" style="border-color: var(--border-bright);">
+        <div class="font-name">Manrope <span class="badge badge-recommended">★ Top Pick</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Semi-rounded geometric · Modern with subtle character</div>
+        <div class="preview-heading" style="font-family: 'Manrope', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Manrope', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Manrope', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Manrope', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Manrope', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Manrope', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Manrope', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Manrope', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Urbanist -->
+      <div class="font-card">
+        <div class="font-name">Urbanist <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Low-contrast geometric · Techy and refined</div>
+        <div class="preview-heading" style="font-family: 'Urbanist', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Urbanist', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Urbanist', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Urbanist', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Urbanist', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Urbanist', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Urbanist', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Urbanist', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Jost -->
+      <div class="font-card">
+        <div class="font-name">Jost <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Futura-inspired geometric · Clean and elegant</div>
+        <div class="preview-heading" style="font-family: 'Jost', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Jost', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Jost', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Jost', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Jost', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Jost', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Jost', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Jost', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Figtree -->
+      <div class="font-card">
+        <div class="font-name">Figtree <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Friendly geometric · Round and open with great readability</div>
+        <div class="preview-heading" style="font-family: 'Figtree', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Figtree', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Figtree', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Figtree', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Figtree', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Figtree', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Figtree', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Figtree', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Albert Sans -->
+      <div class="font-card">
+        <div class="font-name">Albert Sans <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Geometric grotesk · Slightly condensed with soft edges</div>
+        <div class="preview-heading" style="font-family: 'Albert Sans', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Albert Sans', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Albert Sans', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Albert Sans', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Albert Sans', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Albert Sans', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Albert Sans', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Albert Sans', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Exo 2 -->
+      <div class="font-card">
+        <div class="font-name">Exo 2 <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Futuristic geometric · Sci-fi feel with rounded corners</div>
+        <div class="preview-heading" style="font-family: 'Exo 2', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Exo 2', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Exo 2', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Exo 2', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Exo 2', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Exo 2', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Exo 2', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Exo 2', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Poppins -->
+      <div class="font-card">
+        <div class="font-name">Poppins <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Perfectly circular rounded forms · Clean and modern</div>
+        <div class="preview-heading" style="font-family: 'Poppins', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Poppins', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Poppins', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Poppins', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Poppins', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Poppins', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Poppins', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Montserrat -->
+      <div class="font-card">
+        <div class="font-name">Montserrat <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Urban geometric · Bold and confident at heavy weights</div>
+        <div class="preview-heading" style="font-family: 'Montserrat', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Montserrat', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Montserrat', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Montserrat', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Montserrat', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Montserrat', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Montserrat', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Quicksand -->
+      <div class="font-card">
+        <div class="font-name">Quicksand <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Fully rounded terminals · Friendly yet sophisticated</div>
+        <div class="preview-heading" style="font-family: 'Quicksand', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Quicksand', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Quicksand', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Quicksand', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Quicksand', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Quicksand', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Quicksand', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+        </div>
+      </div>
+
+      <!-- Rubik -->
+      <div class="font-card">
+        <div class="font-name">Rubik <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Slightly rounded corners on grotesque base · Polished</div>
+        <div class="preview-heading" style="font-family: 'Rubik', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Rubik', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Rubik', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Rubik', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Rubik', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rubik', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rubik', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rubik', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Raleway -->
+      <div class="font-card">
+        <div class="font-name">Raleway <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Elegant sleek sans-serif · Thin weights convey luxury</div>
+        <div class="preview-heading" style="font-family: 'Raleway', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Raleway', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Raleway', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Raleway', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Raleway', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Raleway', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Raleway', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Raleway', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Nunito Sans -->
+      <div class="font-card">
+        <div class="font-name">Nunito Sans <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Rounded sans-serif · Warm and balanced body text</div>
+        <div class="preview-heading" style="font-family: 'Nunito Sans', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Nunito Sans', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Nunito Sans', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Nunito Sans', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Nunito Sans', sans-serif; font-weight: 300;">Aa</div><div class="weight-label">300</div></div>
+          <div><div class="weight-sample" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500;">Aa</div><div class="weight-label">500</div></div>
+          <div><div class="weight-sample" style="font-family: 'Nunito Sans', sans-serif; font-weight: 700;">Aa</div><div class="weight-label">700</div></div>
+          <div><div class="weight-sample" style="font-family: 'Nunito Sans', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+      <!-- Rethink Sans -->
+      <div class="font-card">
+        <div class="font-name">Rethink Sans <span class="badge badge-recommended">Recommended</span> <span class="badge badge-free">Free</span></div>
+        <div class="font-meta">Google Fonts · Slightly condensed geometric · Clean modern edge</div>
+        <div class="preview-heading" style="font-family: 'Rethink Sans', sans-serif;">Black Pearl Knife Database</div>
+        <div class="preview-subheading" style="font-family: 'Rethink Sans', sans-serif;">Track prices, floats, and screenshots</div>
+        <div class="preview-body" style="font-family: 'Rethink Sans', sans-serif;">Browse the most comprehensive CS2 Doppler Black Pearl database. Every knife, every float value, every price movement — tracked and organized in one place.</div>
+        <div class="preview-small" style="font-family: 'Rethink Sans', sans-serif;">Karambit · Butterfly · M9 Bayonet · Flip · Gut</div>
+        <div class="weight-strip">
+          <div><div class="weight-sample" style="font-family: 'Rethink Sans', sans-serif; font-weight: 400;">Aa</div><div class="weight-label">400</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rethink Sans', sans-serif; font-weight: 600;">Aa</div><div class="weight-label">600</div></div>
+          <div><div class="weight-sample" style="font-family: 'Rethink Sans', sans-serif; font-weight: 800;">Aa</div><div class="weight-label">800</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================= LIVE MOCKUP ======================= -->
+  <div id="tab-mockup" class="tab-content">
+    <p style="color: var(--muted); font-size: 13px; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace;">
+      See how each font looks in context. Click a font to update the mockup instantly.
+    </p>
+
+    <!-- Font selector -->
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px;">
+      <button class="mockup-font-btn active" onclick="setMockupFont('Inter', this)">Inter (current)</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Plus Jakarta Sans', this)">Plus Jakarta Sans</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Outfit', this)">Outfit</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Sora', this)">Sora</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Manrope', this)">Manrope</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Urbanist', this)">Urbanist</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Jost', this)">Jost</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Figtree', this)">Figtree</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Albert Sans', this)">Albert Sans</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Exo 2', this)">Exo 2</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Poppins', this)">Poppins</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Montserrat', this)">Montserrat</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Quicksand', this)">Quicksand</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Rubik', this)">Rubik</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Raleway', this)">Raleway</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Nunito Sans', this)">Nunito Sans</button>
+      <button class="mockup-font-btn" onclick="setMockupFont('Rethink Sans', this)">Rethink Sans</button>
+    </div>
+
+    <div id="mockup-current-font" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--violet-glow); margin-bottom: 20px; padding: 8px 14px; background: var(--elevated); border-radius: 8px; display: inline-block;">
+      Active: Inter
+    </div>
+
+    <!-- Mockup: Navbar -->
+    <div class="mockup-nav" id="mockup-area">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 28px; height: 28px; background: linear-gradient(135deg, var(--violet), var(--violet-glow)); border-radius: 6px;"></div>
+        <span id="m-brand" style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; color: var(--white); letter-spacing: -0.02em;">BLACK PEARL</span>
+      </div>
+      <div style="display: flex; gap: 24px; align-items: center;">
+        <span id="m-nav1" style="font-family: 'Inter', sans-serif; font-size: 13px; color: var(--silver); font-weight: 500;">Knives</span>
+        <span id="m-nav2" style="font-family: 'Inter', sans-serif; font-size: 13px; color: var(--muted); font-weight: 400;">Market</span>
+        <span id="m-nav3" style="font-family: 'Inter', sans-serif; font-size: 13px; color: var(--muted); font-weight: 400;">FAQ</span>
+        <div style="padding: 6px 16px; background: var(--violet); border-radius: 8px;">
+          <span id="m-cta-nav" style="font-family: 'Inter', sans-serif; font-size: 12px; color: var(--white); font-weight: 600;">Sign In</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mockup: Hero -->
+    <div class="mockup-hero">
+      <div id="m-tag" style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--violet-glow); font-weight: 600; margin-bottom: 16px;">Live CS2 Database</div>
+      <h2 id="m-title" style="font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px;">Every Black Pearl.<br>Tracked.</h2>
+      <p id="m-subtitle" style="font-family: 'Inter', sans-serif; font-size: 17px; color: var(--silver); font-weight: 400; max-width: 480px; margin: 0 auto 28px; line-height: 1.6;">Prices, float values, screenshots and active CSFloat listings for every Doppler Black Pearl knife — all in one place.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <div style="padding: 12px 28px; background: var(--violet); border-radius: 10px; box-shadow: 0 4px 20px rgba(124, 63, 190, 0.3);">
+          <span id="m-cta1" style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--white); font-weight: 600;">Browse Knives</span>
+        </div>
+        <div style="padding: 12px 28px; background: var(--elevated); border: 1px solid var(--border); border-radius: 10px;">
+          <span id="m-cta2" style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--silver-bright); font-weight: 500;">View Market</span>
+        </div>
+      </div>
+
+      <!-- Mini stats row -->
+      <div style="display: flex; gap: 32px; justify-content: center; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border);">
+        <div>
+          <div id="m-stat1" style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: var(--white);">2,847</div>
+          <div id="m-stat1-label" style="font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 2px;">Knives Tracked</div>
+        </div>
+        <div>
+          <div id="m-stat2" style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: var(--white);">$4.2M</div>
+          <div id="m-stat2-label" style="font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 2px;">Total Value</div>
+        </div>
+        <div>
+          <div id="m-stat3" style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: var(--white);">156</div>
+          <div id="m-stat3-label" style="font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 2px;">Active Listings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side-by-side comparison -->
+    <h3 style="font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--violet-glow); margin-top: 40px; margin-bottom: 16px;">Side-by-Side: Current vs Selected</h3>
+    <div class="comparison-grid">
+      <div class="comparison-cell">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em;">Current (Inter)</div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 8px;">Black Pearl</div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--silver); line-height: 1.6;">Track prices and float values for every Doppler Black Pearl knife in CS2.</div>
+      </div>
+      <div class="comparison-cell">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--violet-glow); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em;" id="compare-label">Selected (Inter)</div>
+        <div id="compare-heading" style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; margin-bottom: 8px;">Black Pearl</div>
+        <div id="compare-body" style="font-family: 'Inter', sans-serif; font-size: 14px; color: var(--silver); line-height: 1.6;">Track prices and float values for every Doppler Black Pearl knife in CS2.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function setMockupFont(fontName, btn) {
+  const ids = ['m-brand','m-nav1','m-nav2','m-nav3','m-cta-nav','m-tag','m-title','m-subtitle','m-cta1','m-cta2','m-stat1','m-stat1-label','m-stat2','m-stat2-label','m-stat3','m-stat3-label'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.fontFamily = "'" + fontName + "', sans-serif";
+  });
+
+  document.getElementById('mockup-current-font').textContent = 'Active: ' + fontName;
+  document.getElementById('compare-label').textContent = 'Selected (' + fontName + ')';
+  document.getElementById('compare-heading').style.fontFamily = "'" + fontName + "', sans-serif";
+  document.getElementById('compare-body').style.fontFamily = "'" + fontName + "', sans-serif";
+
+  document.querySelectorAll('.mockup-font-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

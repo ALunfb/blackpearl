@@ -14,10 +14,6 @@
     }
   },
   "ignoreCommand": "git diff HEAD^ HEAD --quiet -- ':(exclude)data/*.json'",
-  "rewrites": [
-    { "source": "/", "destination": "/maintenance.html" },
-    { "source": "/index.html", "destination": "/maintenance.html" }
-  ],
   "headers": [
     {
       "source": "/(.*)",
