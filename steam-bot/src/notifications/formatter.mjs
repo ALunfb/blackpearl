@@ -24,6 +24,32 @@ function formatFloat(f) {
   return f.toFixed(10).replace(/0+$/, '').replace(/\.$/, '.0');
 }
 
+// Rarity score — matches the logic used on the main site
+function computeRarity(listing) {
+  if (!listing || typeof listing.float_value !== 'number') return { score: 0, tier: null };
+  const { float_value: f, wear, stattrak } = listing;
+  let score = 0;
+  const wearBase = { FN: 55, MW: 35, FT: 15, WW: 8, BS: 5 };
+  score += wearBase[wear] || 10;
+  const tierRanges = {
+    FN: [0, 0.07], MW: [0.07, 0.15], FT: [0.15, 0.38],
+    WW: [0.38, 0.45], BS: [0.45, 1.0],
+  };
+  const range = tierRanges[wear];
+  if (range) {
+    const pct = (f - range[0]) / (range[1] - range[0]);
+    score += Math.round((1 - pct) * 30);
+    if (wear === 'FN' && f < 0.01) score += 15;
+    else if (wear === 'FN' && f < 0.02) score += 8;
+    if (wear === 'BS' && f > 0.80) score += 10;
+  }
+  if (stattrak) score += 12;
+  score = Math.max(0, Math.min(100, score));
+  const tier = score >= 95 ? 'GRAIL' : score >= 85 ? 'ELITE'
+    : score >= 70 ? 'GREAT' : score >= 50 ? 'GOOD' : null;
+  return { score, tier };
+}
+
 /**
  * Build a notification message for a new listing.
  * @param {object} listing - The listing data from the tracker
@@ -45,13 +71,15 @@ export function formatNewListing(listing, knifeId, knifeName, userName) {
   const wear = listing.wear;
   const st = listing.stattrak ? 'StatTrak\u2122 ' : '';
   const seed = showSeed ? ` | Pattern: ${listing.paint_seed}` : '';
+  const rarity = computeRarity(listing);
+  const rarityLine = rarity.tier ? `\n[${rarity.tier}] Rarity score: ${rarity.score}/100` : '';
 
   const templates = [
-    `${name} \u2014 new ${st}${knifeName} ${bp} listed!\n${wear} | ${price} | Float: ${float}${seed}\n${listing.csfloat_url}${suffix}`,
-    `${name}! A ${st}${knifeName} ${bp} just appeared on CSFloat.\n${price} \u00b7 ${wear} \u00b7 ${float} float${seed}\n\n${listing.csfloat_url}${suffix}`,
-    `${name}, there's a new ${st}${knifeName} ${bp}.\nPrice: ${price} | Condition: ${wear} | Float: ${float}${seed}\nLink: ${listing.csfloat_url}${suffix}`,
-    `New listing: ${st}${knifeName} ${bp} (${wear})\n${price} \u2022 Float ${float}${seed}\n${listing.csfloat_url}`,
-    `${name} \u2014 ${st}${knifeName} ${bp} (${wear}) for ${price}\nFloat: ${float}${seed}\n${listing.csfloat_url}${suffix}`,
+    `${name} \u2014 new ${st}${knifeName} ${bp} listed!\n${wear} | ${price} | Float: ${float}${seed}${rarityLine}\n${listing.csfloat_url}${suffix}`,
+    `${name}! A ${st}${knifeName} ${bp} just appeared on CSFloat.\n${price} \u00b7 ${wear} \u00b7 ${float} float${seed}${rarityLine}\n\n${listing.csfloat_url}${suffix}`,
+    `${name}, there's a new ${st}${knifeName} ${bp}.\nPrice: ${price} | Condition: ${wear} | Float: ${float}${seed}${rarityLine}\nLink: ${listing.csfloat_url}${suffix}`,
+    `New listing: ${st}${knifeName} ${bp} (${wear})\n${price} \u2022 Float ${float}${seed}${rarityLine}\n${listing.csfloat_url}`,
+    `${name} \u2014 ${st}${knifeName} ${bp} (${wear}) for ${price}\nFloat: ${float}${seed}${rarityLine}\n${listing.csfloat_url}${suffix}`,
   ];
 
   return pick(templates);

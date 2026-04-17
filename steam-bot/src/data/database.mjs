@@ -14,6 +14,9 @@ const db = new Database(DB_PATH);
 // Enable WAL mode for concurrent read/write safety
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
+// Security / reliability pragmas
+db.pragma('synchronous = NORMAL');
+db.pragma('busy_timeout = 5000');
 
 // ── Schema migration ─────────────────────────────
 db.exec(`
@@ -92,6 +95,21 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_sessions_expires     ON sessions(expires_at);
 `);
 
+// ── Lightweight additive migrations ───────────────
+function addColumnIfMissing(table, columnDef) {
+  const colName = columnDef.split(/\s+/)[0];
+  const cols = db.prepare(`PRAGMA table_info(${table})`).all();
+  if (!cols.find(c => c.name === colName)) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN ${columnDef}`);
+    log.info(`Migration: added column ${table}.${colName}`);
+  }
+}
+try {
+  addColumnIfMissing('subscriptions', 'min_rarity_score INTEGER');
+} catch (err) {
+  log.error('Migration failed', { error: err.message });
+}
+
 log.info('Database initialized', { path: DB_PATH });
 
 // ── Prepared statements ──────────────────────────
@@ -136,8 +154,8 @@ const _getSubById = db.prepare(
 );
 
 const _createSub = db.prepare(`
-  INSERT INTO subscriptions (user_id, knife_id, float_min, float_max, price_min, price_max, paint_seed, stattrak_only, snipe_alerts, price_drop_pct, frequency)
-  VALUES (@user_id, @knife_id, @float_min, @float_max, @price_min, @price_max, @paint_seed, @stattrak_only, @snipe_alerts, @price_drop_pct, @frequency)
+  INSERT INTO subscriptions (user_id, knife_id, float_min, float_max, price_min, price_max, paint_seed, stattrak_only, snipe_alerts, price_drop_pct, min_rarity_score, frequency)
+  VALUES (@user_id, @knife_id, @float_min, @float_max, @price_min, @price_max, @paint_seed, @stattrak_only, @snipe_alerts, @price_drop_pct, @min_rarity_score, @frequency)
 `);
 
 const _updateSub = db.prepare(`
@@ -145,7 +163,8 @@ const _updateSub = db.prepare(`
     knife_id = @knife_id, float_min = @float_min, float_max = @float_max,
     price_min = @price_min, price_max = @price_max, paint_seed = @paint_seed,
     stattrak_only = @stattrak_only, snipe_alerts = @snipe_alerts,
-    price_drop_pct = @price_drop_pct, frequency = @frequency,
+    price_drop_pct = @price_drop_pct, min_rarity_score = @min_rarity_score,
+    frequency = @frequency,
     is_active = @is_active, updated_at = datetime('now')
   WHERE id = @id AND user_id = @user_id
 `);
@@ -366,5 +385,31 @@ export default {
 
   cleanExpiredSessions() {
     _cleanExpiredSessions.run();
+  },
+
+  // Maintenance — call periodically to prevent unbounded growth
+  cleanOldNotifications(daysToKeep = 90) {
+    const result = db.prepare(
+      `DELETE FROM notifications WHERE sent_at < datetime('now', '-${parseInt(daysToKeep, 10)} days')`
+    ).run();
+    return result.changes;
+  },
+
+  cleanOldPriceCache(daysToKeep = 14) {
+    const result = db.prepare(
+      `DELETE FROM price_cache WHERE updated_at < datetime('now', '-${parseInt(daysToKeep, 10)} days')`
+    ).run();
+    return result.changes;
+  },
+
+  // Graceful shutdown — checkpoint WAL and close connection
+  close() {
+    try {
+      db.pragma('wal_checkpoint(TRUNCATE)');
+      db.close();
+      log.info('Database closed cleanly');
+    } catch (err) {
+      log.error('Error closing database', { error: err.message });
+    }
   },
 };

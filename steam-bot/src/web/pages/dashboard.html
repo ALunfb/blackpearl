@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Black Pearl — Steam Alerts</title>
+  <title>Steam Alerts — Black Pearl</title>
+  <meta name="description" content="Get Steam chat notifications when new Black Pearl Doppler knives are listed on CSFloat. Filter by knife, float, price, rarity, and more.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#7C3FBE">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Steam Alerts for CS2 Black Pearl knives">
+  <meta property="og:description" content="Free Steam chat bot notifying you when new Black Pearl Dopplers are listed on CSFloat matching your filters.">
+  <meta property="og:image" content="https://blackpearl.gg/brand-assets/og-image.png">
+  <meta property="og:url" content="https://bot.blackpearl.gg/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://bot.blackpearl.gg/">
+  <link rel="icon" type="image/svg+xml" href="https://blackpearl.gg/brand-assets/favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -312,6 +323,21 @@
             <input type="number" name="price_drop_pct" class="input-field" placeholder="e.g. 5 = notify on >5% drop" min="1" max="99" id="drop-input" disabled>
           </div>
 
+          <!-- Minimum Rarity Score -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs text-ghost font-mono uppercase tracking-wider">Minimum Rarity</label>
+              <label class="any-toggle"><input type="checkbox" id="rarity-any" checked><span>Any</span></label>
+            </div>
+            <select name="min_rarity_score" class="input-field" id="rarity-input" disabled>
+              <option value="50">GOOD (50+)</option>
+              <option value="70">GREAT (70+)</option>
+              <option value="85">ELITE (85+)</option>
+              <option value="95">GRAIL (95+)</option>
+            </select>
+            <p style="font-size:11px;color:#555568;margin-top:6px;">Only notify for listings matching this rarity tier. Based on float, wear, and stattrak.</p>
+          </div>
+
           <!-- Frequency -->
           <div>
             <label class="block text-xs text-ghost mb-2 font-mono uppercase tracking-wider">Notification Frequency</label>
@@ -372,6 +398,10 @@
         <a href="/auth/logout" class="text-xs text-ghost hover:text-silver transition-colors">Sign out</a>
         <span class="text-ghost mx-2">|</span>
         <a href="https://blackpearl.gg" target="_blank" class="text-xs text-ghost hover:text-violet-400 transition-colors">blackpearl.gg</a>
+        <span class="text-ghost mx-2">|</span>
+        <a href="/privacy" class="text-xs text-ghost hover:text-silver transition-colors">Privacy</a>
+        <span class="text-ghost mx-2">|</span>
+        <a href="/terms" class="text-xs text-ghost hover:text-silver transition-colors">Terms</a>
       </div>
     </div>
 
@@ -424,18 +454,27 @@
       document.getElementById('login-prompt').classList.add('hidden');
       document.getElementById('login-btn').classList.add('hidden');
 
-      // Avatar
-      if (currentUser.avatar_url) {
+      // Avatar — use DOM methods to avoid innerHTML injection
+      if (currentUser.avatar_url && isValidImageUrl(currentUser.avatar_url)) {
         const container = document.getElementById('avatar-container');
-        container.innerHTML = `<img src="${escapeHtml(currentUser.avatar_url)}" class="w-full h-full object-cover" alt="">`;
+        container.textContent = '';
+        const img = document.createElement('img');
+        img.src = currentUser.avatar_url;
+        img.className = 'w-full h-full object-cover';
+        img.alt = '';
+        container.appendChild(img);
       }
       document.getElementById('user-name').textContent = currentUser.persona_name || 'Steam User';
       document.getElementById('user-steam-id').textContent = currentUser.steam_id;
 
-      // Auth buttons
-      document.getElementById('auth-buttons').innerHTML = `
-        <a href="/auth/logout" class="btn-ghost text-xs">Sign out</a>
-      `;
+      // Auth buttons — use DOM methods
+      const authBtns = document.getElementById('auth-buttons');
+      authBtns.textContent = '';
+      const logoutLink = document.createElement('a');
+      logoutLink.href = '/auth/logout';
+      logoutLink.className = 'btn-ghost text-xs';
+      logoutLink.textContent = 'Sign out';
+      authBtns.appendChild(logoutLink);
 
       // Friend status
       const statusText = document.getElementById('friend-status-text');
@@ -558,6 +597,12 @@
         parts.push(`Price: ${min} – ${max}`);
       }
       if (sub.stattrak_only) parts.push('ST only');
+      if (sub.min_rarity_score) {
+        const tier = sub.min_rarity_score >= 95 ? 'GRAIL'
+          : sub.min_rarity_score >= 85 ? 'ELITE'
+          : sub.min_rarity_score >= 70 ? 'GREAT' : 'GOOD';
+        parts.push(`${tier}+`);
+      }
       return parts.length > 0 ? parts.join(' &middot; ') : 'No filters (all listings)';
     }
 
@@ -657,6 +702,7 @@
           stattrak_only: form.stattrak_only.checked,
           snipe_alerts: form.snipe_alerts.checked,
           price_drop_pct: document.getElementById('drop-any').checked ? null : (form.price_drop_pct.value || null),
+          min_rarity_score: document.getElementById('rarity-any').checked ? null : parseInt(form.min_rarity_score.value, 10),
           frequency: form.frequency.value,
         };
 
@@ -673,7 +719,7 @@
           toast('Alert subscription created!');
           form.reset();
           // Re-check "any" toggles
-          ['float-any', 'price-any', 'drop-any'].forEach(id => {
+          ['float-any', 'price-any', 'drop-any', 'rarity-any'].forEach(id => {
             document.getElementById(id).checked = true;
             document.getElementById(id).dispatchEvent(new Event('change'));
           });
@@ -694,6 +740,7 @@
         ['float-any', ['float_min', 'float_max']],
         ['price-any', ['price_min', 'price_max']],
         ['drop-any', ['price_drop_pct']],
+        ['rarity-any', ['min_rarity_score']],
       ];
       for (const [toggleId, inputNames] of pairs) {
         const toggle = document.getElementById(toggleId);
@@ -751,9 +798,21 @@
     }
 
     function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
       const div = document.createElement('div');
-      div.textContent = str;
+      div.textContent = String(str);
       return div.innerHTML;
+    }
+
+    // Validates image URLs to prevent javascript: / data: / file: URL injection
+    function isValidImageUrl(url) {
+      if (typeof url !== 'string') return false;
+      try {
+        const parsed = new URL(url, window.location.origin);
+        return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+      } catch {
+        return false;
+      }
     }
 
     function formatTimeAgo(isoStr) {

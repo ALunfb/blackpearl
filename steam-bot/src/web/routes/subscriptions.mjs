@@ -138,7 +138,8 @@ router.get('/knives', (req, res) => {
 function validateSubscription(body) {
   const {
     knife_id, float_min, float_max, price_min, price_max,
-    paint_seed, stattrak_only, snipe_alerts, price_drop_pct, frequency,
+    paint_seed, stattrak_only, snipe_alerts, price_drop_pct,
+    min_rarity_score, frequency,
   } = body;
 
   if (!knife_id || !VALID_KNIFE_IDS.has(knife_id)) {
@@ -163,8 +164,11 @@ function validateSubscription(body) {
   if (pMin !== null && pMin < 0) return { error: 'price_min must be >= 0' };
   if (pMax !== null && pMax < 0) return { error: 'price_max must be >= 0' };
   if (pMin !== null && pMax !== null && pMin > pMax) return { error: 'price_min must be <= price_max' };
-  if (seed !== null && seed < 0) return { error: 'paint_seed must be >= 0' };
+  if (seed !== null && (seed < 0 || seed > 4095)) return { error: 'paint_seed must be 0-4095' };
   if (dropPct !== null && (dropPct < 1 || dropPct > 99)) return { error: 'price_drop_pct must be 1-99' };
+
+  const minRarity = parseNullableInt(min_rarity_score);
+  if (minRarity !== null && (minRarity < 0 || minRarity > 100)) return { error: 'min_rarity_score must be 0-100' };
 
   return {
     knife_id,
@@ -176,6 +180,7 @@ function validateSubscription(body) {
     stattrak_only: stattrak_only ? 1 : 0,
     snipe_alerts: snipe_alerts ? 1 : 0,
     price_drop_pct: dropPct,
+    min_rarity_score: minRarity,
     frequency: frequency || 'instant',
   };
 }

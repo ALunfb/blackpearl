@@ -2,6 +2,7 @@ import db from '../data/database.mjs';
 import { enqueueMessage } from '../bot/message-sender.mjs';
 import { formatNewListing, formatSnipeAlert, formatBatch } from './formatter.mjs';
 import { detectSnipe } from './snipe-detector.mjs';
+import { rarityScore } from '../utils/rarity.mjs';
 import { createLogger } from '../utils/logger.mjs';
 
 const log = createLogger('matcher');
@@ -184,5 +185,9 @@ function matchesSubscription(listing, sub) {
   if (sub.price_max !== null && listing.price > sub.price_max) return false;
   if (sub.paint_seed !== null && listing.paint_seed !== sub.paint_seed) return false;
   if (sub.stattrak_only && !listing.stattrak) return false;
+  if (sub.min_rarity_score != null) {
+    const { score } = rarityScore(listing);
+    if (score < sub.min_rarity_score) return false;
+  }
   return true;
 }

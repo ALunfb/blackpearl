@@ -167,8 +167,8 @@ function transformListings(rawListings) {
     floorPrice[wear] = prices.length > 0 ? Math.min(...prices) : null;
   }
 
-  // Float range across all listed items
-  const floats = listings.map(l => l.float_value).filter(f => f > 0);
+  // Float range across all listed items (keep exact 0 — it's a valid float)
+  const floats = listings.map(l => l.float_value).filter(f => typeof f === 'number' && f >= 0);
   const floatMin = floats.length ? Math.min(...floats) : null;
   const floatMax = floats.length ? Math.max(...floats) : null;
 

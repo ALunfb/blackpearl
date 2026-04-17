@@ -107,7 +107,13 @@ class SteamClient extends EventEmitter {
     await sleep(delay);
 
     if (!this._shuttingDown) {
-      this.login();
+      try {
+        await this.login();
+      } catch (err) {
+        log.error('Login attempt threw', { error: err.message });
+        // schedule another retry
+        this._scheduleReconnect();
+      }
     }
   }
 

@@ -7,21 +7,42 @@ import { createLogger } from '../utils/logger.mjs';
 import db from '../data/database.mjs';
 import authRoutes from './routes/auth.mjs';
 import subscriptionRoutes from './routes/subscriptions.mjs';
+import steamClient from '../bot/steam-client.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const log = createLogger('web');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '10kb' })); // guard against huge bodies
 app.use(cookieParser());
 
-// CORS for local dev
+// Security headers
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  next();
+});
+
+// CORS — whitelist only trusted origins
+const ALLOWED_ORIGINS = new Set([
+  BOT_WEB_URL,
+  'http://localhost:3001',
+  'https://blackpearl.gg',
+  'https://www.blackpearl.gg',
+]);
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Vary', 'Origin');
   if (req.method === 'OPTIONS') return res.sendStatus(200);
   next();
 });
@@ -60,9 +81,30 @@ app.get('/', (req, res) => {
   res.sendFile(resolve(__dirname, 'pages', 'dashboard.html'));
 });
 
-// Health check
+// Serve static legal pages
+app.get('/privacy', (req, res) => {
+  res.sendFile(resolve(__dirname, 'pages', 'privacy.html'));
+});
+app.get('/terms', (req, res) => {
+  res.sendFile(resolve(__dirname, 'pages', 'terms.html'));
+});
+
+// Comprehensive health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  let dbOk = false;
+  try {
+    dbOk = !!db.raw.prepare('SELECT 1 as ok').get();
+  } catch { /* dbOk stays false */ }
+
+  const health = {
+    status: 'ok',
+    steam: steamClient.isReady,
+    database: dbOk,
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  };
+  const healthy = health.steam && health.database;
+  res.status(healthy ? 200 : 503).json(health);
 });
 
 /**

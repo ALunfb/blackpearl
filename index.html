@@ -28,12 +28,11 @@
 <meta name="twitter:description" content="Live CS2 Doppler Black Pearl knife database. Track prices, floats, screenshots and active CSFloat listings for every Black Pearl knife.">
 <meta name="twitter:image" content="https://blackpearl.gg/brand-assets/og-image.png">
 <meta name="twitter:image:alt" content="Black Pearl Knife Database — CS2 Doppler Black Pearl price tracker">
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://raw.githubusercontent.com" />
 <link rel="dns-prefetch" href="https://community.akamai.steamstatic.com" />
 <link rel="dns-prefetch" href="https://avatars.steamstatic.com" />
-<link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 
 <style>
@@ -83,6 +82,30 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--void); }
   ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 2px; }
+
+  /* Screen-reader-only utility */
+  .sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  /* Focus visibility for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--violet-bright);
+    outline-offset: 2px;
+  }
+  button:focus:not(:focus-visible), a:focus:not(:focus-visible), input:focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* Skip-to-content link */
+  .skip-link {
+    position: absolute; top: -100px; left: 12px;
+    background: var(--violet); color: var(--silver-bright);
+    padding: 8px 16px; border-radius: 6px;
+    font-family: 'Exo 2', sans-serif; font-weight: 600;
+    z-index: 10000; transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 12px; }
 
   /* Typography */
   .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
@@ -2250,6 +2273,44 @@
     margin-left: 4px;
   }
 
+  /* Rarity badges */
+  .rarity-badge {
+    display: inline-flex; align-items: center;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    padding: 2px 6px; border-radius: 3px; margin-left: 4px;
+    text-transform: uppercase;
+  }
+  .rarity-badge.grail {
+    color: #FFD93D;
+    background: linear-gradient(135deg, rgba(255, 217, 61, 0.15), rgba(255, 164, 0, 0.1));
+    border: 1px solid rgba(255, 217, 61, 0.45);
+    box-shadow: 0 0 10px rgba(255, 217, 61, 0.15);
+  }
+  .rarity-badge.elite {
+    color: #C084FC;
+    background: rgba(168, 85, 247, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+  }
+  .rarity-badge.great {
+    color: #60A5FA;
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+  }
+  .rarity-badge.good {
+    color: #34D399;
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+  }
+  .rarity-factor {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.08em;
+    color: #FFA500; padding: 1px 5px; margin-left: 3px;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+    background: rgba(255, 165, 0, 0.05);
+    border-radius: 2px;
+  }
+
   .owners-empty {
     text-align: center;
     padding: 40px 20px;
@@ -2716,6 +2777,28 @@
           }
         }
       ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://blackpearl.gg/" },
+        { "@type": "ListItem", "position": 2, "name": "Database", "item": "https://blackpearl.gg/#database" },
+        { "@type": "ListItem", "position": 3, "name": "Live Feed", "item": "https://blackpearl.gg/#feed" },
+        { "@type": "ListItem", "position": 4, "name": "Price Tracker", "item": "https://blackpearl.gg/#tracker" }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Black Pearl Steam Alerts",
+      "description": "Free Steam chat bot that notifies you when new Black Pearl knife listings match your criteria on CSFloat.",
+      "url": "https://bot.blackpearl.gg",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
     }
   ]
 }
@@ -2723,6 +2806,8 @@
 
 </head>
 <body>
+
+<a href="#database" class="skip-link">Skip to database</a>
 
 <!-- ═══════════════════ NAVIGATION ═══════════════════ -->
 <nav>
@@ -2814,16 +2899,17 @@
   <div class="tracker-controls">
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <div class="search-wrap">
-        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        <input type="text" class="search-input" placeholder="Search knife type..." id="searchInput" />
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <label for="searchInput" class="sr-only">Search knives</label>
+        <input type="text" class="search-input" placeholder="Search knife type..." id="searchInput" aria-label="Search for a knife type" autocomplete="off" />
       </div>
-      <div class="view-toggle">
-        <button class="view-btn active" id="cardViewBtn" onclick="setView('card')">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="0" y="0" width="5" height="5" rx="1"/><rect x="7" y="0" width="5" height="5" rx="1"/><rect x="0" y="7" width="5" height="5" rx="1"/><rect x="7" y="7" width="5" height="5" rx="1"/></svg>
+      <div class="view-toggle" role="group" aria-label="View mode toggle">
+        <button class="view-btn active" id="cardViewBtn" onclick="setView('card')" aria-pressed="true" aria-label="Card view">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="5" height="5" rx="1"/><rect x="7" y="0" width="5" height="5" rx="1"/><rect x="0" y="7" width="5" height="5" rx="1"/><rect x="7" y="7" width="5" height="5" rx="1"/></svg>
           Cards
         </button>
-        <button class="view-btn" id="tableViewBtn" onclick="setView('table')">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="0" y="0" width="12" height="2" rx="1"/><rect x="0" y="5" width="12" height="2" rx="1"/><rect x="0" y="10" width="12" height="2" rx="1"/></svg>
+        <button class="view-btn" id="tableViewBtn" onclick="setView('table')" aria-pressed="false" aria-label="Table view">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="12" height="2" rx="1"/><rect x="0" y="5" width="12" height="2" rx="1"/><rect x="0" y="10" width="12" height="2" rx="1"/></svg>
           Table
         </button>
       </div>
@@ -2835,7 +2921,7 @@
 
     <div class="knife-card" data-name="karambit">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Karambit+%E2%96%AA+Black+Pearl" alt="Karambit Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Karambit+%E2%96%AA+Black+Pearl" alt="Karambit Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
         <div class="knife-card-badge">★ Most Sought</div>
       </div>
@@ -2857,7 +2943,7 @@
 
     <div class="knife-card" data-name="butterfly">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Butterfly+%E2%96%AA+Black+Pearl" alt="Butterfly Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Butterfly+%E2%96%AA+Black+Pearl" alt="Butterfly Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -2878,7 +2964,7 @@
 
     <div class="knife-card" data-name="m9">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=M9+Bayonet+%E2%96%AA+Black+Pearl" alt="M9 Bayonet Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=M9+Bayonet+%E2%96%AA+Black+Pearl" alt="M9 Bayonet Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -2899,7 +2985,7 @@
 
     <div class="knife-card" data-name="bayonet">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Bayonet+%E2%96%AA+Black+Pearl" alt="Bayonet Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Bayonet+%E2%96%AA+Black+Pearl" alt="Bayonet Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -2920,7 +3006,7 @@
 
     <div class="knife-card" data-name="stiletto">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Stiletto+%E2%96%AA+Black+Pearl" alt="Stiletto Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Stiletto+%E2%96%AA+Black+Pearl" alt="Stiletto Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -2941,7 +3027,7 @@
 
     <div class="knife-card" data-name="talon">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Talon+%E2%96%AA+Black+Pearl" alt="Talon Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Talon+%E2%96%AA+Black+Pearl" alt="Talon Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -2962,7 +3048,7 @@
 
     <div class="knife-card" data-name="skeleton">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Skeleton+%E2%96%AA+Black+Pearl" alt="Skeleton Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Skeleton+%E2%96%AA+Black+Pearl" alt="Skeleton Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -2983,7 +3069,7 @@
 
     <div class="knife-card" data-name="flip">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Flip+Knife+%E2%96%AA+Black+Pearl" alt="Flip Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Flip+Knife+%E2%96%AA+Black+Pearl" alt="Flip Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3004,7 +3090,7 @@
 
     <div class="knife-card" data-name="gut">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Gut+Knife+%E2%96%AA+Black+Pearl" alt="Gut Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Gut+Knife+%E2%96%AA+Black+Pearl" alt="Gut Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3025,7 +3111,7 @@
 
     <div class="knife-card" data-name="huntsman">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Huntsman+%E2%96%AA+Black+Pearl" alt="Huntsman Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Huntsman+%E2%96%AA+Black+Pearl" alt="Huntsman Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3046,7 +3132,7 @@
 
     <div class="knife-card" data-name="falchion">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Falchion+%E2%96%AA+Black+Pearl" alt="Falchion Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Falchion+%E2%96%AA+Black+Pearl" alt="Falchion Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3067,7 +3153,7 @@
 
     <div class="knife-card" data-name="bowie">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Bowie+%E2%96%AA+Black+Pearl" alt="Bowie Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Bowie+%E2%96%AA+Black+Pearl" alt="Bowie Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3088,7 +3174,7 @@
 
     <div class="knife-card" data-name="navaja">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Navaja+%E2%96%AA+Black+Pearl" alt="Navaja Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Navaja+%E2%96%AA+Black+Pearl" alt="Navaja Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3109,7 +3195,7 @@
 
     <div class="knife-card" data-name="ursus">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Ursus+%E2%96%AA+Black+Pearl" alt="Ursus Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Ursus+%E2%96%AA+Black+Pearl" alt="Ursus Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3130,7 +3216,7 @@
 
     <div class="knife-card" data-name="shadow">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Shadow+%E2%96%AA+Black+Pearl" alt="Shadow Daggers Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Shadow+%E2%96%AA+Black+Pearl" alt="Shadow Daggers Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3151,7 +3237,7 @@
 
     <div class="knife-card" data-name="paracord">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Paracord+%E2%96%AA+Black+Pearl" alt="Paracord Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Paracord+%E2%96%AA+Black+Pearl" alt="Paracord Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3172,7 +3258,7 @@
 
     <div class="knife-card" data-name="survival">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Survival+%E2%96%AA+Black+Pearl" alt="Survival Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Survival+%E2%96%AA+Black+Pearl" alt="Survival Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3193,7 +3279,7 @@
 
     <div class="knife-card" data-name="nomad">
       <div class="knife-card-image">
-        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Nomad+%E2%96%AA+Black+Pearl" alt="Nomad Knife Black Pearl" />
+        <img src="https://placehold.co/400x200/180828/9D4EDD?text=Nomad+%E2%96%AA+Black+Pearl" alt="Nomad Knife Black Pearl" loading="lazy" decoding="async" />
         <div class="knife-card-image-overlay"></div>
       </div>
       <div class="knife-card-content">
@@ -3464,8 +3550,15 @@
         <span class="footer-contact-email">AL@blackpearl.gg</span>
       </a>
     </div>
-    <div class="footer-bottom" style="justify-content:center;text-align:center;">
+    <div class="footer-bottom" style="justify-content:center;text-align:center;flex-direction:column;gap:8px;">
       <span class="footer-copy">© 2026 blackpearl.gg — Not affiliated with Valve Corporation or CSFloat</span>
+      <span class="footer-copy" style="font-size:11px;opacity:0.7;">
+        <a href="/privacy.html" style="color:inherit;text-decoration:none;">Privacy</a>
+        <span style="margin:0 8px;opacity:0.5;">·</span>
+        <a href="/terms.html" style="color:inherit;text-decoration:none;">Terms</a>
+        <span style="margin:0 8px;opacity:0.5;">·</span>
+        <a href="https://bot.blackpearl.gg" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Steam Alerts</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -3485,6 +3578,7 @@
     <button class="owners-sort-btn" data-sort="price-desc">Price &#x2193;</button>
     <button class="owners-sort-btn" data-sort="float-asc">Float &#x2191;</button>
     <button class="owners-sort-btn" data-sort="float-desc">Float &#x2193;</button>
+    <button class="owners-sort-btn" data-sort="rarity">Rarity</button>
   </div>
   <div class="owners-col-header">
     <span class="olh-seller">Seller - Stall Link</span>
@@ -3514,17 +3608,23 @@
     const tableView = document.getElementById('tableView');
     const cardBtn = document.getElementById('cardViewBtn');
     const tableBtn = document.getElementById('tableViewBtn');
+    if (!cardView || !tableView || !cardBtn || !tableBtn) return;
     if (view === 'card') {
       cardView.style.display = 'grid';
       tableView.style.display = 'none';
       cardBtn.classList.add('active');
+      cardBtn.setAttribute('aria-pressed', 'true');
       tableBtn.classList.remove('active');
+      tableBtn.setAttribute('aria-pressed', 'false');
     } else {
       cardView.style.display = 'none';
       tableView.style.display = 'block';
       cardBtn.classList.remove('active');
+      cardBtn.setAttribute('aria-pressed', 'false');
       tableBtn.classList.add('active');
+      tableBtn.setAttribute('aria-pressed', 'true');
     }
+    try { localStorage.setItem('bp-view-mode', view); } catch {}
   }
 
   // ── Search ──
@@ -3574,7 +3674,17 @@
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeLightboxBtn(); closeOwnersPanel(); }
+    if (e.key !== 'Escape') return;
+    // Close the topmost modal only — lightbox takes precedence
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox && lightbox.classList.contains('active')) {
+      closeLightboxBtn();
+      return;
+    }
+    const ownersPanel = document.getElementById('ownersPanel');
+    if (ownersPanel && ownersPanel.classList.contains('active')) {
+      closeOwnersPanel();
+    }
   });
 
   // ── Scroll reveal ──
@@ -3643,6 +3753,113 @@
 
   function fmtFloat(f) {
     return f != null ? f.toFixed(6).replace(/^0\./, '.') : '—';
+  }
+
+  // Fetch with timeout to prevent hanging on slow networks
+  async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // Safely validate external image URLs
+  function safeImageUrl(url, fallback = '') {
+    if (typeof url !== 'string' || !url) return fallback;
+    try {
+      const parsed = new URL(url, window.location.origin);
+      return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? url : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  // HTML escape for user-facing data interpolation
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    const div = document.createElement('div');
+    div.textContent = String(str);
+    return div.innerHTML;
+  }
+
+  // Allow only https/http URLs for user-facing links
+  function safeUrl(url, fallback = '#') {
+    if (typeof url !== 'string' || !url) return fallback;
+    try {
+      const parsed = new URL(url, window.location.origin);
+      return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? url : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  // Allow only steam:// inspect URLs
+  function safeInspectUrl(url) {
+    if (typeof url !== 'string' || !url) return '';
+    return /^steam:\/\/rungame\//i.test(url) ? url : '';
+  }
+
+  // ── RARITY SCORING ──────────────────────────────────
+  // Scores a listing 0-100 based on how desirable it is.
+  // Factors: float value (lower is better within a wear tier), stattrak,
+  // wear condition. Returns { score, tier, factors }.
+  // Tiers: 95+ = GRAIL, 85+ = ELITE, 70+ = GREAT, 50+ = GOOD
+  function rarityScore(listing) {
+    if (!listing || typeof listing.float_value !== 'number') {
+      return { score: 0, tier: null, factors: [] };
+    }
+    const { float_value: f, wear, stattrak } = listing;
+    let score = 0;
+    const factors = [];
+
+    // Wear tier base score
+    const wearBase = { FN: 55, MW: 35, FT: 15, WW: 8, BS: 5 };
+    score += wearBase[wear] || 10;
+
+    // Float rank within wear tier (lower is better)
+    const tierRanges = {
+      FN: [0, 0.07],
+      MW: [0.07, 0.15],
+      FT: [0.15, 0.38],
+      WW: [0.38, 0.45],
+      BS: [0.45, 1.0],
+    };
+    const range = tierRanges[wear];
+    if (range) {
+      const pct = (f - range[0]) / (range[1] - range[0]); // 0 = best, 1 = worst
+      score += Math.round((1 - pct) * 30); // up to +30 for being at top of tier
+
+      // Bonus for extreme floats
+      if (wear === 'FN' && f < 0.01) {
+        score += 15;
+        factors.push('ULTRA LOW FLOAT');
+      } else if (wear === 'FN' && f < 0.02) {
+        score += 8;
+        factors.push('LOW FLOAT');
+      }
+      if (wear === 'BS' && f > 0.80) {
+        score += 10;
+        factors.push('MAX FLOAT');
+      }
+    }
+
+    // StatTrak bonus
+    if (stattrak) {
+      score += 12;
+      factors.push('STATTRAK');
+    }
+
+    score = Math.max(0, Math.min(100, score));
+    const tier = score >= 95 ? 'GRAIL'
+      : score >= 85 ? 'ELITE'
+      : score >= 70 ? 'GREAT'
+      : score >= 50 ? 'GOOD'
+      : null;
+
+    return { score, tier, factors };
   }
 
   // Set loading state on all cards
@@ -3780,7 +3997,8 @@
       const floatRange = data.float_min != null ? `${fmtFloat(data.float_min)} – ${fmtFloat(data.float_max)}` : '—';
       const dbUrl = data.csfloat_db_url || '#';
 
-      return `<tr onclick="openOwnersPanel('${data.knife_id}','${data.knife_name}',knifeListingsCache['${data.knife_id}']||[])">
+      const safeKnifeId = String(data.knife_id).replace(/[^a-z0-9_-]/gi, '');
+      return `<tr data-knife-id="${safeKnifeId}" onclick="openOwnersPanelFromRow(this)">
         <td><span class="table-knife-name">${shortName(data.knife_name)}</span><span class="table-knife-sub">Doppler · Black Pearl</span></td>
         <td>${fn != null ? `<span class="price-cell"><span class="currency">$</span>${Math.round(fn).toLocaleString()}</span>` : '—'}</td>
         <td>${mw != null ? `<span class="price-cell"><span class="currency">$</span>${Math.round(mw).toLocaleString()}</span>` : '—'}</td>
@@ -3962,7 +4180,7 @@
   // data-only commits don't need a Vercel rebuild.
   async function initDbCounts() {
     try {
-      const res = await fetch(`${DATA_BASE}/db-counts.json`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${DATA_BASE}/db-counts.json`, { cache: 'no-store' }, 15000);
       if (!res.ok) throw new Error('Failed');
       const raw = await res.json();
 
@@ -4023,9 +4241,21 @@
       // Load pre-fetched data from static JSON (no CSFloat API calls at runtime).
       // In production this hits GitHub raw directly so we don't need a Vercel
       // rebuild every time the hourly Action commits fresh data.
-      const res = await fetch(`${DATA_BASE}/listings.json`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${DATA_BASE}/listings.json`, { cache: 'no-store' }, 15000);
       if (!res.ok) throw new Error(`Failed to load listings data: ${res.status}`);
-      const { knives: allData } = await res.json();
+      const json = await res.json();
+      const allData = Array.isArray(json) ? json : json.knives;
+      if (!Array.isArray(allData)) throw new Error('Listings data is malformed');
+
+      // Show data freshness on the live badge
+      if (json.fetched_at) {
+        const badge = document.getElementById('dbLiveBadge');
+        if (badge) {
+          const timeStr = fmtRelTime(json.fetched_at);
+          badge.innerHTML = `<span class="db-live-dot"></span>LIVE · CSFloat · ${escapeHtml(timeStr)}`;
+          badge.title = `Data updated ${new Date(json.fetched_at).toLocaleString()}`;
+        }
+      }
 
       allData.forEach(data => {
         knifeListingsCache[data.knife_id] = data.listings || [];
@@ -4107,17 +4337,21 @@
       const l = row.listing || {};
       const seller = l.seller || {};
       const isPrivate = !seller.username || seller.username === 'Unknown';
-      const sellerUrl = seller.stall_url || l.csfloat_url || '#';
+      const sellerUrl = safeUrl(seller.stall_url || l.csfloat_url, '#');
       const sellerName = isPrivate ? 'Private Stall' : seller.username;
-      const avatar = seller.avatar
-        ? `<img class="ol-avatar" src="${seller.avatar}" alt="" onerror="this.src='brand-assets/private%20stall.png'">`
-        : `<img class="ol-avatar" src="brand-assets/private%20stall.png" alt="Private">`;
+      const safeCsfloatUrl = safeUrl(l.csfloat_url);
+      const safeInspect = safeInspectUrl(l.inspect_link);
+      const rarity = rarityScore(l);
+      const rarityBadge = rarity.tier ? `<span class="rarity-badge ${rarity.tier.toLowerCase()}" title="Rarity score: ${rarity.score}/100">${rarity.tier}</span>` : '';
+      const safeAvatar = safeImageUrl(seller.avatar, 'brand-assets/private%20stall.png');
+      const avatar = `<img class="ol-avatar" src="${escapeHtml(safeAvatar)}" alt="" onerror="this.src='brand-assets/private%20stall.png'">`;
       const price = l.price != null
         ? `<span class="ol-price"><em>$</em>${Math.round(l.price).toLocaleString()}</span>`
         : '—';
       const stTag = l.stattrak ? `<span class="ol-st">ST</span>` : '';
-      const thumb = l.image_url
-        ? `<img class="feed-knife-thumb" src="${l.image_url}" alt="${row.knife_name}" loading="lazy">`
+      const safeImage = safeImageUrl(l.image_url);
+      const thumb = safeImage
+        ? `<img class="feed-knife-thumb" src="${escapeHtml(safeImage)}" alt="${escapeHtml(row.knife_name || '')}" loading="lazy">`
         : `<div class="feed-knife-thumb"></div>`;
       const dateIso = mode === 'sold' ? row.sold_at : row.created_at;
       const freshClass = mode === 'new' && absoluteIdx === 0 ? ' feed-row-fresh' : '';
@@ -4133,11 +4367,11 @@
           </div>
         </td>
         <td class="feed-col-float"><span class="ol-float">${fmtFloat(l.float_value)}</span></td>
-        <td class="feed-col-wear"><span class="ol-wear">${l.wear || '—'}</span></td>
+        <td class="feed-col-wear"><span class="ol-wear">${l.wear || '—'}</span>${rarityBadge}</td>
         <td>
           <div class="ol-seller">
             ${avatar}
-            <a class="ol-name${isPrivate ? ' ol-private' : ''}" href="${sellerUrl}" target="_blank" rel="noopener">${sellerName}</a>
+            <a class="ol-name${isPrivate ? ' ol-private' : ''}" href="${escapeHtml(sellerUrl)}" target="_blank" rel="noopener">${escapeHtml(sellerName)}</a>
             ${stTag}
           </div>
         </td>
@@ -4146,8 +4380,8 @@
           <span class="feed-date-rel">${fmtRelTime(dateIso)}</span>
         </td>
         <td>${price}</td>
-        <td>${l.csfloat_url ? `<a class="ol-link" href="${l.csfloat_url}" target="_blank" rel="noopener">View ↗</a>` : ''}</td>
-        <td class="feed-col-inspect">${l.inspect_link ? `<a class="ol-link ol-inspect" href="${l.inspect_link}">Inspect</a>` : ''}</td>
+        <td>${safeCsfloatUrl ? `<a class="ol-link" href="${escapeHtml(safeCsfloatUrl)}" target="_blank" rel="noopener">View ↗</a>` : ''}</td>
+        <td class="feed-col-inspect">${safeInspect ? `<a class="ol-link ol-inspect" href="${escapeHtml(safeInspect)}">Inspect</a>` : ''}</td>
       </tr>`;
     }).join('');
   }
@@ -4208,7 +4442,7 @@
 
   async function initFeed() {
     try {
-      const res = await fetch(`${DATA_BASE}/listings-tracker.json`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${DATA_BASE}/listings-tracker.json`, { cache: 'no-store' }, 15000);
       if (!res.ok) throw new Error(`Tracker fetch failed: ${res.status}`);
       const raw = await res.json();
       _feedData = {
@@ -4218,10 +4452,11 @@
       };
       renderFeed();
     } catch (err) {
-      console.error('Feed init failed:', err.message);
+      console.error('Feed init failed:', err?.message || err);
       const body = document.getElementById('feedTableBody');
       if (body) {
-        body.innerHTML = `<tr><td colspan="8"><div class="feed-empty">Feed unavailable<span class="feed-empty-sub">${err.message}</span></div></td></tr>`;
+        const msg = err?.message ? escapeHtml(err.message) : 'Network error — check your connection';
+        body.innerHTML = `<tr><td colspan="8"><div class="feed-empty">Feed unavailable<span class="feed-empty-sub">${msg}</span></div></td></tr>`;
       }
     }
   }
@@ -4256,6 +4491,7 @@
     if (sortKey === 'price-desc') sorted.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
     if (sortKey === 'float-asc')  sorted.sort((a, b) => (a.float_value ?? 1) - (b.float_value ?? 1));
     if (sortKey === 'float-desc') sorted.sort((a, b) => (b.float_value ?? 0) - (a.float_value ?? 0));
+    if (sortKey === 'rarity')     sorted.sort((a, b) => rarityScore(b).score - rarityScore(a).score);
 
     return `<table class="ol-table">
       <thead><tr>
@@ -4268,22 +4504,33 @@
       </tr></thead>
       <tbody>${sorted.map(l => {
         const isPrivate = !l.seller?.username || l.seller.username === 'Unknown';
-        const avatar = l.seller?.avatar
-          ? `<img class="ol-avatar" src="${l.seller.avatar}" alt="" onerror="this.src='brand-assets/private%20stall.png'">`
-          : `<img class="ol-avatar" src="brand-assets/private%20stall.png" alt="Private">`;
-        const sellerUrl = l.seller?.stall_url || l.csfloat_url;
+        const safeAv = safeImageUrl(l.seller?.avatar, 'brand-assets/private%20stall.png');
+        const avatar = `<img class="ol-avatar" src="${escapeHtml(safeAv)}" alt="" onerror="this.src='brand-assets/private%20stall.png'">`;
+        const sellerUrl = safeUrl(l.seller?.stall_url || l.csfloat_url);
         const sellerName = isPrivate ? 'Private Stall' : l.seller.username;
         const price = l.price != null ? `<span class="ol-price"><em>$</em>${Math.round(l.price).toLocaleString()}</span>` : '—';
         const st = l.stattrak ? `<span class="ol-st">ST</span>` : '';
+        const rarity = rarityScore(l);
+        const rarityBadge = rarity.tier ? `<span class="rarity-badge ${rarity.tier.toLowerCase()}" title="Rarity score: ${rarity.score}/100">${rarity.tier}</span>` : '';
+        const factors = rarity.factors.map(f => `<span class="rarity-factor">${escapeHtml(f)}</span>`).join('');
+        const inspectHref = safeInspectUrl(l.inspect_link);
         return `<tr>
-          <td><div class="ol-seller">${avatar}<a class="ol-name${isPrivate ? ' ol-private' : ''}" href="${sellerUrl}" target="_blank" rel="noopener">${sellerName}</a>${st}</div></td>
-          <td><span class="ol-float">${fmtFloat(l.float_value)}</span></td>
-          <td><span class="ol-wear">${l.wear}</span></td>
+          <td><div class="ol-seller">${avatar}<a class="ol-name${isPrivate ? ' ol-private' : ''}" href="${escapeHtml(sellerUrl)}" target="_blank" rel="noopener">${escapeHtml(sellerName)}</a>${st}</div></td>
+          <td><span class="ol-float">${fmtFloat(l.float_value)}</span>${factors}</td>
+          <td><span class="ol-wear">${escapeHtml(l.wear || '')}</span>${rarityBadge}</td>
           <td>${price}</td>
-          <td><a class="ol-link" href="${l.csfloat_url}" target="_blank" rel="noopener">View &#x2197;</a></td>
-          <td>${l.inspect_link ? `<a class="ol-link ol-inspect" href="${l.inspect_link}">Inspect</a>` : ''}</td>
+          <td><a class="ol-link" href="${escapeHtml(safeUrl(l.csfloat_url))}" target="_blank" rel="noopener">View &#x2197;</a></td>
+          <td>${inspectHref ? `<a class="ol-link ol-inspect" href="${escapeHtml(inspectHref)}">Inspect</a>` : ''}</td>
         </tr>`;
       }).join('')}</tbody></table>`;
+  }
+
+  // Safe helper — called from table row via data attribute, no string interpolation
+  function openOwnersPanelFromRow(row) {
+    const knifeId = row?.dataset?.knifeId;
+    if (!knifeId || !DB_NAMES[knifeId]) return;
+    const listings = (knifeListingsCache && knifeListingsCache[knifeId]) || [];
+    openOwnersPanel(knifeId, DB_NAMES[knifeId], listings);
   }
 
   function openOwnersPanel(knifeId, knifeName, listings) {
@@ -4553,7 +4800,7 @@
     // commits don't need a rebuild). The /api/history endpoint only ever did
     // server-side time-range filtering, which drawChart already does itself.
     try {
-      const res = await fetch(`${DATA_BASE}/price-history.json`, { cache: 'no-store' });
+      const res = await fetchWithTimeout(`${DATA_BASE}/price-history.json`, { cache: 'no-store' }, 15000);
       if (res.ok) _chartHistory = await res.json();
     } catch {}
 
@@ -4562,6 +4809,14 @@
 
   // Kick off on load
   document.addEventListener('DOMContentLoaded', () => {
+    // Restore saved view mode preference
+    try {
+      const savedView = localStorage.getItem('bp-view-mode');
+      if (savedView === 'table' || savedView === 'card') {
+        setView(savedView);
+      }
+    } catch {}
+
     initDatabase();
     initChart();
     initFeed();

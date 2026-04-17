@@ -119,10 +119,14 @@ async function processQueue() {
       continue;
     }
 
-    // Send the message
+    // Send the message — retry once on transient failure if Steam is still ready
     queue.shift();
 
-    const success = steamClient.sendMessage(item.steamId, item.message);
+    let success = steamClient.sendMessage(item.steamId, item.message);
+    if (!success && steamClient.isReady) {
+      await sleep(2000);
+      success = steamClient.sendMessage(item.steamId, item.message);
+    }
 
     if (success) {
       // Record in rate limiters
