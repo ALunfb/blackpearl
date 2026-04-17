@@ -20,6 +20,19 @@ function randomInt(min, max) {
 }
 
 async function main() {
+  // IP-lock safety: CSFloat will flag the API key if it's used from too many
+  // different IPs in a short window. To prevent this, fetch-data.mjs should
+  // ONLY run from the production Droplet. Set PRODUCTION_FETCHER=1 in the
+  // Droplet's .env to opt in. Any other machine running this without the
+  // override will error out to prevent accidental multi-IP usage.
+  if (!process.env.PRODUCTION_FETCHER && !process.env.GITHUB_ACTIONS) {
+    console.error('ERROR: fetch-data.mjs is IP-locked.');
+    console.error('This script should only run on the production Droplet.');
+    console.error('If you really need to run it here, set PRODUCTION_FETCHER=1.');
+    console.error('Running from multiple IPs will get your CSFloat API key flagged.');
+    process.exit(1);
+  }
+
   // Startup jitter: random 0-8 minute delay. Skipped if --now flag is passed
   // (for manual runs or CI where you want it to start immediately).
   const skipJitter = process.argv.includes('--now');
