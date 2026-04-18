@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Origins — Where Black Pearls Came From</title>
+<meta name="description" content="Group Black Pearl listings by how they entered circulation — unboxed from cases, traded, earned. A provenance lens on the market.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<style>
+  .origin-card {
+    background: rgba(13, 13, 26, 0.55);
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 16px; overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .origin-card-header {
+    padding: 16px 22px; display: flex; justify-content: space-between; gap: 14px;
+    align-items: center; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+  }
+  .origin-card-title {
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 17px; color: #E8E8F4;
+    letter-spacing: -0.01em;
+  }
+  .origin-card-desc { font-family: 'Exo 2', sans-serif; font-size: 13px; color: #8888A0; margin-top: 2px; }
+  .origin-card-count {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #C084FC;
+    letter-spacing: 0.08em;
+    background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.2);
+    padding: 5px 10px; border-radius: 999px;
+  }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div><div class="nav-brand-name">Black Pearl</div><div class="nav-brand-tag">Origins</div></div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/inspect.html">Decoder</a>
+        <a class="nav-link" href="/stattrak.html">StatTrak</a>
+        <a class="nav-link" href="/patterns.html">Patterns</a>
+        <a class="nav-link" href="/named.html">Named</a>
+        <a class="nav-link" href="/appraise.html">Appraise</a>
+        <a class="nav-link active" href="/origins.html">Origins</a>
+        <a class="nav-link" href="/">Home</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Provenance · how each knife entered circulation</div>
+      <h1 class="hero-title">Where did this <span class="accent">Black Pearl</span> come from?</h1>
+      <p>The Steam econ protocol stamps every item with an <em>origin</em> — did it drop from a case, did it come from a trade-up, was it earned as a reward, was it a Valve-granted item? We group every currently-listed Black Pearl by that stamp.</p>
+    </section>
+
+    <div class="stat-strip" id="summary"></div>
+
+    <div id="groups"></div>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · ORIGINS V1</div>
+      <div class="page-footer-links">
+        <a href="/inspect.html">Inspect Decoder</a>
+        <a href="/patterns.html">Patterns</a>
+        <a href="/">Home</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const fmtPrice = (p) => p == null ? '—' : '$' + Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 });
+
+const ORIGIN_DESCRIPTIONS = {
+  'Drop': 'Granted as a random match-end drop.',
+  'Purchased': 'Bought directly from the Steam Marketplace or another seller.',
+  'Traded': 'Moved through a Steam trade at some point.',
+  'Crafted': 'Produced by a trade-up contract.',
+  'Found in Crate': 'Unboxed from a weapon case.',
+  'Earned': 'Awarded through a game-mode or event reward.',
+  'Support Granted': 'Granted by Valve Support — typically a recovered/reissued item.',
+  'Gifted': 'Given as a gift to the current account.',
+  'Tournament Drop': 'Earned during a Valve Major viewing period.',
+  'Store Promo': 'Received as part of a Steam store promotion.',
+  'unknown': 'Inspect link was unmasked or undecodable — origin not available.',
+};
+
+async function load() {
+  const res = await fetch('/data/enriched-listings.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Could not load enriched data');
+  return res.json();
+}
+
+function flattenListings(data) {
+  const out = [];
+  for (const knife of data.knives) {
+    for (const l of (knife.listings || [])) {
+      out.push({ ...l, knife_id: knife.knife_id, knife_name: knife.knife_name });
+    }
+  }
+  return out;
+}
+
+load().then(data => {
+  const all = flattenListings(data);
+  const groups = {};
+  for (const l of all) {
+    const key = l.decoded_meta?.origin_label || 'unknown';
+    (groups[key] ??= []).push(l);
+  }
+  const ordered = Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
+
+  const decodedCount = all.filter(l => l.decoded_meta?.decoded).length;
+  const uniqueOrigins = ordered.filter(([k]) => k !== 'unknown').length;
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-strip-item"><div class="label">Decoded listings</div><div class="value">${decodedCount}<span class="sub"> / ${all.length}</span></div></div>
+    <div class="stat-strip-item"><div class="label">Distinct origins</div><div class="value">${uniqueOrigins}</div></div>
+    <div class="stat-strip-item"><div class="label">Most common</div><div class="value" style="font-size: 18px;">${esc(ordered[0]?.[0] || '—')}</div></div>
+    <div class="stat-strip-item"><div class="label">Unmasked (no origin)</div><div class="value">${all.length - decodedCount}</div></div>
+  `;
+
+  document.getElementById('groups').innerHTML = ordered.map(([origin, listings]) => {
+    const cheapest = listings.filter(l => l.price).sort((a, b) => a.price - b.price)[0];
+    return `
+      <div class="origin-card">
+        <div class="origin-card-header">
+          <div>
+            <div class="origin-card-title">${esc(origin)}</div>
+            <div class="origin-card-desc">${esc(ORIGIN_DESCRIPTIONS[origin] || 'Steam econ origin code — see protobuf spec.')}</div>
+          </div>
+          <span class="origin-card-count">${listings.length} listing${listings.length === 1 ? '' : 's'} · from ${fmtPrice(cheapest?.price)}</span>
+        </div>
+        <div style="padding: 14px 18px;">
+          <div class="listing-grid">
+            ${listings.slice(0, 8).map(l => `
+              <a class="listing" href="${esc(l.csfloat_url)}" target="_blank" rel="noopener">
+                <div class="listing-image">${l.image_url ? `<img src="${esc(l.image_url)}" alt="" loading="lazy">` : ''}</div>
+                <div class="listing-body">
+                  <div class="listing-title">${esc(l.knife_name)}${l.stattrak ? ' ★' : ''}</div>
+                  <div class="listing-meta">float ${l.float_value?.toFixed(6) || '—'} · seed ${l.paint_seed ?? '—'} · ${esc(l.wear || '—')}</div>
+                  <div class="listing-price">${fmtPrice(l.price)}</div>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+          ${listings.length > 8 ? `<div style="text-align:center; margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6B6B8A;">+ ${listings.length - 8} more</div>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}).catch(err => {
+  document.getElementById('groups').innerHTML = `<div class="state-card error"><h2>Could not load data</h2><p>${esc(err.message)}</p></div>`;
+});
+</script>
+</body>
+</html>

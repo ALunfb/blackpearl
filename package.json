@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "@csfloat/cs2-inspect-serializer": "^1.1.6",
     "@paper-design/shaders-react": "^0.0.72",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",

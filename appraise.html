@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appraise Your Knife — Black Pearl</title>
+<meta name="description" content="Paste any CS2 inspect link. We'll decode it, compare it against every Black Pearl currently on the market, and show you exactly where your knife ranks.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<style>
+  .input-card {
+    background: rgba(13, 13, 26, 0.55);
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 18px;
+    padding: 22px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 24px 48px -18px rgba(124, 63, 190, 0.2);
+    margin-bottom: 28px;
+  }
+  .input-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: #8888A0; text-transform: uppercase; display: block; margin-bottom: 10px; }
+  textarea {
+    width: 100%; min-height: 86px; padding: 14px 16px;
+    background: #0A0A17; border: 1px solid rgba(168, 85, 247, 0.16);
+    border-radius: 12px; color: #E8E8F4;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.55;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  textarea:focus { outline: none; border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.08); }
+  textarea::placeholder { color: #4A4A62; }
+  .helper { font-family: 'Exo 2', sans-serif; font-size: 12px; color: #6B6B8A; margin-top: 10px; }
+
+  .verdict {
+    background: linear-gradient(180deg, rgba(20, 10, 33, 0.85) 0%, rgba(13, 13, 26, 0.55) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 64px -24px rgba(124, 63, 190, 0.35);
+  }
+  .verdict-header { padding: 24px 28px; border-bottom: 1px solid rgba(168, 85, 247, 0.12); }
+  .verdict-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 26px; color: #F0F0FA; letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .verdict-title .w { color: #C084FC; }
+  .verdict-subtitle { margin-top: 6px; font-family: 'Exo 2', sans-serif; font-size: 13.5px; color: #8888A0; display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .verdict-body {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: rgba(168, 85, 247, 0.08);
+  }
+  .verdict-block { background: rgba(13, 13, 26, 0.78); padding: 20px 24px; }
+  .verdict-block h3 { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: #6B6B8A; text-transform: uppercase; margin-bottom: 12px; }
+  @media (max-width: 720px) { .verdict-body { grid-template-columns: 1fr; } }
+
+  .big-stat {
+    font-family: 'Exo 2', sans-serif; font-weight: 700;
+    font-size: 28px;
+    background: linear-gradient(135deg, #E8E8F4 0%, #C084FC 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+  .small-label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #6B6B8A; margin-top: 2px; letter-spacing: 0.08em; }
+
+  .meter-row { display: flex; justify-content: space-between; font-family: 'Exo 2', sans-serif; font-size: 13px; color: #B8B8CC; margin-bottom: 4px; }
+  .meter {
+    position: relative; height: 10px;
+    background: rgba(168, 85, 247, 0.08);
+    border-radius: 5px; overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .meter-fill {
+    height: 100%; border-radius: 5px;
+    background: linear-gradient(90deg, #7C3FBE 0%, #A855F7 50%, #E879F9 100%);
+    transition: width 0.4s ease;
+  }
+
+  .checks { display: flex; flex-direction: column; gap: 8px; }
+  .check {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Exo 2', sans-serif; font-size: 13.5px;
+    color: #D8D8E8;
+  }
+  .check .icon {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex: none; font-size: 11px; font-weight: 700;
+  }
+  .check.pass .icon { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
+  .check.warn .icon { background: rgba(251, 191, 36, 0.12); color: #FBBF24; border: 1px solid rgba(251, 191, 36, 0.3); }
+  .check.fail .icon { background: rgba(239, 68, 68, 0.12); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+  .compare-list { margin-top: 24px; }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div><div class="nav-brand-name">Black Pearl</div><div class="nav-brand-tag">Appraise</div></div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/inspect.html">Decoder</a>
+        <a class="nav-link" href="/stattrak.html">StatTrak</a>
+        <a class="nav-link" href="/patterns.html">Patterns</a>
+        <a class="nav-link" href="/named.html">Named</a>
+        <a class="nav-link active" href="/appraise.html">Appraise</a>
+        <a class="nav-link" href="/">Home</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Paste a link · see where your knife ranks</div>
+      <h1 class="hero-title">Is your <span class="accent">Black Pearl</span> priced right?</h1>
+      <p>Drop your Steam inspect link in the box below. We'll decode it client-side, run a forgery-consistency check on the data, and compare your float and paint seed against every Black Pearl currently listed on CSFloat.</p>
+    </section>
+
+    <div class="input-card">
+      <label class="input-label" for="link-input">Steam Inspect Link</label>
+      <textarea id="link-input" placeholder="steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20..." spellcheck="false" autocomplete="off"></textarea>
+      <div class="helper">Works with <span class="mono" style="font-family: 'JetBrains Mono', monospace; background: rgba(168,85,247,0.06); padding: 1px 6px; border-radius: 4px; font-size: 11px; color: #9BA3B8;">masked</span> (self-encoded) links only. We don't send your link anywhere — decoding happens in your browser.</div>
+    </div>
+
+    <div id="result"></div>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · APPRAISE V1</div>
+      <div class="page-footer-links">
+        <a href="/inspect.html">Full Decoder</a>
+        <a href="/patterns.html">Patterns</a>
+        <a href="/stattrak.html">StatTrak Hall</a>
+        <a href="/">Home</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+import { decodeLink } from 'https://esm.sh/@csfloat/cs2-inspect-serializer@1.1.6';
+import { detectLinkFormat, normalizeDecoded } from './inspect-utils.mjs';
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const fmtPrice = (p) => p == null ? '—' : '$' + Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 });
+const pct = (n) => Math.max(0, Math.min(100, n));
+
+let marketCache = null;
+async function loadMarket() {
+  if (marketCache) return marketCache;
+  const res = await fetch('/data/enriched-listings.json', { cache: 'no-store' });
+  if (!res.ok) return null;
+  marketCache = await res.json();
+  return marketCache;
+}
+
+const $input = document.getElementById('link-input');
+const $result = document.getElementById('result');
+
+function renderInvalid() {
+  $result.innerHTML = `
+    <div class="state-card error">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+      </div>
+      <h2>Unrecognized link format</h2>
+      <p>Expected format starts with <code style="font-family: 'JetBrains Mono', monospace;">steam://rungame/730/…+csgo_econ_action_preview</code>.</p>
+    </div>`;
+}
+
+function renderUnmasked() {
+  $result.innerHTML = `
+    <div class="state-card warn">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2>Steam-only link (S/A/D format)</h2>
+      <p>This link can't be decoded offline because it references an item in a specific Steam inventory. Open it in Steam, or paste the <em>masked</em> inspect link from a marketplace listing instead.</p>
+    </div>`;
+}
+
+function forgeryChecks(n) {
+  const checks = [];
+  // defindex is a known knife in our set
+  if (n.is_knife) checks.push({ level: 'pass', text: `Defindex ${n.defindex} resolves to a known knife family (${n.knife_name}).` });
+  else if (n.defindex != null) checks.push({ level: 'warn', text: `Defindex ${n.defindex} is not in our knife set — this may not be a CS2 knife.` });
+
+  // paint_index in Doppler family
+  const dopplerIdx = [415, 416, 417, 617];
+  if (dopplerIdx.includes(n.paintindex)) checks.push({ level: 'pass', text: `Paint index ${n.paintindex} is in the Doppler family — paint seed determines the phase.` });
+  else if (n.paintindex != null) checks.push({ level: 'warn', text: `Paint index ${n.paintindex} isn't a Doppler — our market data only covers Black Pearl Dopplers.` });
+
+  // float consistency with wear
+  if (n.paintwear != null && n.wear_label) checks.push({ level: 'pass', text: `Float ${n.paintwear.toFixed(8)} is consistent with ${n.wear_label}.` });
+
+  // seed is in valid range
+  if (typeof n.paintseed === 'number' && n.paintseed >= 0 && n.paintseed < 1001) checks.push({ level: 'pass', text: `Paint seed ${n.paintseed} is in the valid range (0-1000).` });
+
+  if (n.is_stattrak) checks.push({ level: 'pass', text: `StatTrak™ counter is present (${(n.stattrak_kills ?? 0).toLocaleString()} kills).` });
+
+  if (n.custom_name) checks.push({ level: 'pass', text: `Custom name attached: "${n.custom_name}".` });
+
+  return checks;
+}
+
+function renderVerdict(n, rawDecoded, market) {
+  // Find comparison pool: same knife, same wear, in BP market
+  let pool = [];
+  if (market && n.is_knife) {
+    const knife = market.knives.find(k => k.listings?.[0]?.knife_id && (k.listings[0].knife_id === n.knife_name?.toLowerCase().replace(/\s+/g, '_')) || (k.knife_name === n.knife_name));
+    // Fallback: match by normalized knife_name
+    const matchedKnife = market.knives.find(k => k.knife_name === n.knife_name);
+    const allListings = (matchedKnife?.listings || []).filter(l => typeof l.float_value === 'number');
+    pool = allListings.filter(l => l.wear === n.wear);
+  }
+
+  // Float rank within pool
+  let floatRankText = 'No comparable listings in our BP market data.';
+  let floatRankPct = null;
+  if (pool.length > 0 && n.paintwear != null) {
+    const sorted = pool.slice().sort((a, b) => a.float_value - b.float_value);
+    const lowerCount = sorted.filter(l => l.float_value < n.paintwear).length;
+    const rank = lowerCount + 1;
+    floatRankText = `#${rank} of ${pool.length + 1} currently listed ${n.wear_label} ${n.knife_name || ''} BPs`;
+    floatRankPct = ((pool.length + 1 - rank) / (pool.length + 1)) * 100;
+  }
+
+  // Price estimate: floor and median of pool
+  let priceLine = 'No price data available for this class.';
+  let floorPrice = null;
+  if (pool.length > 0) {
+    const prices = pool.map(l => l.price).filter(p => typeof p === 'number').sort((a, b) => a - b);
+    if (prices.length > 0) {
+      floorPrice = prices[0];
+      const median = prices[Math.floor(prices.length / 2)];
+      priceLine = `Floor ${fmtPrice(floorPrice)} · median ${fmtPrice(median)} across ${prices.length} comparable listings`;
+    }
+  }
+
+  // Seed-twin listings in market (any knife, same seed)
+  let twins = [];
+  if (market && typeof n.paintseed === 'number') {
+    for (const knife of market.knives) {
+      for (const l of (knife.listings || [])) {
+        if (l.paint_seed === n.paintseed) {
+          twins.push({ ...l, knife_name: knife.knife_name });
+        }
+      }
+    }
+  }
+
+  const checks = forgeryChecks(n);
+
+  $result.innerHTML = `
+    <div class="verdict">
+      <div class="verdict-header">
+        <div class="verdict-title">
+          ${n.is_stattrak ? 'StatTrak™ ' : ''}<span class="w">${esc(n.knife_name || `Item #${n.defindex}`)}</span>${n.paint_name ? ` · ${esc(n.paint_name)}` : ''}
+        </div>
+        <div class="verdict-subtitle">
+          ${n.wear_label ? `<span class="tag tag-wear">${esc(n.wear_label)}</span>` : ''}
+          ${n.is_stattrak ? `<span class="tag tag-stattrak">★ ${(n.stattrak_kills ?? 0).toLocaleString()} kills</span>` : ''}
+          ${n.custom_name ? `<span class="tag tag-named">Named "${esc(n.custom_name)}"</span>` : ''}
+          <span class="mono" style="font-family: 'JetBrains Mono', monospace; color: #9BA3B8;">float ${n.paintwear?.toFixed(8) ?? '—'} · seed ${n.paintseed ?? '—'}</span>
+        </div>
+      </div>
+
+      <div class="verdict-body">
+        <div class="verdict-block">
+          <h3>Market rank</h3>
+          ${floatRankPct != null ? `
+            <div class="big-stat">Top ${Math.max(1, Math.round(100 - floatRankPct))}%</div>
+            <div class="small-label">by float · within ${esc(n.wear_label || '')} ${esc(n.knife_name || '')}</div>
+            <div class="meter-row" style="margin-top: 14px;"><span>Your float</span><span>${n.paintwear?.toFixed(8) || '—'}</span></div>
+            <div class="meter"><div class="meter-fill" style="width: ${pct(floatRankPct)}%;"></div></div>
+            <div style="font-family: 'Exo 2', sans-serif; font-size: 13px; color: #B8B8CC;">${esc(floatRankText)}</div>
+          ` : `
+            <div class="big-stat" style="font-size: 20px;">No comp set</div>
+            <div class="small-label">${esc(floatRankText)}</div>
+          `}
+        </div>
+
+        <div class="verdict-block">
+          <h3>Price guidance</h3>
+          ${floorPrice != null ? `
+            <div class="big-stat">${fmtPrice(floorPrice)}</div>
+            <div class="small-label">current market floor</div>
+            <div style="font-family: 'Exo 2', sans-serif; font-size: 13px; color: #B8B8CC; margin-top: 14px;">${esc(priceLine)}</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6B6B8A; margin-top: 8px; letter-spacing: 0.08em;">This is not financial advice. Rare patterns and low floats trade at substantial premiums above floor.</div>
+          ` : `
+            <div class="big-stat" style="font-size: 20px;">—</div>
+            <div class="small-label">${esc(priceLine)}</div>
+          `}
+        </div>
+
+        <div class="verdict-block" style="grid-column: 1/-1;">
+          <h3>Consistency checks</h3>
+          <div class="checks">
+            ${checks.map(c => `
+              <div class="check ${c.level}">
+                <span class="icon">${c.level === 'pass' ? '✓' : c.level === 'warn' ? '!' : '×'}</span>
+                <span>${esc(c.text)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        ${twins.length ? `
+          <div class="verdict-block" style="grid-column: 1/-1;">
+            <h3>Seed #${n.paintseed} on the current market</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 8px;">
+              ${twins.slice(0, 8).map(t => `
+                <a href="${esc(t.csfloat_url)}" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; background: rgba(13,13,26,0.6); border: 1px solid rgba(168,85,247,0.14); border-radius: 10px; padding: 10px 12px; transition: border-color 0.15s ease;" onmouseover="this.style.borderColor='rgba(168,85,247,0.3)'" onmouseout="this.style.borderColor='rgba(168,85,247,0.14)'">
+                  <div style="font-family: 'Exo 2', sans-serif; font-size: 13px; font-weight: 600; color: #E8E8F4;">${esc(t.knife_name)}${t.stattrak ? ' ★' : ''}</div>
+                  <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9BA3B8; margin-top: 2px;">float ${t.float_value?.toFixed(6) || '—'} · ${fmtPrice(t.price)}</div>
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `;
+}
+
+async function handle(link) {
+  const trimmed = (link || '').trim();
+  if (!trimmed) { $result.innerHTML = ''; return; }
+  const format = detectLinkFormat(trimmed);
+  if (format === 'invalid') { renderInvalid(); return; }
+  if (format === 'unmasked') { renderUnmasked(); return; }
+
+  try {
+    const raw = decodeLink(decodeURIComponent(trimmed));
+    const n = normalizeDecoded(raw);
+    const market = await loadMarket();
+    renderVerdict(n, raw, market);
+  } catch (err) {
+    $result.innerHTML = `<div class="state-card error"><div class="state-icon">×</div><h2>Decode failed</h2><p>${esc(err.message)}</p></div>`;
+  }
+}
+
+let t;
+$input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => handle($input.value), 150); });
+
+const initial = new URLSearchParams(window.location.search).get('link');
+if (initial) { $input.value = initial; handle(initial); }
+</script>
+</body>
+</html>

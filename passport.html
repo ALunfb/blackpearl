@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item Passport — Black Pearl</title>
+<meta name="description" content="Per-item histories across listings. Every time a unique Black Pearl fingerprint (seed + float + knife) reappears on the market, we record the change — price moves, kill-count growth, rename events.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<style>
+  .passport-card {
+    background: linear-gradient(180deg, rgba(20, 10, 33, 0.75) 0%, rgba(13, 13, 26, 0.5) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex; gap: 14px; align-items: center;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .passport-card:hover { border-color: rgba(168, 85, 247, 0.35); transform: translateY(-2px); }
+  .passport-thumb {
+    width: 72px; height: 72px; border-radius: 10px; background: #0A0A17;
+    display: flex; align-items: center; justify-content: center; overflow: hidden; flex: none;
+  }
+  .passport-thumb img { max-width: 100%; max-height: 100%; }
+  .passport-main { flex: 1; min-width: 0; }
+  .passport-title { font-family: 'Exo 2', sans-serif; font-weight: 600; font-size: 15px; color: #E8E8F4; }
+  .passport-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8888A0; margin-top: 2px; letter-spacing: 0.06em; }
+  .obs-badge { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; padding: 3px 8px; border-radius: 999px; background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.25); color: #C084FC; letter-spacing: 0.08em; }
+
+  .timeline {
+    border-left: 1px solid rgba(168, 85, 247, 0.2);
+    margin-left: 8px; padding-left: 18px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .timeline-event { position: relative; }
+  .timeline-event::before {
+    content: ''; position: absolute; left: -24px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #A855F7; box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+  }
+  .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #6B6B8A; letter-spacing: 0.08em; }
+  .timeline-body { font-family: 'Exo 2', sans-serif; font-size: 13.5px; color: #D8D8E8; margin-top: 2px; }
+  .timeline-price { color: #C084FC; font-weight: 600; }
+
+  .detail-panel {
+    background: rgba(13, 13, 26, 0.55);
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 18px;
+    padding: 22px;
+    margin-top: 28px;
+  }
+  .passport-search {
+    width: 100%; padding: 12px 16px;
+    background: #0A0A17;
+    border: 1px solid rgba(168, 85, 247, 0.16);
+    border-radius: 12px; color: #E8E8F4;
+    font-family: 'Exo 2', sans-serif; font-size: 14px;
+    margin-bottom: 18px;
+  }
+  .passport-search:focus { outline: none; border-color: rgba(168, 85, 247, 0.5); box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.08); }
+  .passport-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div><div class="nav-brand-name">Black Pearl</div><div class="nav-brand-tag">Item Passport</div></div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/inspect.html">Decoder</a>
+        <a class="nav-link" href="/stattrak.html">StatTrak</a>
+        <a class="nav-link" href="/patterns.html">Patterns</a>
+        <a class="nav-link" href="/named.html">Named</a>
+        <a class="nav-link" href="/appraise.html">Appraise</a>
+        <a class="nav-link active" href="/passport.html">Passport</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Per-item history · fingerprint-indexed</div>
+      <h1 class="hero-title">Every Black Pearl has a <span class="accent">story</span>.</h1>
+      <p>Each time the same float + paint seed + knife + StatTrak fingerprint reappears on the market, we log it: price moves, new kill counts, nametag changes, resale flips. Browse below, or paste a fingerprint to pull one up.</p>
+    </section>
+
+    <div class="stat-strip" id="summary"></div>
+
+    <input type="search" class="passport-search" id="search" placeholder="Search by knife, seed, float, name, or fingerprint…" autocomplete="off">
+
+    <div class="filter-row">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="multi">Multiple observations</button>
+      <button class="filter-pill" data-filter="flipped">Flipped (price changed)</button>
+      <button class="filter-pill" data-filter="stattrak">StatTrak only</button>
+      <button class="filter-pill" data-filter="named">Named only</button>
+    </div>
+
+    <div class="passport-list" id="list"></div>
+
+    <div id="detail"></div>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · PASSPORT V1</div>
+      <div class="page-footer-links">
+        <a href="/inspect.html">Inspect Decoder</a>
+        <a href="/stattrak.html">StatTrak Hall</a>
+        <a href="/patterns.html">Patterns</a>
+        <a href="/">Home</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const fmtPrice = (p) => p == null ? '—' : '$' + Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 });
+const fmtDate = (iso) => { try { return new Date(iso).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch { return iso; } };
+
+let passport = null;
+let currentFilter = 'all';
+let searchTerm = '';
+
+async function load() {
+  const res = await fetch('/data/item-passport.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Could not load passport');
+  return res.json();
+}
+
+function matchFilter(item, filter) {
+  if (filter === 'all') return true;
+  if (filter === 'multi') return item.observations.length > 1;
+  if (filter === 'flipped') {
+    const prices = item.observations.map(o => o.price).filter(p => p != null);
+    return new Set(prices).size > 1;
+  }
+  if (filter === 'stattrak') return item.stattrak === true;
+  if (filter === 'named') return item.observations.some(o => o.custom_name);
+  return true;
+}
+
+function matchSearch(item, q) {
+  if (!q) return true;
+  const hay = [
+    item.knife_name, item.fingerprint,
+    item.seed, item.float,
+    ...item.observations.map(o => o.custom_name || ''),
+  ].join(' ').toLowerCase();
+  return hay.includes(q.toLowerCase());
+}
+
+function renderList() {
+  const items = Object.values(passport.items || {});
+  const filtered = items
+    .filter(i => matchFilter(i, currentFilter) && matchSearch(i, searchTerm))
+    .sort((a, b) => b.observations.length - a.observations.length)
+    .slice(0, 60);
+
+  const $list = document.getElementById('list');
+  if (!filtered.length) {
+    $list.innerHTML = `<div class="state-card" style="grid-column: 1/-1;"><h2>No items match</h2><p>Try clearing filters or running <code style="font-family: 'JetBrains Mono', monospace;">node enrich-listings.mjs</code> to seed data.</p></div>`;
+    return;
+  }
+
+  $list.innerHTML = filtered.map(item => {
+    const last = item.last_seen || item.observations[item.observations.length - 1];
+    const obsCount = item.observations.length;
+    return `
+      <a class="passport-card" href="#${encodeURIComponent(item.fingerprint)}" data-fp="${esc(item.fingerprint)}">
+        <div class="passport-thumb">${last?.image_url ? `<img src="${esc(last.image_url)}" alt="" loading="lazy">` : ''}</div>
+        <div class="passport-main">
+          <div class="passport-title">${esc(item.knife_name)}${item.stattrak ? ' ★' : ''}</div>
+          <div class="passport-meta">float ${typeof item.float === 'number' ? item.float.toFixed(6) : '—'} · seed ${item.seed ?? '—'}</div>
+          <div class="passport-meta">${fmtPrice(last?.price)} · ${obsCount} observation${obsCount === 1 ? '' : 's'}</div>
+        </div>
+        <span class="obs-badge">${obsCount}×</span>
+      </a>
+    `;
+  }).join('');
+}
+
+function renderDetail(fingerprint) {
+  const $detail = document.getElementById('detail');
+  if (!fingerprint) { $detail.innerHTML = ''; return; }
+  const item = passport.items?.[fingerprint];
+  if (!item) { $detail.innerHTML = `<div class="state-card error" style="margin-top: 28px;"><h2>Not found</h2><p>No passport record for fingerprint <code>${esc(fingerprint)}</code>.</p></div>`; return; }
+
+  const events = item.observations.slice().reverse();
+  const first = item.observations[0];
+  const last = item.last_seen || item.observations[item.observations.length - 1];
+  const prices = item.observations.map(o => o.price).filter(p => p != null);
+  const minP = Math.min(...prices);
+  const maxP = Math.max(...prices);
+
+  $detail.innerHTML = `
+    <div class="detail-panel">
+      <div style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px;">
+        <div class="passport-thumb" style="width: 96px; height: 96px;">${last?.image_url ? `<img src="${esc(last.image_url)}" alt="" loading="lazy">` : ''}</div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 24px; color: #F0F0FA; letter-spacing: -0.015em;">${esc(item.knife_name)}${item.stattrak ? ' <span class="tag tag-stattrak">★ ST</span>' : ''}</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8888A0; margin-top: 6px; letter-spacing: 0.06em;">
+            float ${typeof item.float === 'number' ? item.float.toFixed(8) : '—'} · seed ${item.seed ?? '—'}
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #4A4A62; margin-top: 6px; letter-spacing: 0.06em; word-break: break-all;">
+            fingerprint ${esc(item.fingerprint)}
+          </div>
+        </div>
+        <div style="display: flex; gap: 18px;">
+          <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6B6B8A; letter-spacing: 0.14em; text-transform: uppercase;">Observations</div><div class="big-stat" style="font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 22px; background: linear-gradient(135deg, #E8E8F4, #C084FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${item.observations.length}</div></div>
+          ${prices.length ? `<div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6B6B8A; letter-spacing: 0.14em; text-transform: uppercase;">Price range</div><div style="font-family: 'Exo 2', sans-serif; font-weight: 600; font-size: 14px; color: #E8E8F4;">${fmtPrice(minP)}<span style="color:#6B6B8A"> — </span>${fmtPrice(maxP)}</div></div>` : ''}
+        </div>
+      </div>
+
+      <div class="timeline">
+        ${events.map((o) => {
+          return `
+            <div class="timeline-event">
+              <div class="timeline-date">${fmtDate(o.observed_at)}</div>
+              <div class="timeline-body">
+                ${o.price != null ? `Listed for <span class="timeline-price">${fmtPrice(o.price)}</span>` : 'Seen on market'}
+                ${o.stattrak_kills != null ? ` · ${o.stattrak_kills.toLocaleString()} kills` : ''}
+                ${o.custom_name ? ` · named <span style="color:#C084FC">"${esc(o.custom_name)}"</span>` : ''}
+                ${o.csfloat_url ? ` · <a href="${esc(o.csfloat_url)}" target="_blank" rel="noopener" style="color:#C084FC">CSFloat ↗</a>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function handleHashChange() {
+  const fp = decodeURIComponent((window.location.hash || '').slice(1));
+  renderDetail(fp);
+  if (fp) document.getElementById('detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+load().then(data => {
+  passport = data;
+  const items = Object.values(passport.items || {});
+  const multi = items.filter(i => i.observations.length > 1).length;
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-strip-item"><div class="label">Tracked fingerprints</div><div class="value">${items.length}</div></div>
+    <div class="stat-strip-item"><div class="label">With multiple observations</div><div class="value">${multi}</div></div>
+    <div class="stat-strip-item"><div class="label">Updated</div><div class="value" style="font-size: 14px;">${passport.updated_at ? new Date(passport.updated_at).toLocaleString() : '—'}</div></div>
+  `;
+  renderList();
+  handleHashChange();
+}).catch(err => {
+  document.getElementById('list').innerHTML = `<div class="state-card error" style="grid-column: 1/-1;"><h2>Could not load passport</h2><p>${esc(err.message)}</p></div>`;
+});
+
+document.getElementById('search').addEventListener('input', (e) => { searchTerm = e.target.value; renderList(); });
+document.querySelectorAll('.filter-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderList();
+  });
+});
+window.addEventListener('hashchange', handleHashChange);
+</script>
+</body>
+</html>
