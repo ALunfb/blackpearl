@@ -1,15 +1,23 @@
-import { fetchBlackPearls } from '../_lib/csfloat.js';
+// Serves a single knife from the cached listings.json. No CSFloat calls.
+// See api/knives/index.js for the rationale.
+import fs from 'fs';
+import path from 'path';
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  // Cache for 15 minutes on Vercel CDN, serve stale up to 1 hour while revalidating
-  res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=3600');
+  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600');
+
   const { id } = req.query;
   try {
-    const data = await fetchBlackPearls(id);
-    res.status(200).json(data);
+    const filePath = path.join(process.cwd(), 'data', 'listings.json');
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const knife = (data.knives || []).find(k => k.knife_id === id);
+    if (!knife) {
+      res.status(404).json({ error: `Unknown knife id: ${id}` });
+      return;
+    }
+    res.status(200).json(knife);
   } catch (err) {
-    const status = err.message.includes('Unknown knife') ? 404 : 500;
-    res.status(status).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 }

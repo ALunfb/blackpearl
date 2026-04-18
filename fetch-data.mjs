@@ -14,6 +14,21 @@ import { recordTrackerUpdate } from './listings-tracker.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_FILE = path.join(__dirname, 'data', 'listings.json');
+const HEALTH_FILE = path.join(__dirname, 'data', 'fetch-health.json');
+
+// Append a per-run health record. Capped at 500 entries so the file stays
+// small. Read after each run to watch for 429/flag-related failures before
+// they escalate.
+function recordHealth(entry) {
+  let log = { runs: [] };
+  try {
+    if (fs.existsSync(HEALTH_FILE)) log = JSON.parse(fs.readFileSync(HEALTH_FILE, 'utf8'));
+  } catch { log = { runs: [] }; }
+  log.runs.push(entry);
+  if (log.runs.length > 500) log.runs = log.runs.slice(-500);
+  log.updated_at = entry.finished_at;
+  fs.writeFileSync(HEALTH_FILE, JSON.stringify(log, null, 2));
+}
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -46,6 +61,8 @@ async function main() {
 
   console.log(`Fetching data for ${KNIVES.length} knives...\n`);
   const allData = [];
+  const runStartedAt = new Date().toISOString();
+  const errors = []; // per-knife error messages — surfaced in fetch-health.json
 
   for (let i = 0; i < KNIVES.length; i++) {
     const knife = KNIVES[i];
@@ -56,6 +73,7 @@ async function main() {
       console.log(`${data.count} listings, floor $${Math.min(...Object.values(data.floor_prices).filter(p => p != null)) || '—'}`);
     } catch (err) {
       console.log(`ERROR: ${err.message}`);
+      errors.push({ knife: knife.id, message: err.message });
       allData.push({
         knife_id: knife.id,
         knife_name: knife.name,
@@ -104,9 +122,33 @@ async function main() {
   } catch (e) {
     console.error('[History] Market cap record failed:', e.message);
   }
+
+  // Write health record — used to spot flag-related regressions early.
+  // Look for growing `error_count` or any message containing "rate limit",
+  // "429", "403", or CSFloat account-flag language.
+  const totalListings = allData.reduce((s, d) => s + (d.count || 0), 0);
+  const rateLimitHits = errors.filter(e => /429|rate.?limit/i.test(e.message)).length;
+  recordHealth({
+    started_at: runStartedAt,
+    finished_at: new Date().toISOString(),
+    knife_count: allData.length,
+    knives_with_data: allData.filter(d => d.count > 0).length,
+    total_listings: totalListings,
+    error_count: errors.length,
+    rate_limit_hits: rateLimitHits,
+    errors: errors.slice(0, 20), // cap to keep file small
+  });
 }
 
 main().catch(err => {
   console.error('Fatal:', err);
+  try {
+    recordHealth({
+      started_at: new Date().toISOString(),
+      finished_at: new Date().toISOString(),
+      fatal: err.message,
+      error_count: 1,
+    });
+  } catch {}
   process.exit(1);
 });
