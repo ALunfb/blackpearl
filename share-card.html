@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Share Card</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Exo+2:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #05050D;
+    font-family: 'Outfit', sans-serif;
+    color: #E8E8F4;
+    position: relative;
+  }
+  body::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.035; pointer-events: none;
+  }
+  .glow-a, .glow-b {
+    position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none;
+  }
+  .glow-a { top: -180px; left: -120px; width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(168, 85, 247, 0.35), transparent 70%); }
+  .glow-b { bottom: -200px; right: -100px; width: 650px; height: 500px; background: radial-gradient(ellipse, rgba(124, 63, 190, 0.28), transparent 70%); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
+  .card {
+    position: absolute; inset: 40px;
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(20, 10, 33, 0.55) 0%, rgba(13, 13, 26, 0.35) 100%);
+    backdrop-filter: blur(10px);
+    padding: 56px 64px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #140a21, #1a0f2a);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.3);
+  }
+  .brand-text {
+    font-family: 'Exo 2', sans-serif; font-weight: 700;
+    font-size: 20px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px; border-radius: 999px;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #C084FC;
+  }
+  .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: #A855F7; box-shadow: 0 0 10px #A855F7; }
+
+  .title-block { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 20px 0; }
+  h1 {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 80px; line-height: 0.98; letter-spacing: -0.035em;
+    color: #F0F0FA;
+    max-width: 900px;
+  }
+  h1 .accent {
+    background: linear-gradient(135deg, #C084FC 0%, #A855F7 50%, #7C3FBE 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .tag-row { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    padding: 7px 14px; border-radius: 999px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .tag-st { background: rgba(207, 106, 50, 0.15); border: 1px solid rgba(207, 106, 50, 0.4); color: #F59E5F; }
+  .tag-wear { background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.35); color: #93C5FD; }
+  .tag-named { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #C084FC; }
+
+  .stat-row {
+    display: flex; gap: 60px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(168, 85, 247, 0.2);
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: #6B6B8A; margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: 'Exo 2', sans-serif; font-weight: 700;
+    font-size: 32px; color: #F0F0FA; letter-spacing: -0.01em;
+  }
+  .stat-value.mono {
+    font-family: 'JetBrains Mono', monospace; font-weight: 500;
+    font-size: 26px;
+  }
+  .stat-value.accent {
+    background: linear-gradient(135deg, #E8E8F4 0%, #C084FC 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .url {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: #8888A0; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+
+  .custom-name {
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 28px; color: #F0E8FA; font-style: italic;
+    margin-bottom: 20px;
+  }
+  .custom-name-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #8858AA; letter-spacing: 0.16em; text-transform: uppercase;
+    margin-bottom: 4px; font-style: normal;
+  }
+
+  .error-state {
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 48px; color: #FCA5A5;
+    text-align: center; padding: 80px;
+  }
+</style>
+</head>
+<body>
+  <div class="glow-a"></div>
+  <div class="glow-b"></div>
+  <div class="grid"></div>
+
+  <div class="card" id="card"></div>
+
+<script type="module">
+import { decodeLink } from 'https://esm.sh/@csfloat/cs2-inspect-serializer@1.1.6';
+import { detectLinkFormat, normalizeDecoded } from './inspect-utils.mjs';
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+
+const link = new URLSearchParams(window.location.search).get('link');
+const $card = document.getElementById('card');
+
+function renderError(message) {
+  $card.innerHTML = `<div class="error-state">${esc(message)}</div>`;
+}
+
+if (!link) {
+  renderError('No ?link= parameter provided');
+} else {
+  const format = detectLinkFormat(link);
+  if (format !== 'masked') {
+    renderError(format === 'unmasked' ? 'Unmasked S/A/D link — can\'t render offline' : 'Invalid inspect link');
+  } else {
+    try {
+      const raw = decodeLink(decodeURIComponent(link));
+      const n = normalizeDecoded(raw);
+      const weaponName = n.knife_name || `Item #${n.defindex}`;
+      const paint = n.paint_name || '';
+      const tags = [];
+      if (n.is_stattrak) tags.push(`<div class="tag tag-st">★ StatTrak™ · ${(n.stattrak_kills ?? 0).toLocaleString()} kills</div>`);
+      if (n.wear_label) tags.push(`<div class="tag tag-wear">${esc(n.wear_label)}</div>`);
+      if (n.custom_name) tags.push(`<div class="tag tag-named">Named</div>`);
+
+      $card.innerHTML = `
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-logo">
+              <svg width="26" height="26" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+            </div>
+            <div class="brand-text">Black Pearl</div>
+          </div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span>Decoded inspect link</div>
+        </div>
+
+        <div class="title-block">
+          ${n.custom_name ? `<div class="custom-name-label">Nametag</div><div class="custom-name">"${esc(n.custom_name)}"</div>` : ''}
+          <h1>${n.is_stattrak ? 'StatTrak™ ' : ''}<span class="accent">${esc(weaponName)}</span>${paint ? ` · ${esc(paint)}` : ''}</h1>
+          ${tags.length ? `<div class="tag-row">${tags.join('')}</div>` : ''}
+        </div>
+
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Float value</div>
+            <div class="stat-value mono accent">${n.paintwear != null ? n.paintwear.toFixed(8) : '—'}</div>
+          </div>
+          <div>
+            <div class="stat-label">Paint seed</div>
+            <div class="stat-value mono">${n.paintseed ?? '—'}</div>
+          </div>
+          ${n.is_stattrak ? `
+          <div>
+            <div class="stat-label">Kill counter</div>
+            <div class="stat-value">${(n.stattrak_kills ?? 0).toLocaleString()}</div>
+          </div>` : ''}
+          <div style="margin-left: auto; text-align: right;">
+            <div class="stat-label">Decode at</div>
+            <div class="url">blackpearl.gg/inspect</div>
+          </div>
+        </div>
+      `;
+    } catch (err) {
+      renderError(`Decode failed: ${err.message}`);
+    }
+  }
+}
+</script>
+</body>
+</html>

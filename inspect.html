@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS2 Inspect Link Decoder — Black Pearl</title>
+<meta name="description" content="Decode any CS2 inspect link instantly. See float value, paint seed, StatTrak kills, stickers, keychains, and more — offline, no API, no wait.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Open Graph -->
+<meta property="og:title" content="CS2 Inspect Link Decoder">
+<meta property="og:description" content="Decode any CS2 inspect link instantly. Float, paint seed, StatTrak kills, stickers — all offline.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blackpearl.gg/inspect">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    background: #05050D;
+    color: #C8C8D8;
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 32px 24px 80px;
+  }
+  ::selection { background: rgba(168, 85, 247, 0.35); }
+
+  /* Grain */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 9999;
+    pointer-events: none; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Ambient glows */
+  .glow-1, .glow-2 {
+    position: fixed; border-radius: 50%;
+    filter: blur(90px); pointer-events: none; z-index: 0;
+  }
+  .glow-1 {
+    top: -18%; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 520px;
+    background: radial-gradient(ellipse, rgba(124, 63, 190, 0.22) 0%, transparent 70%);
+  }
+  .glow-2 {
+    bottom: -25%; right: 10%;
+    width: 650px; height: 420px;
+    background: radial-gradient(ellipse, rgba(168, 85, 247, 0.14) 0%, transparent 70%);
+  }
+
+  /* Grid */
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at center, black 25%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 78%);
+  }
+
+  .page {
+    position: relative; z-index: 10;
+    max-width: 960px; margin: 0 auto;
+  }
+
+  /* Top nav */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 56px;
+  }
+  .nav-brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    text-decoration: none; color: inherit;
+  }
+  .nav-logo {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: linear-gradient(135deg, #140a21 0%, #1a0f2a 100%);
+    border: 1px solid rgba(168, 85, 247, 0.28);
+    box-shadow: 0 0 18px rgba(124, 63, 190, 0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .nav-brand-name {
+    font-family: 'Exo 2', sans-serif; font-weight: 700; font-size: 14px;
+    letter-spacing: 0.12em; color: #E8E8F4; text-transform: uppercase;
+  }
+  .nav-brand-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.18em; color: #6B6B8A; text-transform: uppercase;
+    display: block; margin-top: 2px;
+  }
+  .nav-link {
+    font-family: 'Exo 2', sans-serif; font-size: 13px;
+    color: #8888A0; text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .nav-link:hover, .nav-link:focus-visible { color: #C084FC; outline: none; }
+
+  /* Hero */
+  .hero { text-align: center; margin-bottom: 48px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.18em;
+    color: #C084FC; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #A855F7; box-shadow: 0 0 8px #A855F7;
+  }
+  h1 {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(36px, 5.5vw, 56px);
+    line-height: 1.02; letter-spacing: -0.03em;
+    color: #F0F0FA; margin-bottom: 18px;
+  }
+  h1 .accent {
+    background: linear-gradient(135deg, #C084FC 0%, #A855F7 50%, #7C3FBE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 17px; line-height: 1.65; color: #B8B8CC;
+    max-width: 580px; margin: 0 auto;
+  }
+
+  /* Input section */
+  .input-card {
+    background: rgba(13, 13, 26, 0.55);
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 18px;
+    padding: 22px;
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 24px 48px -18px rgba(124, 63, 190, 0.2),
+      0 1px 0 rgba(255,255,255,0.03) inset;
+    margin-bottom: 28px;
+  }
+  .input-label {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .input-label span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em;
+    color: #8888A0; text-transform: uppercase;
+  }
+  .input-label button {
+    font-family: 'Exo 2', sans-serif; font-size: 12px;
+    color: #8888A0; background: transparent; border: none;
+    cursor: pointer; padding: 4px 8px; border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .input-label button:hover, .input-label button:focus-visible {
+    color: #C084FC; background: rgba(168, 85, 247, 0.08);
+    outline: none;
+  }
+  textarea {
+    width: 100%; min-height: 86px;
+    padding: 14px 16px;
+    background: #0A0A17;
+    border: 1px solid rgba(168, 85, 247, 0.16);
+    border-radius: 12px;
+    color: #E8E8F4;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; line-height: 1.55;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  textarea::placeholder { color: #4A4A62; }
+  textarea:focus {
+    outline: none;
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.08);
+  }
+  .helper-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 12px; gap: 12px; flex-wrap: wrap;
+  }
+  .helper-text {
+    font-family: 'Exo 2', sans-serif; font-size: 12px; color: #6B6B8A;
+  }
+  .helper-text code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: #9BA3B8;
+    background: rgba(168, 85, 247, 0.06);
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    border-radius: 4px; padding: 1px 5px;
+  }
+
+  /* Result area */
+  .result { margin-top: 8px; }
+
+  .state-card {
+    background: rgba(13, 13, 26, 0.55);
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 18px;
+    padding: 28px;
+    backdrop-filter: blur(12px);
+    text-align: center;
+  }
+  .state-card.empty { padding: 52px 24px; }
+  .state-card .state-icon {
+    width: 44px; height: 44px; margin: 0 auto 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124,63,190,0.2), rgba(168,85,247,0.08));
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: #C084FC;
+  }
+  .state-card h2 {
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 18px; color: #E8E8F4; margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .state-card p {
+    font-size: 13.5px; color: #8888A0; max-width: 440px; margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .state-card.error .state-icon {
+    background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(239,68,68,0.05));
+    border-color: rgba(239, 68, 68, 0.3); color: #FCA5A5;
+  }
+  .state-card.unmasked .state-icon {
+    background: linear-gradient(135deg, rgba(251,191,36,0.18), rgba(251,191,36,0.05));
+    border-color: rgba(251, 191, 36, 0.3); color: #FBBF24;
+  }
+
+  /* Item card */
+  .item-card {
+    background: linear-gradient(180deg, rgba(20, 10, 33, 0.85) 0%, rgba(13, 13, 26, 0.55) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(14px);
+    box-shadow:
+      0 32px 64px -24px rgba(124, 63, 190, 0.35),
+      0 1px 0 rgba(255,255,255,0.04) inset;
+  }
+  .item-header {
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.12);
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .item-title-group { flex: 1; min-width: 200px; }
+  .item-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 26px; line-height: 1.15; color: #F0F0FA;
+    letter-spacing: -0.02em;
+  }
+  .item-title .item-title-weapon { color: #C084FC; }
+  .item-subtitle {
+    font-family: 'Exo 2', sans-serif; font-size: 13px;
+    color: #8888A0; margin-top: 4px;
+    display: inline-flex; align-items: center; gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .tag-stattrak {
+    background: rgba(207, 106, 50, 0.12);
+    border: 1px solid rgba(207, 106, 50, 0.3);
+    color: #F59E5F;
+  }
+  .tag-named {
+    background: rgba(168, 85, 247, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #C084FC;
+  }
+  .tag-wear {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    color: #93C5FD;
+  }
+
+  .custom-name-banner {
+    margin: 12px 28px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(168, 85, 247, 0.06);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 13px; color: #D8C8F0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .custom-name-banner .name-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: #8858AA; text-transform: uppercase;
+  }
+  .custom-name-banner .name-value {
+    font-style: italic; color: #F0E8FA; font-weight: 500;
+  }
+
+  /* Stat grid */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1px; background: rgba(168, 85, 247, 0.1);
+  }
+  .stat {
+    background: rgba(13, 13, 26, 0.75);
+    padding: 18px 22px;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: #6B6B8A; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: 'Exo 2', sans-serif; font-weight: 600;
+    font-size: 18px; color: #E8E8F4;
+    line-height: 1.2;
+    word-break: break-all;
+  }
+  .stat-value.mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; font-size: 15px;
+  }
+  .stat-value.large {
+    font-size: 24px;
+    background: linear-gradient(135deg, #E8E8F4 0%, #C084FC 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-sub {
+    font-size: 11.5px; color: #6B6B8A; margin-top: 2px;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  /* Float bar */
+  .float-bar-wrap {
+    grid-column: 1 / -1;
+    background: rgba(13, 13, 26, 0.75);
+    padding: 18px 22px;
+  }
+  .float-bar {
+    position: relative; height: 6px; border-radius: 3px;
+    background: linear-gradient(90deg, #10B981 0%, #10B981 7%, #84CC16 7%, #84CC16 15%, #EAB308 15%, #EAB308 38%, #F97316 38%, #F97316 45%, #EF4444 45%, #EF4444 100%);
+    margin-top: 10px;
+  }
+  .float-bar-marker {
+    position: absolute; top: -4px; width: 2px; height: 14px;
+    background: #F0F0FA;
+    box-shadow: 0 0 8px rgba(240, 240, 250, 0.6);
+    transform: translateX(-1px);
+  }
+  .float-bar-ticks {
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: #6B6B8A; margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Footer area */
+  .item-footer {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(168, 85, 247, 0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .raw-toggle {
+    background: transparent; border: none;
+    font-family: 'Exo 2', sans-serif; font-size: 12px;
+    color: #8888A0; cursor: pointer; padding: 6px 10px;
+    border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .raw-toggle:hover { color: #C084FC; background: rgba(168, 85, 247, 0.06); }
+  .share-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    color: #C084FC; font-family: 'Exo 2', sans-serif;
+    font-size: 12.5px; font-weight: 500;
+    padding: 7px 14px; border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .share-btn:hover, .share-btn:focus-visible {
+    background: rgba(168, 85, 247, 0.18);
+    border-color: rgba(168, 85, 247, 0.4);
+    outline: none; transform: translateY(-1px);
+  }
+  .share-btn.copied { color: #10B981; border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.08); }
+  .share-btn svg { width: 13px; height: 13px; }
+
+  .raw-json {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(168, 85, 247, 0.12);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #9BA3B8;
+    background: #07070F;
+    max-height: 320px; overflow: auto;
+    white-space: pre-wrap; word-break: break-all;
+  }
+  .raw-json[hidden] { display: none; }
+
+  /* Stickers / keychains list */
+  .attach-section {
+    padding: 18px 24px;
+    border-top: 1px solid rgba(168, 85, 247, 0.12);
+  }
+  .attach-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em;
+    color: #6B6B8A; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .attach-list {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  .attach {
+    background: rgba(13, 13, 26, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.12);
+    border-radius: 10px; padding: 10px 12px;
+    font-family: 'Exo 2', sans-serif;
+  }
+  .attach-name { font-size: 13px; color: #D8D8E8; font-weight: 500; }
+  .attach-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; color: #6B6B8A;
+    margin-top: 2px;
+  }
+
+  /* Foot links */
+  .page-footer {
+    margin-top: 56px; padding-top: 28px;
+    border-top: 1px solid rgba(168, 85, 247, 0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .page-footer-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.12em;
+    color: #555568; text-transform: uppercase;
+  }
+  .page-footer-links { display: flex; gap: 20px; }
+  .page-footer-links a {
+    font-family: 'Exo 2', sans-serif; font-size: 12px;
+    color: #6B6B8A; text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .page-footer-links a:hover { color: #C084FC; }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div>
+          <div class="nav-brand-name">Black Pearl</div>
+          <div class="nav-brand-tag">Inspect Decoder</div>
+        </div>
+      </a>
+      <a class="nav-link" href="/">← Back to home</a>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Client-side · No API · Instant
+      </div>
+      <h1>Inspect <span class="accent">every byte</span> of any&nbsp;CS2 item.</h1>
+      <p>Paste a Steam inspect link. We decode the embedded data right in your browser — float, paint seed, StatTrak kills, stickers, keychains, origin, and more. No server round-trip, no Steam sign-in, no wait.</p>
+    </section>
+
+    <section class="input-card">
+      <div class="input-label">
+        <span>Inspect Link</span>
+        <button id="paste-btn" type="button">Paste from clipboard</button>
+      </div>
+      <textarea id="link-input"
+        placeholder="steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20..."
+        spellcheck="false"
+        autocomplete="off"
+      ></textarea>
+      <div class="helper-row">
+        <div class="helper-text">
+          Works with <code>masked</code> links (self-encoded, decodable offline). <code>S/A/D</code> links need Steam — we'll tell you if that's the case.
+        </div>
+      </div>
+    </section>
+
+    <section class="result" id="result">
+      <!-- Empty state (initial) -->
+      <div class="state-card empty" id="state-empty">
+        <div class="state-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <h2>Waiting for a link</h2>
+        <p>Paste an inspect link above. You can also share a decoded item by appending <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9BA3B8;">?link=</code> to the URL of this page.</p>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · INSPECT V1</div>
+      <div class="page-footer-links">
+        <a href="/">Home</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+import { decodeLink } from 'https://esm.sh/@csfloat/cs2-inspect-serializer@1.1.6';
+import {
+  detectLinkFormat,
+  normalizeDecoded,
+  extractMaskedHex,
+  WEAR_LABELS,
+} from './inspect-utils.mjs';
+
+const $input = document.getElementById('link-input');
+const $result = document.getElementById('result');
+const $pasteBtn = document.getElementById('paste-btn');
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+
+function render(html) { $result.innerHTML = html; }
+
+function renderEmpty() {
+  render(`
+    <div class="state-card empty">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <h2>Waiting for a link</h2>
+      <p>Paste an inspect link above. You can also share a decoded item by appending <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9BA3B8;">?link=</code> to the URL of this page.</p>
+    </div>
+  `);
+}
+
+function renderInvalid() {
+  render(`
+    <div class="state-card error">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+      </div>
+      <h2>Unrecognized link format</h2>
+      <p>This doesn't look like a CS2 inspect link. Expected format starts with <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">steam://rungame/730/…+csgo_econ_action_preview</code>.</p>
+    </div>
+  `);
+}
+
+function renderUnmasked() {
+  render(`
+    <div class="state-card unmasked">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2>Steam-only link (S/A/D format)</h2>
+      <p>This link references an item in a specific Steam inventory and can't be decoded offline. For items like this, open the link in Steam — the in-game inspector will resolve it, or use CSFloat's inspect service.</p>
+    </div>
+  `);
+}
+
+function renderDecodeError(err) {
+  render(`
+    <div class="state-card error">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+      </div>
+      <h2>Decode failed</h2>
+      <p>${esc(err?.message || 'Unknown error')}. The link looks masked but the payload couldn't be parsed. It may be truncated.</p>
+    </div>
+  `);
+}
+
+function floatBar(f) {
+  if (typeof f !== 'number') return '';
+  const pct = Math.max(0, Math.min(1, f)) * 100;
+  return `
+    <div class="float-bar-wrap">
+      <div class="stat-label">Float Position</div>
+      <div class="float-bar"><div class="float-bar-marker" style="left: ${pct.toFixed(2)}%;"></div></div>
+      <div class="float-bar-ticks">
+        <span>0.00 FN</span>
+        <span>0.07 MW</span>
+        <span>0.15 FT</span>
+        <span>0.38 WW</span>
+        <span>0.45 BS</span>
+        <span>1.00</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderDecoded(n, rawDecoded) {
+  const weaponName = n.knife_name || `Item #${n.defindex ?? '—'}`;
+  const paintName = n.paint_name ? `${n.paint_name}` : (n.paintindex != null ? `Paint #${n.paintindex}` : '');
+  const tagRow = [];
+  if (n.is_stattrak) tagRow.push(`<span class="tag tag-stattrak">★ StatTrak™${n.stattrak_kills != null ? ` · ${n.stattrak_kills.toLocaleString()} kills` : ''}</span>`);
+  if (n.wear_label) tagRow.push(`<span class="tag tag-wear">${esc(n.wear_label)}</span>`);
+  if (n.custom_name) tagRow.push(`<span class="tag tag-named">Named</span>`);
+
+  const statBlocks = [
+    n.paintwear != null ? `
+      <div class="stat">
+        <div class="stat-label">Float value</div>
+        <div class="stat-value large mono">${n.paintwear.toFixed(8)}</div>
+        <div class="stat-sub">${n.wear_label || '—'}</div>
+      </div>` : '',
+    n.paintseed != null ? `
+      <div class="stat">
+        <div class="stat-label">Paint seed</div>
+        <div class="stat-value mono">${n.paintseed}</div>
+        <div class="stat-sub">pattern index</div>
+      </div>` : '',
+    n.is_stattrak ? `
+      <div class="stat">
+        <div class="stat-label">StatTrak kills</div>
+        <div class="stat-value mono">${(n.stattrak_kills ?? 0).toLocaleString()}</div>
+        <div class="stat-sub">on-weapon counter</div>
+      </div>` : '',
+    n.origin_label ? `
+      <div class="stat">
+        <div class="stat-label">Origin</div>
+        <div class="stat-value">${esc(n.origin_label)}</div>
+        <div class="stat-sub">how it entered circulation</div>
+      </div>` : '',
+    n.defindex != null ? `
+      <div class="stat">
+        <div class="stat-label">Defindex</div>
+        <div class="stat-value mono">${n.defindex}</div>
+        <div class="stat-sub">${esc(n.knife_name || 'unknown item')}</div>
+      </div>` : '',
+    n.paintindex != null ? `
+      <div class="stat">
+        <div class="stat-label">Paint index</div>
+        <div class="stat-value mono">${n.paintindex}</div>
+        <div class="stat-sub">${esc(n.paint_name || 'unknown paint')}</div>
+      </div>` : '',
+  ].filter(Boolean).join('');
+
+  const stickersHtml = n.stickers.length ? `
+    <div class="attach-section">
+      <div class="attach-section-title">Stickers · ${n.stickers.length}</div>
+      <div class="attach-list">
+        ${n.stickers.map(s => `
+          <div class="attach">
+            <div class="attach-name">Sticker #${esc(s.sticker_id)}</div>
+            <div class="attach-meta">slot ${esc(s.slot ?? '—')} · wear ${typeof s.wear === 'number' ? (s.wear * 100).toFixed(1) + '%' : 'pristine'}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+
+  const keychainsHtml = n.keychains.length ? `
+    <div class="attach-section">
+      <div class="attach-section-title">Keychains · ${n.keychains.length}</div>
+      <div class="attach-list">
+        ${n.keychains.map(k => `
+          <div class="attach">
+            <div class="attach-name">Charm #${esc(k.sticker_id ?? k.charm_id ?? '—')}</div>
+            <div class="attach-meta">slot ${esc(k.slot ?? '—')} · seed ${esc(k.pattern ?? '—')}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+
+  render(`
+    <div class="item-card">
+      <div class="item-header">
+        <div class="item-title-group">
+          <div class="item-title">
+            ${n.is_stattrak ? 'StatTrak™ ' : ''}<span class="item-title-weapon">${esc(weaponName)}</span>${paintName ? ` · ${esc(paintName)}` : ''}
+          </div>
+          ${tagRow.length ? `<div class="item-subtitle">${tagRow.join('')}</div>` : ''}
+        </div>
+      </div>
+
+      ${n.custom_name ? `
+        <div class="custom-name-banner">
+          <span class="name-label">Nametag</span>
+          <span class="name-value">"${esc(n.custom_name)}"</span>
+        </div>
+      ` : ''}
+
+      <div class="stat-grid">
+        ${statBlocks}
+        ${floatBar(n.paintwear)}
+      </div>
+
+      ${stickersHtml}
+      ${keychainsHtml}
+
+      <div class="item-footer">
+        <button class="raw-toggle" type="button" data-action="toggle-raw">Show raw decoded JSON</button>
+        <button class="share-btn" type="button" data-action="share">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
+          Copy share link
+        </button>
+      </div>
+
+      <pre class="raw-json" id="raw-json" hidden>${esc(JSON.stringify(rawDecoded, null, 2))}</pre>
+    </div>
+  `);
+
+  // Wire up footer buttons
+  $result.querySelector('[data-action="toggle-raw"]').addEventListener('click', (e) => {
+    const raw = $result.querySelector('#raw-json');
+    const hidden = raw.hasAttribute('hidden');
+    if (hidden) { raw.removeAttribute('hidden'); e.target.textContent = 'Hide raw decoded JSON'; }
+    else { raw.setAttribute('hidden', ''); e.target.textContent = 'Show raw decoded JSON'; }
+  });
+  $result.querySelector('[data-action="share"]').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    const url = new URL(window.location.href);
+    url.searchParams.set('link', $input.value.trim());
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg> Copy share link`;
+      }, 2000);
+    } catch {
+      btn.textContent = 'Copy failed';
+    }
+  });
+}
+
+function handle(link) {
+  const trimmed = (link || '').trim();
+  if (!trimmed) { renderEmpty(); return; }
+
+  const format = detectLinkFormat(trimmed);
+  if (format === 'invalid') { renderInvalid(); return; }
+  if (format === 'unmasked') { renderUnmasked(); return; }
+
+  // Masked — decode.
+  try {
+    const decoded = decodeLink(decodeURIComponent(trimmed));
+    const n = normalizeDecoded(decoded);
+    renderDecoded(n, decoded);
+  } catch (err) {
+    renderDecodeError(err);
+  }
+}
+
+// Debounced input handler so decoding doesn't race while typing.
+let t;
+$input.addEventListener('input', () => {
+  clearTimeout(t);
+  t = setTimeout(() => {
+    handle($input.value);
+    // Update URL without full navigation so refresh preserves state.
+    const v = $input.value.trim();
+    const url = new URL(window.location.href);
+    if (v) url.searchParams.set('link', v);
+    else url.searchParams.delete('link');
+    window.history.replaceState(null, '', url);
+  }, 120);
+});
+
+$pasteBtn.addEventListener('click', async () => {
+  try {
+    const text = await navigator.clipboard.readText();
+    if (text) {
+      $input.value = text;
+      $input.dispatchEvent(new Event('input'));
+      $input.focus();
+    }
+  } catch {
+    $input.focus();
+  }
+});
+
+// Load initial state from ?link=...
+const initial = new URLSearchParams(window.location.search).get('link');
+if (initial) {
+  $input.value = initial;
+  handle(initial);
+}
+</script>
+</body>
+</html>

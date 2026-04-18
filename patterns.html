@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paint Patterns & Float Ranks — Black Pearl</title>
+<meta name="description" content="Explore paint-seed distribution across every Black Pearl knife listed, find seed-twins across knife families, and see the lowest-float Black Pearls on the market.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<style>
+  .heatmap {
+    display: grid;
+    grid-template-columns: 140px repeat(10, 1fr);
+    gap: 1px;
+    background: rgba(168, 85, 247, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+  }
+  .heatmap-cell { background: #0A0A17; padding: 8px 6px; text-align: center; color: #9BA3B8; }
+  .heatmap-cell.head { background: rgba(168, 85, 247, 0.05); color: #6B6B8A; letter-spacing: 0.08em; }
+  .heatmap-cell.row-label { text-align: left; color: #E8E8F4; font-family: 'Exo 2', sans-serif; font-weight: 500; font-size: 12px; }
+  .heatmap-cell.data {
+    position: relative; transition: transform 0.15s ease;
+    cursor: pointer;
+  }
+  .heatmap-cell.data:hover { transform: scale(1.1); z-index: 2; box-shadow: 0 0 0 1px rgba(192, 132, 252, 0.5); }
+  .heatmap-cell.data[data-count="0"] { color: #2A2A3E; }
+  .heatmap-scale-note {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    color: #6B6B8A; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .scale-gradient {
+    display: inline-block; width: 120px; height: 8px; border-radius: 4px;
+    background: linear-gradient(90deg, #0A0A17 0%, #4C1D95 30%, #7C3FBE 60%, #A855F7 85%, #E879F9 100%);
+  }
+
+  @media (max-width: 720px) {
+    .heatmap { grid-template-columns: 80px repeat(10, 1fr); font-size: 9px; }
+    .heatmap-cell.row-label { font-size: 10px; }
+  }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  @media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div><div class="nav-brand-name">Black Pearl</div><div class="nav-brand-tag">Pattern Tools</div></div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/inspect.html">Decoder</a>
+        <a class="nav-link" href="/stattrak.html">StatTrak</a>
+        <a class="nav-link active" href="/patterns.html">Patterns</a>
+        <a class="nav-link" href="/named.html">Named</a>
+        <a class="nav-link" href="/appraise.html">Appraise</a>
+        <a class="nav-link" href="/">Home</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Paint seed · Float rank · Twins · Rare patterns</div>
+      <h1 class="hero-title">Every pattern, <span class="accent">every float</span>, every angle.</h1>
+      <p>Black Pearl is a Doppler Phase — which means paint seed controls how the pearl streaks across the blade. Explore the distribution of seeds across every live listing, hunt down seed-twins between knife families, and sort the lowest-float knives currently on the market.</p>
+    </section>
+
+    <div class="stat-strip" id="summary"></div>
+
+    <div class="section-head">
+      <h2>Paint-seed heatmap</h2>
+      <span class="muted">seed buckets · rows = knife family</span>
+    </div>
+    <div class="card">
+      <div id="heatmap" class="heatmap"></div>
+      <div class="heatmap-scale-note">
+        <span>Fewer</span><span class="scale-gradient"></span><span>More listings</span>
+        <span style="margin-left: auto;">Hover a cell for details · Columns 0 = seeds 0-99, 1 = 100-199 … 9 = 900-999</span>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Seed twins</h2>
+      <span class="muted">same paint seed across different knife families</span>
+    </div>
+    <div class="card" style="padding: 0;">
+      <table class="rank-table">
+        <thead><tr><th>Paint seed</th><th>Knives sharing this seed</th><th>Total listings</th></tr></thead>
+        <tbody id="twins-body"></tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-top: 28px;">
+      <div>
+        <div class="section-head"><h2>Lowest floats</h2><span class="muted">cleanest Factory News</span></div>
+        <div class="card" style="padding: 0;">
+          <table class="rank-table"><tbody id="low-float-body"></tbody></table>
+        </div>
+      </div>
+      <div>
+        <div class="section-head"><h2>Highest floats</h2><span class="muted">deepest Battle-Scarreds</span></div>
+        <div class="card" style="padding: 0;">
+          <table class="rank-table"><tbody id="high-float-body"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top: 48px;">
+      <h2>Low-seed rarities</h2>
+      <span class="muted">paint seeds &lt; 50 — often collector-hunted numbers</span>
+    </div>
+    <div class="card" style="padding: 0;">
+      <table class="rank-table">
+        <thead><tr><th>Seed</th><th></th><th>Knife</th><th>Float</th><th>Wear</th><th>Price</th><th></th></tr></thead>
+        <tbody id="low-seed-body"></tbody>
+      </table>
+    </div>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · PATTERNS V1</div>
+      <div class="page-footer-links">
+        <a href="/inspect.html">Inspect Decoder</a>
+        <a href="/stattrak.html">StatTrak Hall</a>
+        <a href="/named.html">Named Registry</a>
+        <a href="/">Home</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const fmtPrice = (p) => p == null ? '—' : '$' + Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 });
+
+async function load() {
+  const res = await fetch('/data/enriched-listings.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Could not load enriched data');
+  return res.json();
+}
+
+function flattenListings(data) {
+  const out = [];
+  for (const knife of data.knives) {
+    for (const l of (knife.listings || [])) {
+      out.push({ ...l, knife_id: knife.knife_id, knife_name: knife.knife_name });
+    }
+  }
+  return out;
+}
+
+function renderSummary(all) {
+  const uniqueSeeds = new Set(all.map(l => l.paint_seed).filter(s => s != null));
+  const sortedByFloat = [...all].filter(l => typeof l.float_value === 'number').sort((a, b) => a.float_value - b.float_value);
+  const lowest = sortedByFloat[0]?.float_value;
+  const highestPrice = Math.max(...all.map(l => l.price || 0));
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-strip-item"><div class="label">Total listings</div><div class="value">${all.length}</div></div>
+    <div class="stat-strip-item"><div class="label">Unique paint seeds</div><div class="value">${uniqueSeeds.size}</div></div>
+    <div class="stat-strip-item"><div class="label">Lowest float</div><div class="value">${lowest != null ? lowest.toFixed(5) : '—'}</div></div>
+    <div class="stat-strip-item"><div class="label">Highest ask</div><div class="value">${fmtPrice(highestPrice)}</div></div>
+  `;
+}
+
+function renderHeatmap(data) {
+  const $hm = document.getElementById('heatmap');
+  // Columns: seed buckets 0-9 (each = 100-wide). Rows: each knife family.
+  const buckets = {};
+  const knifeOrder = data.knives.map(k => k.knife_id);
+  for (const knife of data.knives) {
+    buckets[knife.knife_id] = new Array(10).fill(0);
+    for (const l of (knife.listings || [])) {
+      if (typeof l.paint_seed !== 'number') continue;
+      const b = Math.min(9, Math.floor(l.paint_seed / 100));
+      buckets[knife.knife_id][b]++;
+    }
+  }
+  const maxCount = Math.max(1, ...Object.values(buckets).flat());
+
+  const head = [`<div class="heatmap-cell head"></div>`, ...Array.from({length: 10}, (_, i) => `<div class="heatmap-cell head">${i * 100}s</div>`)].join('');
+  const rows = knifeOrder.map(kid => {
+    const knifeName = data.knives.find(k => k.knife_id === kid)?.knife_name || kid;
+    const cells = buckets[kid].map((count, i) => {
+      const intensity = count / maxCount;
+      const bg = count === 0 ? '#0A0A17'
+        : `color-mix(in oklab, #0A0A17, #E879F9 ${(intensity * 90).toFixed(0)}%)`;
+      const range = `${i * 100}-${i * 100 + 99}`;
+      return `<div class="heatmap-cell data" data-count="${count}" style="background: ${bg};" title="${esc(knifeName)} · seeds ${range} · ${count} listings">${count || ''}</div>`;
+    }).join('');
+    return `<div class="heatmap-cell row-label">${esc(knifeName)}</div>${cells}`;
+  }).join('');
+  $hm.innerHTML = head + rows;
+}
+
+function renderTwins(all) {
+  // Group by paint_seed, collect unique knife_ids per seed
+  const bySeed = {};
+  for (const l of all) {
+    if (l.paint_seed == null) continue;
+    (bySeed[l.paint_seed] ??= []).push(l);
+  }
+  const twins = Object.entries(bySeed)
+    .map(([seed, listings]) => {
+      const knifeIds = new Set(listings.map(l => l.knife_id));
+      return { seed: Number(seed), knives: [...knifeIds], total: listings.length, listings };
+    })
+    .filter(t => t.knives.length >= 2)
+    .sort((a, b) => b.knives.length - a.knives.length || b.total - a.total)
+    .slice(0, 30);
+
+  const $b = document.getElementById('twins-body');
+  if (!twins.length) {
+    $b.innerHTML = `<tr><td colspan="3" style="text-align:center; padding: 28px; color: #8888A0;">No seed-twins in the current data — each listed seed is unique across knife families.</td></tr>`;
+    return;
+  }
+  $b.innerHTML = twins.map(t => `
+    <tr>
+      <td><span class="mono" style="font-size: 14px; color: #E8E8F4;">#${t.seed}</span></td>
+      <td>${t.listings.map(l => `<a href="${esc(l.csfloat_url)}" target="_blank" rel="noopener" style="color:#C084FC; margin-right: 10px; font-size: 13px;">${esc(l.knife_name)}${l.stattrak ? ' ★' : ''}</a>`).join('')}</td>
+      <td class="mono">${t.knives.length} family / ${t.total} listing${t.total === 1 ? '' : 's'}</td>
+    </tr>
+  `).join('');
+}
+
+function rankRow(l, i, valueExtractor) {
+  return `
+    <tr>
+      <td><span class="rank-num ${i < 3 ? 'top-' + (i + 1) : ''}">#${i + 1}</span></td>
+      <td><div class="rank-thumb">${l.image_url ? `<img src="${esc(l.image_url)}" alt="" loading="lazy">` : ''}</div></td>
+      <td>
+        <div style="font-weight: 600; color: #E8E8F4;">${esc(l.knife_name)}${l.stattrak ? ' ★' : ''}</div>
+        <div class="mono">seed ${l.paint_seed ?? '—'} · ${esc(l.wear || '—')}</div>
+      </td>
+      <td class="mono" style="color: #E8E8F4; font-size: 13px;">${valueExtractor(l)}</td>
+      <td style="font-weight: 600;">${fmtPrice(l.price)}</td>
+      <td><a href="${esc(l.csfloat_url || '#')}" target="_blank" rel="noopener" style="color:#C084FC; font-size:12px;">View ↗</a></td>
+    </tr>
+  `;
+}
+
+function renderFloatTables(all) {
+  const withFloat = all.filter(l => typeof l.float_value === 'number');
+  const low = [...withFloat].sort((a, b) => a.float_value - b.float_value).slice(0, 10);
+  const high = [...withFloat].sort((a, b) => b.float_value - a.float_value).slice(0, 10);
+  document.getElementById('low-float-body').innerHTML = low.map((l, i) => rankRow(l, i, x => x.float_value.toFixed(6))).join('');
+  document.getElementById('high-float-body').innerHTML = high.map((l, i) => rankRow(l, i, x => x.float_value.toFixed(6))).join('');
+}
+
+function renderLowSeeds(all) {
+  const low = all.filter(l => typeof l.paint_seed === 'number' && l.paint_seed < 50)
+    .sort((a, b) => a.paint_seed - b.paint_seed).slice(0, 20);
+  const $b = document.getElementById('low-seed-body');
+  if (!low.length) { $b.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 28px; color: #8888A0;">No listings with paint seeds below 50 currently.</td></tr>`; return; }
+  $b.innerHTML = low.map(l => `
+    <tr>
+      <td><span class="mono" style="font-size: 15px; color: #FBBF24;">#${l.paint_seed}</span></td>
+      <td><div class="rank-thumb">${l.image_url ? `<img src="${esc(l.image_url)}" alt="" loading="lazy">` : ''}</div></td>
+      <td><div style="font-weight: 600; color: #E8E8F4;">${esc(l.knife_name)}${l.stattrak ? ' <span class="tag tag-stattrak">★ ST</span>' : ''}</div></td>
+      <td class="mono">${l.float_value?.toFixed(6) ?? '—'}</td>
+      <td>${esc(l.wear || '—')}</td>
+      <td style="font-weight: 600;">${fmtPrice(l.price)}</td>
+      <td><a href="${esc(l.csfloat_url || '#')}" target="_blank" rel="noopener" style="color:#C084FC; font-size:12px;">View ↗</a></td>
+    </tr>
+  `).join('');
+}
+
+load().then(data => {
+  const all = flattenListings(data);
+  renderSummary(all);
+  renderHeatmap(data);
+  renderTwins(all);
+  renderFloatTables(all);
+  renderLowSeeds(all);
+}).catch(err => {
+  document.getElementById('summary').innerHTML = `<div class="stat-strip-item" style="grid-column: 1/-1;"><div class="label">Error</div><div class="value">${esc(err.message)}</div></div>`;
+});
+</script>
+</body>
+</html>

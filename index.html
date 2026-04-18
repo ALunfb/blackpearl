@@ -133,35 +133,48 @@
     max-width: 480px; margin: 0 auto 40px;
   }
 
-  /* Info cards */
-  .info-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px; margin-bottom: 32px;
+  /* Tools grid — promoted while maintenance is active */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px; margin-bottom: 32px;
     text-align: left;
   }
-  @media (max-width: 480px) {
-    .info-grid { grid-template-columns: 1fr; }
-  }
-  .info-card {
+  @media (max-width: 520px) { .tools-grid { grid-template-columns: 1fr; } }
+  .tool-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
     background: rgba(13, 13, 26, 0.6);
-    border: 1px solid rgba(168, 85, 247, 0.12);
-    border-radius: 12px; padding: 16px 18px;
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    border-radius: 12px;
     backdrop-filter: blur(10px);
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
   }
-  .info-card:hover {
-    border-color: rgba(168, 85, 247, 0.25);
+  .tool-card:hover, .tool-card:focus-visible {
+    border-color: rgba(168, 85, 247, 0.35);
+    background: rgba(20, 10, 33, 0.7);
     transform: translateY(-2px);
+    outline: none;
   }
-  .info-card-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.15em;
-    color: #6B6B8A; text-transform: uppercase;
-    margin-bottom: 6px;
+  .tool-icon {
+    flex: none;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(124,63,190,0.25), rgba(168,85,247,0.1));
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    display: flex; align-items: center; justify-content: center;
+    color: #C084FC;
   }
-  .info-card-value {
+  .tool-icon svg { width: 18px; height: 18px; }
+  .tool-text { flex: 1; min-width: 0; }
+  .tool-title {
     font-family: 'Exo 2', sans-serif; font-weight: 600;
-    font-size: 15px; color: #E8E8F4;
+    font-size: 14px; color: #E8E8F4;
+    line-height: 1.2;
+  }
+  .tool-desc {
+    font-size: 12px; color: #8888A0;
+    margin-top: 2px; line-height: 1.3;
   }
 
   /* Links row */
@@ -206,22 +219,69 @@
       <span>System Maintenance</span>
     </div>
 
-    <h1>Down for<br><span class="accent">maintenance</span></h1>
+    <h1>New tools<br><span class="accent">while you wait</span></h1>
 
     <p class="subtitle">
-      We're temporarily offline while we resolve an issue with our data provider.
-      Listings will resume as soon as the provider restores access to our account.
+      Live listings are paused while we resolve an issue with our data provider.
+      While you wait, we've just shipped a full suite of tools that work <em>right now</em> —
+      no fetch required.
     </p>
 
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-card-label">Estimated Return</div>
-        <div class="info-card-value">Within 72 hours</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-label">Affected</div>
-        <div class="info-card-value">Listings &amp; alerts</div>
-      </div>
+    <div class="tools-grid">
+      <a class="tool-card" href="/inspect.html">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <div class="tool-text">
+          <div class="tool-title">Inspect Decoder</div>
+          <div class="tool-desc">Paste any CS2 inspect link, see every byte</div>
+        </div>
+      </a>
+      <a class="tool-card" href="/appraise.html">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+        </div>
+        <div class="tool-text">
+          <div class="tool-title">Appraise My Knife</div>
+          <div class="tool-desc">Rank your float against the market</div>
+        </div>
+      </a>
+      <a class="tool-card" href="/stattrak.html">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4.5L6 21l1.5-7.5L2 9h7z"/></svg>
+        </div>
+        <div class="tool-text">
+          <div class="tool-title">StatTrak™ Hall of Fame</div>
+          <div class="tool-desc">Highest &amp; freshest kill counts</div>
+        </div>
+      </a>
+      <a class="tool-card" href="/patterns.html">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="tool-text">
+          <div class="tool-title">Paint Patterns</div>
+          <div class="tool-desc">Seed heatmap, twins, float ranks</div>
+        </div>
+      </a>
+      <a class="tool-card" href="/named.html">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1"/></svg>
+        </div>
+        <div class="tool-text">
+          <div class="tool-title">Named Registry</div>
+          <div class="tool-desc">Black Pearls with custom nametags</div>
+        </div>
+      </a>
+      <a class="tool-card" href="/passport.html">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="tool-text">
+          <div class="tool-title">Item Passport</div>
+          <div class="tool-desc">Per-item history &amp; resale tracking</div>
+        </div>
+      </a>
     </div>
 
     <div class="links">

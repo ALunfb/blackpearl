@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Named Black Pearls — Registry</title>
+<meta name="description" content="A live registry of Black Pearl Doppler knives that carry a custom nametag. The rarest collector overlay — decoded from inspect links.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<style>
+  .name-card {
+    background: linear-gradient(180deg, rgba(20, 10, 33, 0.85) 0%, rgba(13, 13, 26, 0.55) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.24);
+    border-radius: 16px;
+    padding: 22px;
+    text-decoration: none; color: inherit;
+    display: flex; gap: 18px; align-items: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .name-card:hover { transform: translateY(-2px); border-color: rgba(168, 85, 247, 0.45); }
+  .name-card-thumb {
+    width: 100px; height: 100px; border-radius: 12px;
+    background: #0A0A17;
+    display: flex; align-items: center; justify-content: center; overflow: hidden; flex: none;
+  }
+  .name-card-thumb img { max-width: 100%; max-height: 100%; }
+  .name-card-main { flex: 1; min-width: 0; }
+  .name-card-quote {
+    font-family: 'Outfit', sans-serif; font-weight: 600;
+    font-size: 22px; letter-spacing: -0.01em;
+    color: #F0E8FA; font-style: italic;
+    line-height: 1.15; margin-bottom: 6px;
+    word-break: break-word;
+  }
+  .name-card-sub {
+    font-family: 'Exo 2', sans-serif; font-size: 13px;
+    color: #8888A0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .name-card-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: #6B6B8A; margin-top: 8px;
+    letter-spacing: 0.06em;
+  }
+  .name-list { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div><div class="nav-brand-name">Black Pearl</div><div class="nav-brand-tag">Named Registry</div></div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/inspect.html">Decoder</a>
+        <a class="nav-link" href="/stattrak.html">StatTrak</a>
+        <a class="nav-link" href="/patterns.html">Patterns</a>
+        <a class="nav-link active" href="/named.html">Named</a>
+        <a class="nav-link" href="/appraise.html">Appraise</a>
+        <a class="nav-link" href="/">Home</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>The rarest overlay · nametag + Black Pearl</div>
+      <h1 class="hero-title">Named <span class="accent">Black Pearls</span>.</h1>
+      <p>A Nametag costs $5 on Steam. But the handful of collectors willing to permanently brand a five-figure knife produce some of the most personal objects in CS2. Every listing below carries a custom name we decoded from the seller's inspect link.</p>
+    </section>
+
+    <div class="stat-strip" id="summary"></div>
+
+    <div id="content"></div>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · NAMED V1</div>
+      <div class="page-footer-links">
+        <a href="/inspect.html">Inspect Decoder</a>
+        <a href="/stattrak.html">StatTrak Hall</a>
+        <a href="/patterns.html">Patterns</a>
+        <a href="/">Home</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const fmtPrice = (p) => p == null ? '—' : '$' + Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 });
+
+async function load() {
+  const res = await fetch('/data/named-black-pearls.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Could not load named registry');
+  return res.json();
+}
+
+function renderEmpty() {
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-strip-item"><div class="label">Currently named</div><div class="value">0</div></div>
+    <div class="stat-strip-item"><div class="label">Watching</div><div class="value">Every fetch</div></div>
+    <div class="stat-strip-item"><div class="label">Rarity</div><div class="value">&lt;1%<span class="sub"> of listings</span></div></div>
+  `;
+  document.getElementById('content').innerHTML = `
+    <div class="state-card">
+      <div class="state-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      </div>
+      <h2>The registry is empty — for now</h2>
+      <p>No Black Pearl currently on the market is carrying a custom nametag. This list auto-populates the moment one appears in a CSFloat fetch. Bookmark the page and check back.</p>
+    </div>
+  `;
+}
+
+function renderList(items) {
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-strip-item"><div class="label">Currently named</div><div class="value">${items.length}</div></div>
+    <div class="stat-strip-item"><div class="label">Highest-asking</div><div class="value">${fmtPrice(items[0]?.price)}</div></div>
+    <div class="stat-strip-item"><div class="label">StatTraks named</div><div class="value">${items.filter(i => i.stattrak).length}</div></div>
+    <div class="stat-strip-item"><div class="label">Knife families</div><div class="value">${new Set(items.map(i => i.knife_id)).size}</div></div>
+  `;
+  document.getElementById('content').innerHTML = `
+    <div class="name-list">
+      ${items.map(item => `
+        <a class="name-card" href="${esc(item.csfloat_url)}" target="_blank" rel="noopener">
+          <div class="name-card-thumb">${item.image_url ? `<img src="${esc(item.image_url)}" alt="" loading="lazy">` : ''}</div>
+          <div class="name-card-main">
+            <div class="name-card-quote">"${esc(item.custom_name)}"</div>
+            <div class="name-card-sub">
+              <span style="color: #E8E8F4; font-weight: 500;">${esc(item.knife_name)}</span>
+              ${item.stattrak ? `<span class="tag tag-stattrak">★ StatTrak${item.stattrak_kills != null ? ` · ${item.stattrak_kills.toLocaleString()}` : ''}</span>` : ''}
+              <span class="tag tag-wear">${esc(item.wear || '—')}</span>
+              <span class="tag tag-named">Named</span>
+            </div>
+            <div class="name-card-meta">float ${typeof item.float === 'number' ? item.float.toFixed(6) : '—'} · seed ${item.seed ?? '—'} · asking ${fmtPrice(item.price)}</div>
+          </div>
+        </a>
+      `).join('')}
+    </div>
+  `;
+}
+
+load().then(data => {
+  const items = data.items || [];
+  if (items.length === 0) renderEmpty();
+  else renderList(items);
+}).catch(err => {
+  document.getElementById('content').innerHTML = `<div class="state-card error"><h2>Could not load registry</h2><p>${esc(err.message)}</p></div>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StatTrak™ Hall of Fame — Black Pearl</title>
+<meta name="description" content="Live leaderboard of the highest StatTrak kill-counts on Black Pearl Doppler knives currently listed on CSFloat — plus fresh sub-100-kill StatTraks for collectors.">
+<meta name="theme-color" content="#7C3FBE">
+<link rel="icon" type="image/svg+xml" href="brand-assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<meta property="og:title" content="StatTrak™ Hall of Fame — Black Pearl">
+<meta property="og:description" content="Live leaderboard of the highest StatTrak™ kill counts on Black Pearl knives.">
+<meta property="og:type" content="website">
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="page">
+    <nav class="nav">
+      <a class="nav-brand" href="/">
+        <div class="nav-logo">
+          <svg width="22" height="22" viewBox="415 200 570 390" aria-hidden="true"><g fill="#A855F7"><path d="M688.4 555.8 c-6.7 -12.8 -19.5 -37.5 -28.8 -54.9 -9.2 -17.4 -20.1 -38.2 -24.3 -46 -4.1 -7.9 -11.9 -22.6 -17.2 -32.7 -5.3 -10.1 -15.1 -29 -21.8 -41.7 l-12.2 -23.3 0 -4.1 0 -4 120.2 0 120.2 0 0 3.3 0 3.2 -3.5 6.2 c-1.9 3.5 -11.6 21.7 -21.4 40.5 -9.8 18.8 -28.3 54.3 -41.1 78.8 -12.8 24.5 -29.6 56.6 -37.2 71.3 l-13.9 26.9 -3.6 0 -3.6 0 -12 -23.3z"/><path d="M582.2 340.3 l0 -3.5 13.7 -36.6 c7.5 -20.3 14 -37.8 14.3 -39 l0.7 -2.4 2.3 -0.5 2.3 -0.5 90.6 0.2 90.5 0.3 6.5 17.4 c3.5 9.6 10 27.1 14.5 39 l8.2 21.6 0 3.8 0 3.7 -121.8 0 -121.8 0 0 -3.5z"/></g></svg>
+        </div>
+        <div><div class="nav-brand-name">Black Pearl</div><div class="nav-brand-tag">StatTrak Hall</div></div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/inspect.html">Decoder</a>
+        <a class="nav-link active" href="/stattrak.html">StatTrak</a>
+        <a class="nav-link" href="/patterns.html">Patterns</a>
+        <a class="nav-link" href="/named.html">Named</a>
+        <a class="nav-link" href="/appraise.html">Appraise</a>
+        <a class="nav-link" href="/">Home</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Live · decoded from inspect links · updates with each fetch</div>
+      <h1 class="hero-title">The <span class="accent">highest-kill</span> Black Pearl StatTraks on the market.</h1>
+      <p>Every StatTrak™ Black Pearl listing on CSFloat, decoded client-side to pull the on-weapon kill counter. Collectors want the highest numbers (proof of war-worn history) or the cleanest zeros (blank slate to write your own story). Both are below.</p>
+    </section>
+
+    <div class="stat-strip" id="summary"></div>
+
+    <div class="section-head">
+      <h2>All-time kill leaders</h2>
+      <span class="muted" id="top-muted">loading…</span>
+    </div>
+    <div class="card" style="padding: 0;">
+      <table class="rank-table">
+        <thead><tr><th>#</th><th></th><th>Knife</th><th>Kills</th><th>Float / Seed</th><th>Price</th><th></th></tr></thead>
+        <tbody id="top-kills-body"></tbody>
+      </table>
+    </div>
+
+    <div class="section-head">
+      <h2>Fresh StatTraks <span style="font-weight: 400; color: #8888A0; font-size: 14px;">&nbsp;· under 100 kills</span></h2>
+      <span class="muted">blank-slate collectors →</span>
+    </div>
+    <div class="card" style="padding: 0;">
+      <table class="rank-table">
+        <thead><tr><th>#</th><th></th><th>Knife</th><th>Kills</th><th>Float / Seed</th><th>Price</th><th></th></tr></thead>
+        <tbody id="fresh-body"></tbody>
+      </table>
+    </div>
+
+    <div class="section-head">
+      <h2>Per-knife breakdown</h2>
+      <span class="muted">highest & lowest kills in each family</span>
+    </div>
+    <div id="per-knife"></div>
+
+    <footer class="page-footer">
+      <div class="page-footer-note">BLACKPEARL.GG · STATTRAK V1</div>
+      <div class="page-footer-links">
+        <a href="/inspect.html">Inspect Decoder</a>
+        <a href="/patterns.html">Pattern Tools</a>
+        <a href="/named.html">Named Registry</a>
+        <a href="/">Home</a>
+      </div>
+    </footer>
+  </div>
+
+<script type="module">
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const fmtPrice = (p) => p == null ? '—' : '$' + Number(p).toLocaleString(undefined, { maximumFractionDigits: 2 });
+const rankClass = (i) => i === 0 ? 'rank-num top-1' : i === 1 ? 'rank-num top-2' : i === 2 ? 'rank-num top-3' : 'rank-num';
+
+async function load() {
+  const res = await fetch('/data/stattrak-hall-of-fame.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Could not load StatTrak data');
+  return res.json();
+}
+
+function rowHtml(e, i) {
+  return `
+    <tr>
+      <td><span class="${rankClass(i)}">#${i + 1}</span></td>
+      <td><div class="rank-thumb">${e.image_url ? `<img src="${esc(e.image_url)}" alt="" loading="lazy">` : ''}</div></td>
+      <td>
+        <div style="font-weight: 600; color: #E8E8F4;">${esc(e.knife_name)}</div>
+        <div class="mono">${esc(e.wear || '—')}${e.custom_name ? ` · <span style="color:#C084FC">"${esc(e.custom_name)}"</span>` : ''}</div>
+      </td>
+      <td><span class="rank-kills">${(e.kills ?? 0).toLocaleString()}</span></td>
+      <td class="mono">${typeof e.float === 'number' ? e.float.toFixed(6) : '—'} / ${e.seed ?? '—'}</td>
+      <td style="font-weight: 600;">${fmtPrice(e.price)}</td>
+      <td><a href="${esc(e.csfloat_url || '#')}" target="_blank" rel="noopener noreferrer" style="color:#C084FC; font-size:12px;">View ↗</a></td>
+    </tr>
+  `;
+}
+
+function renderSummary(data) {
+  const allTop = data.all_time_top || [];
+  const fresh = data.fresh_stattrak || [];
+  const totalSt = allTop.length;
+  const topKills = allTop[0]?.kills ?? 0;
+  const knifeCount = Object.keys(data.per_knife || {}).length;
+  document.getElementById('summary').innerHTML = `
+    <div class="stat-strip-item"><div class="label">StatTraks listed</div><div class="value">${totalSt}</div></div>
+    <div class="stat-strip-item"><div class="label">Highest kill count</div><div class="value">${topKills.toLocaleString()}<span class="sub"> kills</span></div></div>
+    <div class="stat-strip-item"><div class="label">Fresh (<100 kills)</div><div class="value">${fresh.length}</div></div>
+    <div class="stat-strip-item"><div class="label">Knife families covered</div><div class="value">${knifeCount}</div></div>
+  `;
+  document.getElementById('top-muted').textContent = `updated ${new Date(data.updated_at).toLocaleString()}`;
+}
+
+function renderPerKnife(data) {
+  const $root = document.getElementById('per-knife');
+  const keys = Object.keys(data.per_knife || {}).sort((a, b) =>
+    (data.per_knife[b].highest_kills[0]?.kills || 0) - (data.per_knife[a].highest_kills[0]?.kills || 0)
+  );
+  if (!keys.length) { $root.innerHTML = `<div class="state-card"><h2>No StatTrak knives in the current data</h2><p>Come back after the next CSFloat fetch.</p></div>`; return; }
+  $root.innerHTML = keys.map(knifeId => {
+    const k = data.per_knife[knifeId];
+    const highest = k.highest_kills[0];
+    return `
+      <div class="card" style="padding: 0; margin-bottom: 14px;">
+        <div style="padding: 16px 22px; border-bottom: 1px solid rgba(168,85,247,0.12); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <div>
+            <div style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; color: #E8E8F4;">${esc(highest?.knife_name || knifeId)}</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6B6B8A; letter-spacing: 0.08em; margin-top: 2px;">${k.total} StatTrak listing${k.total === 1 ? '' : 's'}</div>
+          </div>
+          <div style="display: flex; gap: 18px;">
+            <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6B6B8A; letter-spacing: 0.14em; text-transform: uppercase;">Max kills</div><div class="rank-kills">${(highest?.kills ?? 0).toLocaleString()}</div></div>
+            <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6B6B8A; letter-spacing: 0.14em; text-transform: uppercase;">Min kills</div><div class="rank-kills" style="background: linear-gradient(135deg, #34D399 0%, #10B981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${(k.lowest_kills[0]?.kills ?? 0).toLocaleString()}</div></div>
+          </div>
+        </div>
+        <table class="rank-table">
+          <tbody>
+            ${k.highest_kills.slice(0, 5).map((e, i) => rowHtml(e, i)).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }).join('');
+}
+
+load().then(data => {
+  renderSummary(data);
+  document.getElementById('top-kills-body').innerHTML = (data.all_time_top || []).slice(0, 20).map((e, i) => rowHtml(e, i)).join('') || `<tr><td colspan="7" style="text-align:center; padding: 28px; color: #8888A0;">No StatTrak listings in the latest fetch.</td></tr>`;
+  document.getElementById('fresh-body').innerHTML = (data.fresh_stattrak || []).slice(0, 20).map((e, i) => rowHtml(e, i)).join('') || `<tr><td colspan="7" style="text-align:center; padding: 28px; color: #8888A0;">No sub-100-kill StatTraks currently listed.</td></tr>`;
+  renderPerKnife(data);
+}).catch(err => {
+  document.getElementById('per-knife').innerHTML = `<div class="state-card error"><h2>Could not load StatTrak data</h2><p>${esc(err.message)}</p></div>`;
+});
+</script>
+</body>
+</html>
