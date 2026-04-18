@@ -2,9 +2,14 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { fetchBlackPearls, fetchAllBlackPearls, KNIVES } from './csfloat.mjs';
-import { getHistory, recordMarketCap } from './price-history.mjs';
+import { getHistory } from './price-history.mjs';
 import { getDbCounts } from './db-counts.mjs';
+
+// NOTE: We intentionally do NOT import from csfloat.mjs here. The local dev
+// server must not make live CSFloat calls — every dev-machine request is a
+// new IP hitting the same API key, and that's the exact pattern CSFloat flags.
+// All /api/knives/* endpoints read the cached data/listings.json that the
+// Droplet cron maintains.
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = 3000;
@@ -37,30 +42,31 @@ function jsonError(res, message, status = 500) {
   json(res, { error: message }, status);
 }
 
+const LISTINGS_FILE = path.join(__dirname, 'data', 'listings.json');
+
+function readListings() {
+  return JSON.parse(fs.readFileSync(LISTINGS_FILE, 'utf8'));
+}
+
 const server = http.createServer(async (req, res) => {
   const urlPath = decodeURIComponent(req.url.split('?')[0]);
 
-  // ── API Routes ───────────────────────────────────────────────
+  // ── API Routes — all read from cached data/listings.json ────
+  // None of these make live CSFloat calls. See the header note on why.
   if (urlPath === '/api/knives') {
     try {
-      const data = await fetchAllBlackPearls();
-      // Record market cap snapshot using DB counts from file
-      try { recordMarketCap(data, getDbCounts().counts); } catch (e) {
-        console.error('[History] Market cap record failed:', e.message);
-      }
-      return json(res, data);
+      const data = readListings();
+      return json(res, data.knives || []);
     } catch (err) {
       console.error('[/api/knives]', err.message);
       return jsonError(res, err.message);
     }
   }
 
-  // /api/db-counts — database totals with deltas
   if (urlPath === '/api/db-counts') {
     return json(res, getDbCounts());
   }
 
-  // /api/history — price history (optional ?knife=karambit&days=30)
   if (urlPath === '/api/history') {
     const params = new URL(req.url, `http://localhost:${PORT}`).searchParams;
     const knifeId = params.get('knife') || null;
@@ -68,22 +74,26 @@ const server = http.createServer(async (req, res) => {
     return json(res, getHistory(knifeId, days));
   }
 
-  // /api/knives/list — quick metadata (no CSFloat calls, instant)
   if (urlPath === '/api/knives/list') {
-    return json(res, KNIVES.map(k => ({ id: k.id, name: k.name })));
+    try {
+      const data = readListings();
+      return json(res, (data.knives || []).map(k => ({ id: k.knife_id, name: k.knife_name })));
+    } catch (err) {
+      return jsonError(res, err.message);
+    }
   }
 
-  // /api/knives/:id — single knife
   const knifeMatch = urlPath.match(/^\/api\/knives\/([a-z0-9_]+)$/);
   if (knifeMatch) {
     const knifeId = knifeMatch[1];
     try {
-      const data = await fetchBlackPearls(knifeId);
-      return json(res, data);
+      const data = readListings();
+      const knife = (data.knives || []).find(k => k.knife_id === knifeId);
+      if (!knife) return jsonError(res, `Unknown knife id: ${knifeId}`, 404);
+      return json(res, knife);
     } catch (err) {
-      const status = err.message.includes('Unknown knife') ? 404 : 500;
       console.error(`[/api/knives/${knifeId}]`, err.message);
-      return jsonError(res, err.message, status);
+      return jsonError(res, err.message);
     }
   }
 
