@@ -5,6 +5,7 @@
 - The user's standing instruction: **be as conservative as possible** with anything that touches CSFloat. Single-knife probes before full fetches. Long observation windows between cadence increases. If in doubt, slow it down further or pause entirely.
 - The account may be banned at the account level, not just the key level. Generating a new API key may not restore access. We have no way to know in advance — only by testing minimally.
 - Never run `fetch-data.mjs` (or any other CSFloat-hitting script) from a non-Droplet IP, ever. Each new IP makes things worse and there's no support path to fix it.
+- **Backup accounts available:** the user has 2 additional CSFloat accounts in new-account cooldown. When they clear, the test sequence is: (1) generate a fresh API key on backup account #1, (2) probe from the **same** Droplet IP first — if it 429s with "too many IPs", the flag is IP-level not account-level and a new VPS IP is required, (3) only after a probe returns 200 do we resume the phased fetch plan. Hold backup account #2 in reserve in case #1 also burns.
 
 ## Working With the User on Operational Tasks
 - The user is not a sysadmin. Assume zero familiarity with shell, SSH, cron, systemd, log files, etc.
