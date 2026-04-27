@@ -13,7 +13,6 @@
       "maxDuration": 15
     }
   },
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet -- ':(exclude)data/*.json'",
   "headers": [
     {
       "source": "/(.*)",

@@ -66,12 +66,20 @@ function setCache(key, data) {
 }
 
 // ── CSFloat API fetch (with retry on 429) ────────────────────────
-async function apiFetch(url, apiKey) {
+// `retries` caps the recursive 429 backoff. If we burn through retries it
+// throws — that surfaces a real flag (e.g. "too many IPs") in fetch-health.json
+// instead of silently hammering the API. Default of 2 was chosen to tolerate a
+// single transient 429 + one safety retry, but no more.
+async function apiFetch(url, apiKey, retries = 2) {
   const res = await fetch(url, {
     headers: { 'Authorization': apiKey },
   });
 
   if (res.status === 429) {
+    if (retries <= 0) {
+      const text = await res.text().catch(() => '');
+      throw new Error(`CSFloat API 429: rate limited, retries exhausted. Body: ${text.slice(0, 200)}`);
+    }
     // Use x-ratelimit-reset header if available, fall back to Retry-After or 10s
     const resetTs = parseInt(res.headers.get('x-ratelimit-reset') || '0', 10);
     let waitMs;
@@ -82,9 +90,9 @@ async function apiFetch(url, apiKey) {
       const retryAfter = parseInt(res.headers.get('Retry-After') || '10', 10);
       waitMs = retryAfter * 1000;
     }
-    console.log(`[CSFloat] Rate limited, waiting ${Math.round(waitMs/1000)}s...`);
+    console.log(`[CSFloat] Rate limited, waiting ${Math.round(waitMs/1000)}s... (${retries} ${retries === 1 ? 'retry' : 'retries'} left)`);
     await new Promise(r => setTimeout(r, waitMs));
-    return apiFetch(url, apiKey);
+    return apiFetch(url, apiKey, retries - 1);
   }
 
   if (!res.ok) {
