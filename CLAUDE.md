@@ -1,5 +1,11 @@
 # CLAUDE.md — Frontend Website Rules
 
+## CSFloat API Reality
+- **CSFloat support does not respond to API questions.** Don't suggest "contact support" as a step — it's a dead end. Every API issue is debugged blind.
+- The user's standing instruction: **be as conservative as possible** with anything that touches CSFloat. Single-knife probes before full fetches. Long observation windows between cadence increases. If in doubt, slow it down further or pause entirely.
+- The account may be banned at the account level, not just the key level. Generating a new API key may not restore access. We have no way to know in advance — only by testing minimally.
+- Never run `fetch-data.mjs` (or any other CSFloat-hitting script) from a non-Droplet IP, ever. Each new IP makes things worse and there's no support path to fix it.
+
 ## Working With the User on Operational Tasks
 - The user is not a sysadmin. Assume zero familiarity with shell, SSH, cron, systemd, log files, etc.
 - For anything that runs on a server (Droplet, Vercel, GitHub Actions): give **one command at a time**, wait for the result, then give the next.
