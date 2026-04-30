@@ -3123,24 +3123,22 @@
      Direction: D (Vault) atmosphere + A (Inspect Mode) on items.
      ═══════════════════════════════════════════════════════════ */
 
-  /* Cursor-aura: a very diffused soft violet glow that follows the
-     cursor with a slight transition lag for a trailing feel. No
-     bright center dot — the whole thing is soft and subtle. */
+  /* Cursor-aura: cursor-sized soft violet glow that follows the
+     mouse with a slight transition lag for a trailing feel. */
   .cursor-aura {
     position: fixed;
     top: 0; left: 0;
-    width: 140px; height: 140px;
+    width: 22px; height: 22px;
     pointer-events: none;
     z-index: 9998;
     border-radius: 50%;
     background: radial-gradient(circle at center,
-      rgba(192, 132, 252, 0.10) 0%,
-      rgba(168, 85, 247, 0.06) 30%,
-      rgba(124, 63, 190, 0.02) 60%,
-      transparent 75%);
-    filter: blur(8px);
-    transform: translate3d(calc(var(--cursor-x, 50vw) - 70px), calc(var(--cursor-y, 50vh) - 70px), 0);
-    transition: transform 0.22s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease;
+      rgba(192, 132, 252, 0.32) 0%,
+      rgba(168, 85, 247, 0.16) 50%,
+      transparent 80%);
+    filter: blur(2px);
+    transform: translate3d(calc(var(--cursor-x, 50vw) - 11px), calc(var(--cursor-y, 50vh) - 11px), 0);
+    transition: transform 0.18s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
     will-change: transform;
     mix-blend-mode: screen;
     opacity: 0;
@@ -3149,88 +3147,8 @@
   @media (hover: none) { .cursor-aura { display: none; } }
   @media (prefers-reduced-motion: reduce) { .cursor-aura { display: none; } }
 
-  /* Drifting volumetric light — soft luminous orbs of color that
-     drift independently across the viewport. Replaces the previous
-     pin-prick "dust" particles with larger, softer blooms that read
-     as atmospheric haze rather than dirt on the screen.
-
-     Each .vault-orb is positioned absolutely; multiple orbs are
-     placed at staggered start positions and animate at different
-     durations so they never align. Mix-blend-mode: screen keeps
-     them additive. */
-  .vault-particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .vault-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    mix-blend-mode: screen;
-    opacity: 0;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    will-change: transform, opacity;
-  }
-  .vault-orb-1 {
-    width: 320px; height: 320px;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.55), transparent 65%);
-    top: -8%; left: 12%;
-    animation: orb-drift-a 38s infinite ease-in-out;
-  }
-  .vault-orb-2 {
-    width: 260px; height: 260px;
-    background: radial-gradient(circle, rgba(192, 132, 252, 0.45), transparent 65%);
-    top: 35%; right: -6%;
-    animation: orb-drift-b 46s infinite ease-in-out;
-  }
-  .vault-orb-3 {
-    width: 380px; height: 380px;
-    background: radial-gradient(circle, rgba(124, 63, 190, 0.40), transparent 70%);
-    bottom: -10%; left: 30%;
-    animation: orb-drift-c 54s infinite ease-in-out;
-  }
-  .vault-orb-4 {
-    width: 220px; height: 220px;
-    background: radial-gradient(circle, rgba(212, 181, 255, 0.38), transparent 68%);
-    top: 65%; left: -4%;
-    animation: orb-drift-d 42s infinite ease-in-out;
-  }
-  .vault-orb-5 {
-    width: 280px; height: 280px;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.35), transparent 70%);
-    top: 12%; right: 20%;
-    animation: orb-drift-e 50s infinite ease-in-out;
-  }
-  @keyframes orb-drift-a {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
-    33%      { transform: translate3d(60px, 80px, 0) scale(1.15); opacity: 0.85; }
-    66%      { transform: translate3d(-40px, 120px, 0) scale(0.9); opacity: 0.45; }
-  }
-  @keyframes orb-drift-b {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.50; }
-    50%      { transform: translate3d(-90px, 60px, 0) scale(1.2); opacity: 0.80; }
-  }
-  @keyframes orb-drift-c {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.50; }
-    40%      { transform: translate3d(80px, -70px, 0) scale(1.1); opacity: 0.75; }
-    70%      { transform: translate3d(-60px, -40px, 0) scale(0.95); opacity: 0.55; }
-  }
-  @keyframes orb-drift-d {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.45; }
-    50%      { transform: translate3d(80px, -50px, 0) scale(1.15); opacity: 0.70; }
-  }
-  @keyframes orb-drift-e {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.40; }
-    35%      { transform: translate3d(-50px, 90px, 0) scale(1.1); opacity: 0.65; }
-    75%      { transform: translate3d(70px, 40px, 0) scale(0.95); opacity: 0.50; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .vault-orb { animation: none !important; opacity: 0.4 !important; }
-  }
+  /* Vault-particles container retained but visually inert — orbs removed. */
+  .vault-particles { display: none; }
 
   /* ── Inspect-mode interactions — knife & gallery cards ─────── */
 
@@ -3484,15 +3402,8 @@
 
 <a href="#database" class="skip-link">Skip to database</a>
 
-<!-- Vault atmosphere — cursor-aura + drifting volumetric orbs. Decorative only. -->
+<!-- Cursor-aura: small soft glow following the mouse. Decorative only. -->
 <div class="cursor-aura" aria-hidden="true"></div>
-<div class="vault-particles" aria-hidden="true">
-  <div class="vault-orb vault-orb-1"></div>
-  <div class="vault-orb vault-orb-2"></div>
-  <div class="vault-orb vault-orb-3"></div>
-  <div class="vault-orb vault-orb-4"></div>
-  <div class="vault-orb vault-orb-5"></div>
-</div>
 
 <!-- ═══════════════════ NAVIGATION ═══════════════════ -->
 <nav>
@@ -5576,10 +5487,9 @@
           const rect = card.getBoundingClientRect();
           const x = (lastEvent.clientX - rect.left) / rect.width;
           const y = (lastEvent.clientY - rect.top) / rect.height;
-          // Tilt: top of card tilts back when cursor near top, etc.
-          // Values feel noticeable but not arcade-y.
-          const rx = ((y - 0.5) * -10).toFixed(2);
-          const ry = ((x - 0.5) * 12).toFixed(2);
+          // Tilt: max ±15° X, ±20° Y at the corners.
+          const rx = ((y - 0.5) * -15).toFixed(2);
+          const ry = ((x - 0.5) * 20).toFixed(2);
           const s = card.style;
           s.setProperty('--rx', rx + 'deg');
           s.setProperty('--ry', ry + 'deg');
