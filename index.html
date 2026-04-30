@@ -3123,29 +3123,8 @@
      Direction: D (Vault) atmosphere + A (Inspect Mode) on items.
      ═══════════════════════════════════════════════════════════ */
 
-  /* Cursor-aura: cursor-sized soft violet glow that follows the
-     mouse with a slight transition lag for a trailing feel. */
-  .cursor-aura {
-    position: fixed;
-    top: 0; left: 0;
-    width: 22px; height: 22px;
-    pointer-events: none;
-    z-index: 9998;
-    border-radius: 50%;
-    background: radial-gradient(circle at center,
-      rgba(192, 132, 252, 0.32) 0%,
-      rgba(168, 85, 247, 0.16) 50%,
-      transparent 80%);
-    filter: blur(2px);
-    transform: translate3d(calc(var(--cursor-x, 50vw) - 11px), calc(var(--cursor-y, 50vh) - 11px), 0);
-    transition: transform 0.18s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
-    will-change: transform;
-    mix-blend-mode: screen;
-    opacity: 0;
-  }
-  .cursor-aura.is-active { opacity: 1; }
-  @media (hover: none) { .cursor-aura { display: none; } }
-  @media (prefers-reduced-motion: reduce) { .cursor-aura { display: none; } }
+  /* Cursor-aura removed per user feedback. */
+  .cursor-aura { display: none !important; }
 
   /* Vault-particles container retained but visually inert — orbs removed. */
   .vault-particles { display: none; }
@@ -3402,8 +3381,6 @@
 
 <a href="#database" class="skip-link">Skip to database</a>
 
-<!-- Cursor-aura: small soft glow following the mouse. Decorative only. -->
-<div class="cursor-aura" aria-hidden="true"></div>
 
 <!-- ═══════════════════ NAVIGATION ═══════════════════ -->
 <nav>
@@ -5444,17 +5421,7 @@
     const isTouch = window.matchMedia('(hover: none)').matches;
     if (isTouch) return;
 
-    const aura = document.querySelector('.cursor-aura');
-    let auraActivated = false;
-    document.addEventListener('mousemove', (e) => {
-      const root = document.documentElement.style;
-      root.setProperty('--cursor-x', e.clientX + 'px');
-      root.setProperty('--cursor-y', e.clientY + 'px');
-      if (aura && !auraActivated) {
-        aura.classList.add('is-active');
-        auraActivated = true;
-      }
-    }, { passive: true });
+    // Cursor-aura removed.
 
     function enhanceInspectCard(card) {
       if (card.dataset.inspectBound) return;
