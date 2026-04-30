@@ -5446,9 +5446,11 @@
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
         // (coord - 0.5) ranges -0.5..+0.5; multipliers chosen so corners
-        // hit ±20° X / ±30° Y.
-        const rx = (y - 0.5) * -40;
-        const ry = (x - 0.5) * 60;
+        // hit ±10° X / ±15° Y. Tuned down from ±20°/±30° because the
+        // steeper angle made the link buttons inside listing cards
+        // awkward to click.
+        const rx = (y - 0.5) * -20;
+        const ry = (x - 0.5) * 30;
         card.style.transform =
           'perspective(1100px) rotateX(' + rx.toFixed(2) + 'deg)' +
           ' rotateY(' + ry.toFixed(2) + 'deg) ' + tail;
