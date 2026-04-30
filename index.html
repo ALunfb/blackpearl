@@ -504,12 +504,12 @@
   .hero-title-line2 {
     display: block;
     background: linear-gradient(110deg,
-      #F4EFE0 0%,
-      #E8E8F4 22%,
-      var(--lavender) 44%,
-      var(--violet-glow) 60%,
-      var(--violet-bright) 80%,
-      #E8E8F4 100%);
+      var(--lavender-soft) 0%,
+      var(--lavender) 22%,
+      var(--violet-glow) 44%,
+      var(--violet-bright) 60%,
+      var(--violet-glow) 78%,
+      var(--lavender) 100%);
     background-size: 220% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1008,8 +1008,8 @@
   }
 
   .knife-card:hover {
+    --ty: -6px;
     border-color: var(--border-bright);
-    transform: translateY(-6px);
     box-shadow: var(--shadow-elevated);
   }
 
@@ -1305,7 +1305,7 @@
   }
 
   .gallery-item:hover {
-    transform: scale(1.025);
+    --gscale: 1.025;
     border-color: var(--border-bright);
     box-shadow: var(--shadow-elevated);
     z-index: 2;
@@ -3127,40 +3127,56 @@
      Direction: D (Vault) atmosphere + A (Inspect Mode) on items.
      ═══════════════════════════════════════════════════════════ */
 
-  /* Cursor-aura: a soft violet pool of light that follows the cursor.
-     JS sets --cursor-x / --cursor-y on mousemove. Pointer-events:none
-     so it never interferes with anything. Hidden on touch and for
-     reduced-motion users. */
+  /* Cursor-aura: a small bright dot that tracks the cursor with a
+     short transition lag — gives a slight trail when the mouse moves
+     fast. Hidden on touch and for reduced-motion users. */
   .cursor-aura {
     position: fixed;
     top: 0; left: 0;
-    width: 720px; height: 720px;
+    width: 28px; height: 28px;
     pointer-events: none;
-    z-index: 1;
+    z-index: 9998;
+    border-radius: 50%;
     background: radial-gradient(circle at center,
-      rgba(168, 85, 247, 0.10) 0%,
-      rgba(124, 63, 190, 0.045) 30%,
-      transparent 60%);
-    transform: translate3d(calc(var(--cursor-x, 50vw) - 360px), calc(var(--cursor-y, 50vh) - 360px), 0);
+      rgba(232, 232, 244, 0.55) 0%,
+      rgba(192, 132, 252, 0.45) 30%,
+      rgba(168, 85, 247, 0.20) 60%,
+      transparent 80%);
+    transform: translate3d(calc(var(--cursor-x, 50vw) - 14px), calc(var(--cursor-y, 50vh) - 14px), 0);
+    transition: transform 0.18s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
     will-change: transform;
     mix-blend-mode: screen;
     opacity: 0;
-    transition: opacity 0.6s var(--ease-out-quart);
   }
   .cursor-aura.is-active { opacity: 1; }
+  /* A second smaller dot sits exactly at the cursor with no transition,
+     so the bright "head" is sharp while the surrounding aura trails. */
+  .cursor-aura::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(232, 232, 244, 0.85);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(192, 132, 252, 0.7);
+  }
   @media (hover: none) { .cursor-aura { display: none; } }
   @media (prefers-reduced-motion: reduce) { .cursor-aura { display: none; } }
 
-  /* Drifting vault particles — three radial gradient sprite layers
-     translate slowly in opposite directions. CSS-only, GPU-friendly. */
+  /* Drifting vault particles — radial gradient sprites translate slowly
+     in opposite directions. Stacked at z-index 9997 (below the grain at
+     9999, below the cursor aura at 9998) with mix-blend-mode:screen so
+     they brighten over content rather than darken text. */
   .vault-particles {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: 9997;
     overflow: hidden;
-    mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 100%);
+    mix-blend-mode: screen;
+    mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, black 35%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 95% 90% at 50% 50%, black 35%, transparent 100%);
   }
   .vault-particles::before,
   .vault-particles::after {
@@ -3168,20 +3184,22 @@
     position: absolute;
     inset: -10%;
     background-image:
-      radial-gradient(1.6px 1.6px at 22% 32%, rgba(232, 232, 244, 0.22), transparent 50%),
-      radial-gradient(1px   1px   at 73% 64%, rgba(192, 132, 252, 0.18), transparent 55%),
-      radial-gradient(1.4px 1.4px at 47% 81%, rgba(212, 185, 120, 0.10), transparent 55%),
-      radial-gradient(1px   1px   at 88% 27%, rgba(232, 232, 244, 0.18), transparent 50%),
-      radial-gradient(1.4px 1.4px at 13% 76%, rgba(192, 132, 252, 0.16), transparent 55%),
-      radial-gradient(1px   1px   at 60% 14%, rgba(232, 232, 244, 0.16), transparent 50%);
-    background-size: 640px 640px;
+      radial-gradient(1.8px 1.8px at 22% 32%, rgba(232, 232, 244, 0.55), transparent 50%),
+      radial-gradient(1.2px 1.2px at 73% 64%, rgba(192, 132, 252, 0.50), transparent 55%),
+      radial-gradient(1.6px 1.6px at 47% 81%, rgba(212, 185, 120, 0.20), transparent 55%),
+      radial-gradient(1.2px 1.2px at 88% 27%, rgba(232, 232, 244, 0.45), transparent 50%),
+      radial-gradient(1.6px 1.6px at 13% 76%, rgba(192, 132, 252, 0.40), transparent 55%),
+      radial-gradient(1.2px 1.2px at 60% 14%, rgba(232, 232, 244, 0.40), transparent 50%),
+      radial-gradient(1px   1px   at 32% 55%, rgba(192, 132, 252, 0.35), transparent 50%),
+      radial-gradient(1.4px 1.4px at 8%  18%, rgba(232, 232, 244, 0.42), transparent 50%);
+    background-size: 520px 520px;
     animation: particle-drift-a 70s linear infinite;
-    opacity: 0.55;
+    opacity: 0.85;
   }
   .vault-particles::after {
-    background-size: 880px 880px;
+    background-size: 760px 760px;
     animation: particle-drift-b 110s linear infinite;
-    opacity: 0.32;
+    opacity: 0.55;
   }
   @keyframes particle-drift-a {
     from { transform: translate3d(0, 0, 0); }
@@ -3198,18 +3216,28 @@
   /* ── Inspect-mode interactions — knife & gallery cards ─────── */
 
   /* 3D context. JS sets --rx/--ry per card on mousemove, resets on leave.
-     The base transition is slower (0.6s ease) for the leave/return; on
-     :hover we override to a quicker (0.18s) easing so cursor tracking
-     feels responsive. */
-  .knife-card,
+     We use CSS custom properties (--rx, --ry, --ty, --gscale) so the
+     transform composes cleanly. The :hover rules elsewhere (further
+     above in this stylesheet) set --ty / --gscale, NOT transform, to
+     avoid clobbering the rotate. */
+  .knife-card {
+    transform: perspective(1100px)
+               rotateX(var(--rx, 0deg))
+               rotateY(var(--ry, 0deg))
+               translateY(var(--ty, 0px));
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
   .gallery-item {
-    transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px));
+    transform: perspective(1100px)
+               rotateX(var(--rx, 0deg))
+               rotateY(var(--ry, 0deg))
+               scale(var(--gscale, 1));
     transform-style: preserve-3d;
     will-change: transform;
   }
   .knife-card:hover,
   .gallery-item:hover {
-    --ty: -6px;
     transition:
       transform 0.18s var(--ease-out-quart),
       border-color 0.5s var(--ease-out-quart),
@@ -3231,7 +3259,7 @@
     background: linear-gradient(
       105deg,
       transparent 36%,
-      rgba(232, 232, 244, 0.10) 50%,
+      rgba(232, 232, 244, 0.12) 50%,
       transparent 64%
     );
     transform: translateX(-110%) skewX(-14deg);
@@ -3246,31 +3274,8 @@
     transform: translateX(220%) skewX(-14deg);
   }
 
-  /* Cursor follow-spot inside cards — a violet light pool tracks
-     the cursor position via --mx/--my (set by JS as percentages). */
-  .knife-card-image .inspect-spot,
-  .gallery-item .inspect-spot {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle 220px at var(--mx, 50%) var(--my, 50%),
-      rgba(192, 132, 252, 0.18) 0%,
-      transparent 55%
-    );
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 0.4s var(--ease-out-quart);
-    mix-blend-mode: screen;
-  }
-  .knife-card:hover .knife-card-image .inspect-spot,
-  .gallery-item:hover .inspect-spot {
-    opacity: 1;
-  }
-
-  /* Iridescent hue shift — the real Black Pearl Doppler shifts purple →
-     green → blue as the camera moves. Mimic on hover with a small
-     hue-rotate + saturation bump. */
+  /* Iridescent hue shift on the actual knife images — subtle nod to the
+     real Black Pearl Doppler's purple→green→blue color play. */
   .knife-card-image img,
   .gallery-item img {
     transition:
@@ -3282,16 +3287,14 @@
     filter: saturate(1.18) brightness(1.02) hue-rotate(12deg);
   }
 
-  /* Reduced-motion: kill the tilt and the sheen sweep, keep the lift. */
+  /* Reduced-motion: drop the tilt and the sheen sweep, keep the lift. */
   @media (prefers-reduced-motion: reduce) {
     .knife-card,
     .gallery-item {
       transform: none !important;
     }
     .knife-card-image .inspect-sheen,
-    .gallery-item .inspect-sheen,
-    .knife-card-image .inspect-spot,
-    .gallery-item .inspect-spot {
+    .gallery-item .inspect-sheen {
       display: none;
     }
   }
@@ -5526,17 +5529,13 @@
         ? card.querySelector('.knife-card-image')
         : card;
       if (host && !host.querySelector('.inspect-sheen')) {
-        const spot = document.createElement('div');
-        spot.className = 'inspect-spot';
-        spot.setAttribute('aria-hidden', 'true');
         const sheen = document.createElement('div');
         sheen.className = 'inspect-sheen';
         sheen.setAttribute('aria-hidden', 'true');
-        host.appendChild(spot);
         host.appendChild(sheen);
       }
 
-      // Tilt + spot tracking. rAF-throttled so we never run more than
+      // Tilt tracking. rAF-throttled so we never run more than
       // once per frame even with rapid cursor movement.
       let pending = false;
       let lastEvent = null;
@@ -5555,8 +5554,6 @@
           const s = card.style;
           s.setProperty('--rx', rx + 'deg');
           s.setProperty('--ry', ry + 'deg');
-          s.setProperty('--mx', (x * 100).toFixed(1) + '%');
-          s.setProperty('--my', (y * 100).toFixed(1) + '%');
         });
       }, { passive: true });
       card.addEventListener('mouseleave', () => {
