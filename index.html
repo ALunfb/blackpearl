@@ -5424,33 +5424,28 @@
         host.appendChild(sheen);
       }
 
-      // Tilt tracking. Set the FULL transform inline on mousemove so
-      // the rotation always applies (avoiding CSS-var-in-transform
-      // quirks). Cleared on mouseleave so the :hover lift/scale CSS
-      // takes back over.
+      // Tilt tracking. Set the FULL transform inline on every mousemove.
+      // No rAF throttle — modern browsers handle 60fps mousemove updates
+      // without strain, and the rAF queue had a "stuck pending" failure
+      // mode that locked some cards at their first rotation value.
       const isGallery = card.classList.contains('gallery-item');
-      let pending = false;
-      let lastEvent = null;
-      card.addEventListener('mousemove', (e) => {
-        lastEvent = e;
-        if (pending) return;
-        pending = true;
-        requestAnimationFrame(() => {
-          pending = false;
-          if (!lastEvent) return;
-          const rect = card.getBoundingClientRect();
-          const x = (lastEvent.clientX - rect.left) / rect.width;
-          const y = (lastEvent.clientY - rect.top) / rect.height;
-          // (x - 0.5) and (y - 0.5) range from -0.5 to +0.5, so to
-          // hit ±20° X / ±30° Y at the corners we multiply by -40 / 60.
-          const rx = ((y - 0.5) * -40).toFixed(2);
-          const ry = ((x - 0.5) * 60).toFixed(2);
-          const tail = isGallery ? 'scale(1.025)' : 'translateY(-6px)';
-          card.style.transform =
-            `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) ${tail}`;
-        });
-      }, { passive: true });
-      card.addEventListener('mouseleave', () => {
+      const tail = isGallery ? 'scale(1.025)' : 'translateY(-6px)';
+      function applyTilt(e) {
+        const rect = card.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        // (coord - 0.5) ranges -0.5..+0.5; multipliers chosen so corners
+        // hit ±20° X / ±30° Y.
+        const rx = (y - 0.5) * -40;
+        const ry = (x - 0.5) * 60;
+        card.style.transform =
+          'perspective(1100px) rotateX(' + rx.toFixed(2) + 'deg)' +
+          ' rotateY(' + ry.toFixed(2) + 'deg) ' + tail;
+      }
+      card.addEventListener('mouseenter', applyTilt, { passive: true });
+      card.addEventListener('mousemove', applyTilt, { passive: true });
+      card.addEventListener('mouseleave', function() {
         // Clear inline transform; CSS :hover no longer matches so the
         // element returns to default with the standard transition.
         card.style.transform = '';
