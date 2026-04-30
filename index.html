@@ -1004,9 +1004,9 @@
   }
 
   .knife-card:hover {
-    --ty: -6px;
     border-color: var(--border-bright);
     box-shadow: var(--shadow-elevated);
+    transform: translateY(-6px);
   }
 
   .knife-card:hover::before { opacity: 1; }
@@ -1301,7 +1301,7 @@
   }
 
   .gallery-item:hover {
-    --gscale: 1.025;
+    transform: scale(1.025);
     border-color: var(--border-bright);
     box-shadow: var(--shadow-elevated);
     z-index: 2;
@@ -3131,24 +3131,13 @@
 
   /* ── Inspect-mode interactions — knife & gallery cards ─────── */
 
-  /* 3D context. JS sets --rx/--ry per card on mousemove, resets on leave.
-     We use CSS custom properties (--rx, --ry, --ty, --gscale) so the
-     transform composes cleanly. The :hover rules elsewhere (further
-     above in this stylesheet) set --ty / --gscale, NOT transform, to
-     avoid clobbering the rotate. */
-  .knife-card {
-    transform: perspective(1100px)
-               rotateX(var(--rx, 0deg))
-               rotateY(var(--ry, 0deg))
-               translateY(var(--ty, 0px));
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
+  /* 3D context. JS sets the full transform inline on mousemove
+     (perspective + rotateX/Y + translateY/scale) and clears it on
+     mouseleave so the CSS :hover rule's lift/scale takes back over.
+     Avoids the CSS-var-in-transform browser quirk where var changes
+     don't always trigger re-render. */
+  .knife-card,
   .gallery-item {
-    transform: perspective(1100px)
-               rotateX(var(--rx, 0deg))
-               rotateY(var(--ry, 0deg))
-               scale(var(--gscale, 1));
     transform-style: preserve-3d;
     will-change: transform;
   }
@@ -3203,14 +3192,9 @@
     filter: saturate(1.18) brightness(1.02) hue-rotate(12deg);
   }
 
-  /* Reduced-motion: zero the rotation vars so tilt becomes flat, but
-     keep --ty / --gscale (lift, scale) functional. Hide the sheen. */
+  /* Reduced-motion: hide the sheen sweep. Tilt is gated in JS
+     for reduced-motion users so they get clean lift/scale only. */
   @media (prefers-reduced-motion: reduce) {
-    .knife-card,
-    .gallery-item {
-      --rx: 0deg !important;
-      --ry: 0deg !important;
-    }
     .knife-card-image .inspect-sheen,
     .gallery-item .inspect-sheen {
       display: none;
@@ -5440,8 +5424,11 @@
         host.appendChild(sheen);
       }
 
-      // Tilt tracking. rAF-throttled so we never run more than
-      // once per frame even with rapid cursor movement.
+      // Tilt tracking. Set the FULL transform inline on mousemove so
+      // the rotation always applies (avoiding CSS-var-in-transform
+      // quirks). Cleared on mouseleave so the :hover lift/scale CSS
+      // takes back over.
+      const isGallery = card.classList.contains('gallery-item');
       let pending = false;
       let lastEvent = null;
       card.addEventListener('mousemove', (e) => {
@@ -5454,18 +5441,19 @@
           const rect = card.getBoundingClientRect();
           const x = (lastEvent.clientX - rect.left) / rect.width;
           const y = (lastEvent.clientY - rect.top) / rect.height;
-          // Tilt: max ±15° X, ±20° Y at the corners.
-          const rx = ((y - 0.5) * -15).toFixed(2);
-          const ry = ((x - 0.5) * 20).toFixed(2);
-          const s = card.style;
-          s.setProperty('--rx', rx + 'deg');
-          s.setProperty('--ry', ry + 'deg');
+          // (x - 0.5) and (y - 0.5) range from -0.5 to +0.5, so to
+          // hit ±20° X / ±30° Y at the corners we multiply by -40 / 60.
+          const rx = ((y - 0.5) * -40).toFixed(2);
+          const ry = ((x - 0.5) * 60).toFixed(2);
+          const tail = isGallery ? 'scale(1.025)' : 'translateY(-6px)';
+          card.style.transform =
+            `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) ${tail}`;
         });
       }, { passive: true });
       card.addEventListener('mouseleave', () => {
-        const s = card.style;
-        s.setProperty('--rx', '0deg');
-        s.setProperty('--ry', '0deg');
+        // Clear inline transform; CSS :hover no longer matches so the
+        // element returns to default with the standard transition.
+        card.style.transform = '';
       });
     }
 
