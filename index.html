@@ -3141,13 +3141,23 @@
     transform-style: preserve-3d;
     will-change: transform;
   }
+  /* IMPORTANT: transition-delay: 0 !important is required because the
+     reveal stagger system applies per-nth-child transition-delays
+     (0s, 0.07s, 0.14s ...) to every direct child of .stagger-children.
+     The cardView grid is .stagger-children, so cards 2..N inherit a
+     non-zero transition-delay. With the inline transform updating on
+     every mousemove, that delay was perpetually resetting and the
+     transition never got to paint — locking those cards on the first
+     rotation value. Karambit is nth-child(1) with delay 0, which is
+     why it was the only card that tilted continuously. */
   .knife-card:hover,
   .gallery-item:hover {
     transition:
-      transform 0.18s var(--ease-out-quart),
+      transform 0.12s linear,
       border-color 0.5s var(--ease-out-quart),
       box-shadow 0.5s var(--ease-out-quart),
       background 0.5s var(--ease-out-quart);
+    transition-delay: 0s !important;
   }
 
   /* Inspect-scan sheen — soft diagonal sweep that crosses the image
